@@ -75,6 +75,7 @@ test {
 // for more configuration options please see: https://vaadin.com/docs/latest/guide/start/gradle/#all-options
 vaadin {
 	pnpmEnable = true
+    productionMode = true
 }
 
 tasks.withType(JavaCompile) {
