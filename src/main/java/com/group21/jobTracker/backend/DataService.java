@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import com.group21.jobTracker.backend.data.Category;
+import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.Product;
 import com.group21.jobTracker.backend.mock.MockDataService;
 
@@ -12,19 +13,24 @@ import com.group21.jobTracker.backend.mock.MockDataService;
  */
 public abstract class DataService implements Serializable {
 
-    public abstract Collection<Product> getAllProducts();
+    public abstract Collection<Jobs> getAllJobs();
 
     public abstract Collection<Category> getAllCategories();
 
-    public abstract void updateProduct(Product p);
+    public abstract void updateJob(Jobs p);
 
-    public abstract void deleteProduct(int productId);
+    public abstract void deleteJob(int jobId);
 
-    public abstract Product getProductById(int productId);
+    public abstract Jobs getJobsbyId(int jobId);
 
     public abstract void updateCategory(Category category);
 
     public abstract void deleteCategory(int categoryId);
+    
+    public abstract Collection<Product> getAllProducts();
+    public abstract void updateProduct(Product p);
+    public abstract void deleteProduct(int productId);
+    public abstract Product getProductById(int productId);
 
     public static DataService get() {
         return MockDataService.getInstance();
