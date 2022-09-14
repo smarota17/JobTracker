@@ -1,3 +1,4 @@
 # JobTracker
 * Generate gradle spring project: https://start.spring.io/
-* Instructions: https://javadeveloperzone.com/spring-boot/spring-boot-gradle-example/#23_SpringBootApplication & https://spring.io/guides/gs/spring-boot/
+* Sprint Boot Instructions: https://javadeveloperzone.com/spring-boot/spring-boot-gradle-example/#23_SpringBootApplication & https://spring.io/guides/gs/spring-boot/
+* Vaddin Instruction: https://vaadin.com/docs/latest/guide/start/gradle
