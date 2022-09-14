@@ -9,11 +9,12 @@ import java.util.Set;
 
 import com.group21.jobTracker.backend.data.Availability;
 import com.group21.jobTracker.backend.data.Category;
+import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.Product;
 
 public class MockDataGenerator {
     private static int nextCategoryId = 1;
-    private static int nextProductId = 1;
+    private static int nextJobId = 1;
     private static final Random random = new Random(1);
     private static final String categoryNames[] = new String[] {
             "Children's books", "Best sellers", "Romance", "Mystery",
@@ -47,14 +48,14 @@ public class MockDataGenerator {
 
     }
 
-    static List<Product> createProducts(List<Category> categories) {
-        List<Product> products = new ArrayList<Product>();
+    static List<Jobs> createProducts(List<Category> categories) {
+        List<Jobs> jobs = new ArrayList<Jobs>();
         for (int i = 0; i < 100; i++) {
-            Product p = createProduct(categories);
-            products.add(p);
+            Jobs j = createJobs(categories);
+            jobs.add(j);
         }
 
-        return products;
+        return jobs;
     }
 
     private static Category createCategory(String name) {
@@ -64,17 +65,17 @@ public class MockDataGenerator {
         return c;
     }
 
-    private static Product createProduct(List<Category> categories) {
-        Product p = new Product();
-        p.setId(nextProductId++);
-        p.setProductName(generateName());
+    private static Jobs createJobs(List<Category> categories) {
+        Jobs p = new Jobs();
+        p.setId(nextJobId++);
+        p.setName(generateName());
 
-        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
-        p.setAvailability(Availability.values()[random.nextInt(Availability
-                .values().length)]);
-        if (p.getAvailability() == Availability.AVAILABLE) {
-            p.setStockCount(random.nextInt(523));
-        }
+//        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
+//        p.setAvailability(Availability.values()[random.nextInt(Availability
+//                .values().length)]);
+//        if (p.getAvailability() == Availability.AVAILABLE) {
+//            p.setStockCount(random.nextInt(523));
+//        }
 
         p.setCategory(getCategory(categories, 1, 2));
         return p;

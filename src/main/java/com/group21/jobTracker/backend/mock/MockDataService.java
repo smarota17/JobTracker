@@ -1,10 +1,12 @@
 package com.group21.jobTracker.backend.mock;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Category;
+import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.Product;
 
 /**
@@ -15,15 +17,15 @@ public class MockDataService extends DataService {
 
     private static MockDataService INSTANCE;
 
-    private List<Product> products;
+    private List<Jobs> jobs;
     private List<Category> categories;
-    private int nextProductId = 0;
+    private int nextJobId = 0;
     private int nextCategoryId = 0;
 
     private MockDataService() {
         categories = MockDataGenerator.createCategories();
-        products = MockDataGenerator.createProducts(categories);
-        nextProductId = products.size() + 1;
+        jobs = MockDataGenerator.createProducts(categories);
+        nextJobId = jobs.size() + 1;
         nextCategoryId = categories.size() + 1;
     }
 
@@ -34,9 +36,10 @@ public class MockDataService extends DataService {
         return INSTANCE;
     }
 
+    /* returning jobs */
     @Override
-    public synchronized List<Product> getAllProducts() {
-        return Collections.unmodifiableList(products);
+    public synchronized List<Jobs> getAllJobs() {
+        return Collections.unmodifiableList(jobs);
     }
 
     @Override
@@ -44,30 +47,32 @@ public class MockDataService extends DataService {
         return Collections.unmodifiableList(categories);
     }
 
+    /* updating job */
     @Override
-    public synchronized void updateProduct(Product p) {
-        if (p.getId() < 0) {
+    public synchronized void updateJob(Jobs j) {
+        if (j.getId() < 0) {
             // New product
-            p.setId(nextProductId++);
-            products.add(p);
+            j.setId(nextJobId++);
+            jobs.add(j);
             return;
         }
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId() == p.getId()) {
-                products.set(i, p);
+        for (int i = 0; i < jobs.size(); i++) {
+            if (jobs.get(i).getId() == j.getId()) {
+            	jobs.set(i, j);
                 return;
             }
         }
 
-        throw new IllegalArgumentException("No product with id " + p.getId()
+        throw new IllegalArgumentException("No Job with id " + j.getId()
                 + " found");
     }
 
+    /* Search jobs by Id*/
     @Override
-    public synchronized Product getProductById(int productId) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId() == productId) {
-                return products.get(i);
+    public synchronized Jobs getJobsbyId(int jobId) {
+        for (int i = 0; i < jobs.size(); i++) {
+            if (jobs.get(i).getId() == jobId) {
+                return jobs.get(i);
             }
         }
         return null;
@@ -81,22 +86,48 @@ public class MockDataService extends DataService {
         }
     }
 
+    /* delete  jobs based on the category*/
     @Override
     public void deleteCategory(int categoryId) {
         if (categories.removeIf(category -> category.getId() == categoryId)) {
-            getAllProducts().forEach(product -> {
-                product.getCategory().removeIf(category -> category.getId() == categoryId);
+            getAllJobs().forEach(job -> {
+                job.getCategory().removeIf(category -> category.getId() == categoryId);
             });
         }
     }
 
+    /* Delete method for Jobs*/
     @Override
-    public synchronized void deleteProduct(int productId) {
-        Product p = getProductById(productId);
-        if (p == null) {
-            throw new IllegalArgumentException("Product with id " + productId
+    public synchronized void deleteJob(int jobId) {
+        Jobs j = getJobsbyId(jobId);
+        if (j == null) {
+            throw new IllegalArgumentException("Job with id " + jobId
                     + " not found");
         }
-        products.remove(p);
+        jobs.remove(j);
     }
+
+	@Override
+	public Collection<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProduct(int productId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Product getProductById(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
