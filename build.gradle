@@ -13,6 +13,7 @@ plugins {
 	id 'java'
 	id 'com.vaadin'
 	id 'eclipse'
+	id 'war'
 }
 
 defaultTasks("clean", "build")
