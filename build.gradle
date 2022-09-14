@@ -22,6 +22,11 @@ group = 'com.group21'
 version = '0.0.1'
 sourceCompatibility = '11.0'
 
+jar {
+    baseName = 'jobtracker'
+    version = '0.0.1'
+}
+
 repositories {
 	mavenLocal()
 	maven { setUrl("https://repo.maven.apache.org/maven2/") }
