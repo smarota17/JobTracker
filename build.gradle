@@ -13,7 +13,6 @@ plugins {
 	id 'java'
 	id 'com.vaadin'
 	id 'eclipse'
-	id 'war'
 }
 
 defaultTasks("clean", "build")
@@ -21,6 +20,11 @@ defaultTasks("clean", "build")
 group = 'com.group21'
 version = '0.0.1'
 sourceCompatibility = '11.0'
+
+jar {
+    baseName = 'jobtracker'
+    version = '0.0.1'
+}
 
 repositories {
 	mavenLocal()
@@ -47,7 +51,6 @@ dependencies {
 	    exclude module: "logback-classic"
 	}
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
 	testImplementation 'com.vaadin:vaadin-testbench:23.1.3'
     testImplementation 'io.github.bonigarcia:webdrivermanager:3.8.1'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -74,17 +77,4 @@ vaadin {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-task stage(type: Copy, dependsOn: [clean, build]) {
-    from jar.archivePath
-    into project.rootDir
-    rename {
-        'app.jar'
-    }
-}
-stage.mustRunAfter(clean)
-
-clean << {
-    project.file('app.jar').delete()
 }
