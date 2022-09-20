@@ -7,7 +7,6 @@ import java.util.List;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.backend.data.Product;
 
 /**
  * Mock data model. This implementation has very simplistic locking and does not

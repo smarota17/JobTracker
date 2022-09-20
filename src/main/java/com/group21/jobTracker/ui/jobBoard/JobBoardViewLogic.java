@@ -1,4 +1,4 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import java.io.Serializable;
 
@@ -17,11 +17,11 @@ import com.vaadin.flow.component.UI;
  * the system separately, and to e.g. provide alternative views for the same
  * data.
  */
-public class InventoryViewLogic implements Serializable {
+public class JobBoardViewLogic implements Serializable {
 
-    private final InventoryView view;
+    private final JobBoardView view;
 
-    public InventoryViewLogic(InventoryView simpleCrudView) {
+    public JobBoardViewLogic(JobBoardView simpleCrudView) {
         view = simpleCrudView;
     }
 
@@ -56,7 +56,7 @@ public class InventoryViewLogic implements Serializable {
             fragmentParameter = jobId;
         }
 
-        UI.getCurrent().navigate(InventoryView.class, fragmentParameter);
+        UI.getCurrent().navigate(JobBoardView.class, fragmentParameter);
     }
 
     /**

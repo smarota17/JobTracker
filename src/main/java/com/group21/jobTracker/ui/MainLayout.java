@@ -2,8 +2,9 @@ package com.group21.jobTracker.ui;
 
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
-import com.group21.jobTracker.ui.about.AboutView;
-import com.group21.jobTracker.ui.inventory.InventoryView;
+import com.group21.jobTracker.ui.about.ProfileView;
+import com.group21.jobTracker.ui.application.ApplicationView;
+import com.group21.jobTracker.ui.jobBoard.JobBoardView;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
@@ -57,17 +58,19 @@ public class MainLayout extends AppLayout implements RouterLayout {
                 "img/table-logo.png");
 
         final Image image = new Image(resolvedImage, "");
-        final Label title = new Label("Bookstore");
+        final Label title = new Label("Job Tracker");
         top.add(image, title);
         top.add(title);
         addToNavbar(top);
 
+        addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
+                VaadinIcon.DOCTOR.create()));
         // Navigation items
-        addToDrawer(createMenuLink(InventoryView.class, InventoryView.VIEW_NAME,
-                VaadinIcon.EDIT.create()));
+        addToDrawer(createMenuLink(JobBoardView.class, JobBoardView.VIEW_NAME,
+                VaadinIcon.BOOK.create()));
 
-        addToDrawer(createMenuLink(AboutView.class, AboutView.VIEW_NAME,
-                VaadinIcon.INFO_CIRCLE.create()));
+        addToDrawer(createMenuLink(ApplicationView.class, ApplicationView.VIEW_NAME,
+                VaadinIcon.EDIT.create()));
 
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
@@ -131,7 +134,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
             // The link can only be created now, because the RouterLink checks
             // that the target is valid.
             addToDrawer(createMenuLink(AdminView.class, AdminView.VIEW_NAME,
-                    VaadinIcon.DOCTOR.create()));
+                    VaadinIcon.INFO_CIRCLE_O.create()));
         }
 
         // Finally, add logout button for all users

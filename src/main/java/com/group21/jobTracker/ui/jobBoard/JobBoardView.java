@@ -1,8 +1,10 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
+import com.group21.jobTracker.ui.application.ApplicationForm;
+import com.group21.jobTracker.ui.application.ApplicationViewLogic;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
@@ -21,25 +23,24 @@ import com.vaadin.flow.router.RouteAlias;
 /**
  * A view for performing create-read-update-delete operations on products.
  *
- * See also {@link InventoryViewLogic} for fetching the data, the actual CRUD
+ * See also {@link JobBoardViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
-@Route(value = "Inventory", layout = MainLayout.class)
+@Route(value = "JobBoard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-public class InventoryView extends HorizontalLayout
+public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    public static final String VIEW_NAME = "Inventory";
+    public static final String VIEW_NAME = "JobBoard";
     private final JobGrid grid;
-    private final JobForm form;
+    private final JobApplicationForm form;
     private TextField filter;
-
-    private final InventoryViewLogic viewLogic = new InventoryViewLogic(this);
+    private final JobBoardViewLogic viewLogic = new JobBoardViewLogic(this);
     private Button newProduct;
 
-    private final ProductDataProvider dataProvider = new ProductDataProvider();
+    private final JobDataProvider dataProvider = new JobDataProvider();
 
-    public InventoryView() {
+    public JobBoardView() {
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
@@ -48,7 +49,7 @@ public class InventoryView extends HorizontalLayout
         // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
-        form = new JobForm(viewLogic);
+        form = new JobApplicationForm(viewLogic);
         form.setCategories(DataService.get().getAllCategories());
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
