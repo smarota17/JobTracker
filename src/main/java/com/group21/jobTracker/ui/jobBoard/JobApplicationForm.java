@@ -1,4 +1,4 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -9,6 +9,7 @@ import java.util.Locale;
 import com.group21.jobTracker.backend.data.Availability;
 import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.ui.application.ApplicationViewLogic;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
@@ -31,7 +32,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 /**
  * A form for editing a single product.
  */
-public class JobForm extends Div {
+public class JobApplicationForm extends Div {
 
     private final VerticalLayout content;
 
@@ -44,12 +45,12 @@ public class JobForm extends Div {
     private Button cancel;
     private final Button delete;
 
-    private final InventoryViewLogic viewLogic;
+    private final JobBoardViewLogic viewLogic;
     // private final Binder<Jobs> binder;
     private Jobs currentJob;
 
 
-    public JobForm(InventoryViewLogic sampleCrudLogic) {
+    public JobApplicationForm(JobBoardViewLogic sampleCrudLogic) {
         setClassName("job-form");
 
         content = new VerticalLayout();

@@ -1,4 +1,4 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import java.text.DecimalFormat;
 import java.util.Comparator;

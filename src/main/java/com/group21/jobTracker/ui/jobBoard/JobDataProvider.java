@@ -1,4 +1,4 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -16,12 +16,12 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
-public class ProductDataProvider extends ListDataProvider<Jobs> {
+public class JobDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
     private String filterText = "";
 
-    public ProductDataProvider() {
+    public JobDataProvider() {
         super(DataService.get().getAllJobs());
     }
 
