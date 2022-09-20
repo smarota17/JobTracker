@@ -24,7 +24,7 @@ public class MockDataService extends DataService {
 
     private MockDataService() {
         categories = MockDataGenerator.createCategories();
-        jobs = MockDataGenerator.createProducts(categories);
+        jobs = MockDataGenerator.createJobs(categories);
         nextJobId = jobs.size() + 1;
         nextCategoryId = categories.size() + 1;
     }
@@ -106,28 +106,4 @@ public class MockDataService extends DataService {
         }
         jobs.remove(j);
     }
-
-	@Override
-	public Collection<Product> getAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateProduct(Product p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteProduct(int productId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Product getProductById(int productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

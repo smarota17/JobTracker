@@ -3,6 +3,8 @@ package com.group21.jobTracker.ui.inventory;
 import java.util.Locale;
 import java.util.Objects;
 
+import com.group21.jobTracker.backend.data.Jobs;
+
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -14,13 +16,13 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
-public class ProductDataProvider extends ListDataProvider<Product> {
+public class ProductDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
     private String filterText = "";
 
     public ProductDataProvider() {
-        super(DataService.get().getAllProducts());
+        super(DataService.get().getAllJobs());
     }
 
     /**
@@ -29,14 +31,14 @@ public class ProductDataProvider extends ListDataProvider<Product> {
      * @param product
      *            the updated or new product
      */
-    public void save(Product product) {
-        final boolean newProduct = product.isNewProduct();
+    public void save(Jobs job) {
+        final boolean newProduct = job.isNewJob();
 
-        DataService.get().updateProduct(product);
+        DataService.get().updateJob(job);
         if (newProduct) {
             refreshAll();
         } else {
-            refreshItem(product);
+            refreshItem(job);
         }
     }
 
@@ -46,8 +48,8 @@ public class ProductDataProvider extends ListDataProvider<Product> {
      * @param product
      *            the product to be deleted
      */
-    public void delete(Product product) {
-        DataService.get().deleteProduct(product.getId());
+    public void delete(Jobs job) {
+        DataService.get().deleteJob(job.getId());
         refreshAll();
     }
 
@@ -66,17 +68,16 @@ public class ProductDataProvider extends ListDataProvider<Product> {
         }
         this.filterText = filterText.trim().toLowerCase(Locale.ENGLISH);
 
-        setFilter(product -> passesFilter(product.getProductName(), this.filterText)
-                || passesFilter(product.getAvailability(), this.filterText)
-                || passesFilter(product.getCategory(), this.filterText));
+        setFilter(job -> passesFilter(job.getJobTitle(), this.filterText)
+                || passesFilter(job.getCategory(), this.filterText));
     }
 
     @Override
-    public Integer getId(Product product) {
-        Objects.requireNonNull(product,
+    public Integer getId(Jobs job) {
+        Objects.requireNonNull(job,
                 "Cannot provide an id for a null product.");
 
-        return product.getId();
+        return job.getId();
     }
 
     private boolean passesFilter(Object object, String filterText) {
