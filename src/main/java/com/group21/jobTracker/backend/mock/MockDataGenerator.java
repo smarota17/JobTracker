@@ -48,10 +48,10 @@ public class MockDataGenerator {
 
     }
 
-    static List<Jobs> createProducts(List<Category> categories) {
+    static List<Jobs> createJobs(List<Category> categories) {
         List<Jobs> jobs = new ArrayList<Jobs>();
         for (int i = 0; i < 100; i++) {
-            Jobs j = createJobs(categories);
+            Jobs j = createJob(categories);
             jobs.add(j);
         }
 
@@ -65,7 +65,7 @@ public class MockDataGenerator {
         return c;
     }
 
-    private static Jobs createJobs(List<Category> categories) {
+    private static Jobs createJob(List<Category> categories) {
         Jobs p = new Jobs();
         p.setId(nextJobId++);
         p.setName(generateName());
@@ -82,7 +82,7 @@ public class MockDataGenerator {
     }
 
     private static Set<Category> getCategory(List<Category> categories,
-            int min, int max) {
+        int min, int max) {
         int nr = random.nextInt(max) + min;
         HashSet<Category> productCategories = new HashSet<Category>();
         for (int i = 0; i < nr; i++) {
