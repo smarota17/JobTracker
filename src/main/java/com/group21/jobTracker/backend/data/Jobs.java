@@ -79,4 +79,9 @@ public class Jobs implements Serializable{
 		}
 		this.priority = priority;
 	}
+	
+	//checking whther this is a new job or exiting one
+	public boolean isNewJob() {
+        return getId() == -1;
+    }
 }

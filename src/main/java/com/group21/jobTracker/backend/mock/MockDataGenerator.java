@@ -68,7 +68,7 @@ public class MockDataGenerator {
     private static Jobs createJobs(List<Category> categories) {
         Jobs p = new Jobs();
         p.setId(nextJobId++);
-        p.setName(generateName());
+        p.setJobTitle(generateName());
 
 //        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
 //        p.setAvailability(Availability.values()[random.nextInt(Availability
