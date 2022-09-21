@@ -12,7 +12,7 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
  * It is registered in a file named
  * com.vaadin.flow.server.VaadinServiceInitListener in META-INF/services.
  */
-public class BookstoreInitListener implements VaadinServiceInitListener {
+public class JobTrackerInitListener implements VaadinServiceInitListener {
     @Override
     public void serviceInit(ServiceInitEvent initEvent) {
         final AccessControl accessControl = AccessControlFactory.getInstance()

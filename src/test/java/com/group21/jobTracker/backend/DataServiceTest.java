@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.mock.MockDataService;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +24,7 @@ public class DataServiceTest {
 
     @Test
     public void testDataServiceCanFetchProducts() throws Exception {
-        assertFalse(service.getAllProducts().isEmpty());
+        assertFalse(service.getAllJobs().isEmpty());
     }
 
     @Test
@@ -34,10 +34,10 @@ public class DataServiceTest {
 
     @Test
     public void testUpdateProduct_updatesTheProduct() throws Exception {
-        Product p = service.getAllProducts().iterator().next();
-        p.setProductName("My Test Name");
-        service.updateProduct(p);
-        Product p2 = service.getAllProducts().iterator().next();
-        assertEquals("My Test Name", p2.getProductName());
+        Jobs p = service.getAllJobs().iterator().next();
+        p.setName("My Test Name");
+        service.updateJob(p);
+        Jobs p2 = service.getAllJobs().iterator().next();
+        assertEquals("My Test Name", p2.getName());
     }
 }

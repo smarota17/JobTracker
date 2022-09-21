@@ -28,15 +28,29 @@ public class MockDataGenerator {
             "Being awesome at", "The life changer:", "The Vaadin way:",
             "Becoming one with", "Beginners guide to",
             "The complete visual guide to", "The mother of all references:" };
+    
+    private static String[] word2 = new String[] { "The art of", "Mastering",
+            "The secrets of", "Avoiding", "For fun and profit: ",
+            "How to fail at", "10 important facts about",
+            "The ultimate guide to", "Book of", "Surviving", "Encyclopedia of",
+            "Very much", "Learning the basics of", "The cheap way to",
+            "Being awesome at", "The life changer:", "The Vaadin way:",
+            "Becoming one with", "Beginners guide to",
+            "The complete visual guide to", "The mother of all references:" };
 
-    private static String[] word2 = new String[] { "gardening",
-            "living a healthy life", "designing tree houses", "home security",
-            "intergalaxy travel", "meditation", "ice hockey",
-            "children's education", "computer programming", "Vaadin TreeTable",
-            "winter bathing", "playing the cello", "dummies", "rubber bands",
-            "feeling down", "debugging", "running barefoot",
-            "speaking to a big audience", "creating software", "giant needles",
-            "elephants", "keeping your wife happy" };
+
+    private static String[] word3 = new String[] { "Software Engineer I",
+            "Software Engineer II", "Senior Software Engineer", "Cloud Engineer",
+            "mechanical Engineer", "Business Analyst", "Medical Assistant",
+            "Web Designer", "Dog Trainer", "President of Sales",
+            "Nursing Assistant" };
+    
+    private static String[] word4 = new String[] { "SwipeWire","SecureSmarter","Dwellsmith",
+            "SalePush", "Formonix","Branding","Cloudrevel","Seekingon", "Medicine","Crowdstage",
+            "Hiphonic","QuickSpace","MetConnect", "Rentoor","Kiddily", "Jumpsync","Conceptual",
+            "VisionSwipe","Tourish","Drivemo","Knowza","Composey","Excursy","InvestSpend","Deductly",
+            "SiteDept","Metricsilo","Legal Right","Shipplier","SecuriToday",
+            "GameEight","Nutrition","TechTack","Digimail"};
 
     static List<Category> createCategories() {
         List<Category> categories = new ArrayList<Category>();
@@ -48,10 +62,10 @@ public class MockDataGenerator {
 
     }
 
-    static List<Jobs> createProducts(List<Category> categories) {
+    static List<Jobs> createJobs(List<Category> categories) {
         List<Jobs> jobs = new ArrayList<Jobs>();
         for (int i = 0; i < 100; i++) {
-            Jobs j = createJobs(categories);
+            Jobs j = createJob(categories);
             jobs.add(j);
         }
 
@@ -65,10 +79,15 @@ public class MockDataGenerator {
         return c;
     }
 
-    private static Jobs createJobs(List<Category> categories) {
+    private static Jobs createJob(List<Category> categories) {
         Jobs p = new Jobs();
         p.setId(nextJobId++);
+
         p.setJobTitle(generateName());
+
+        p.setName(generateName());
+        p.setJobTitle(generateTitle());
+        p.setCompany(generateCompany());
 
 //        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
 //        p.setAvailability(Availability.values()[random.nextInt(Availability
@@ -82,7 +101,7 @@ public class MockDataGenerator {
     }
 
     private static Set<Category> getCategory(List<Category> categories,
-            int min, int max) {
+        int min, int max) {
         int nr = random.nextInt(max) + min;
         HashSet<Category> productCategories = new HashSet<Category>();
         for (int i = 0; i < nr; i++) {
@@ -96,6 +115,14 @@ public class MockDataGenerator {
     private static String generateName() {
         return word1[random.nextInt(word1.length)] + " "
                 + word2[random.nextInt(word2.length)];
+    }
+
+    private static String generateTitle() {
+        return word3[random.nextInt(word3.length)];
+    }
+
+    private static String generateCompany() {
+        return word4[random.nextInt(word4.length)];
     }
 
 }

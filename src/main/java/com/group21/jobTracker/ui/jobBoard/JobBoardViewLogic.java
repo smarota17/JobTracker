@@ -1,11 +1,11 @@
-package com.group21.jobTracker.ui.inventory;
+package com.group21.jobTracker.ui.jobBoard;
 
 import java.io.Serializable;
 
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.backend.data.Jobs;
 import com.vaadin.flow.component.UI;
 
 /**
@@ -17,11 +17,11 @@ import com.vaadin.flow.component.UI;
  * the system separately, and to e.g. provide alternative views for the same
  * data.
  */
-public class InventoryViewLogic implements Serializable {
+public class JobBoardViewLogic implements Serializable {
 
-    private final InventoryView view;
+    private final JobBoardView view;
 
-    public InventoryViewLogic(InventoryView simpleCrudView) {
+    public JobBoardViewLogic(JobBoardView simpleCrudView) {
         view = simpleCrudView;
     }
 
@@ -48,15 +48,15 @@ public class InventoryViewLogic implements Serializable {
      * refresh and to enable bookmarking of individual product selections.
      *
      */
-    private void setFragmentParameter(String productId) {
+    private void setFragmentParameter(String jobId) {
         String fragmentParameter;
-        if (productId == null || productId.isEmpty()) {
+        if (jobId == null || jobId.isEmpty()) {
             fragmentParameter = "";
         } else {
-            fragmentParameter = productId;
+            fragmentParameter = jobId;
         }
 
-        UI.getCurrent().navigate(InventoryView.class, fragmentParameter);
+        UI.getCurrent().navigate(JobBoardView.class, fragmentParameter);
     }
 
     /**
@@ -66,18 +66,18 @@ public class InventoryViewLogic implements Serializable {
      * user can edit them.
      *
      * 
-     * @param productId
+     * @param jobId
      */
-    public void enter(String productId) {
-        if (productId != null && !productId.isEmpty()) {
-            if (productId.equals("new")) {
-                newProduct();
+    public void enter(String jobId) {
+        if (jobId != null && !jobId.isEmpty()) {
+            if (jobId.equals("new")) {
+                newJob();
             } else {
                 // Ensure this is selected even if coming directly here from
                 // login
                 try {
-                    final int pid = Integer.parseInt(productId);
-                    final Product product = findProduct(pid);
+                    final int pid = Integer.parseInt(jobId);
+                    final Jobs product = findJob(pid);
                     view.selectRow(product);
                 } catch (final NumberFormatException e) {
                 }
@@ -87,45 +87,45 @@ public class InventoryViewLogic implements Serializable {
         }
     }
 
-    private Product findProduct(int productId) {
-        return DataService.get().getProductById(productId);
+    private Jobs findJob(int jobId) {
+        return DataService.get().getJobsbyId(jobId);
     }
 
-    public void saveProduct(Product product) {
-        final boolean newProduct = product.isNewProduct();
+    public void saveProduct(Jobs job) {
+        final boolean newJob = job.isNewJob();
         view.clearSelection();
-        view.updateProduct(product);
+        view.updateProduct(job);
         setFragmentParameter("");
-        view.showNotification(product.getProductName()
-                + (newProduct ? " created" : " updated"));
+        view.showNotification(job.getName()
+                + (newJob ? " created" : " updated"));
     }
 
-    public void deleteProduct(Product product) {
+    public void deleteJob(Jobs job) {
         view.clearSelection();
-        view.removeProduct(product);
+        view.removeProduct(job);
         setFragmentParameter("");
-        view.showNotification(product.getProductName() + " removed");
+        view.showNotification(job.getName() + " removed");
     }
 
-    public void editProduct(Product product) {
-        if (product == null) {
+    public void editJob(Jobs job) {
+        if (job == null) {
             setFragmentParameter("");
         } else {
-            setFragmentParameter(product.getId() + "");
+            setFragmentParameter(job.getId() + "");
         }
-        view.editProduct(product);
+        view.editJob(job);
     }
 
-    public void newProduct() {
+    public void newJob() {
         view.clearSelection();
         setFragmentParameter("new");
-        view.editProduct(new Product());
+        view.editJob(new Jobs());
     }
 
-    public void rowSelected(Product product) {
+    public void rowSelected(Jobs job) {
         if (AccessControlFactory.getInstance().createAccessControl()
                 .isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
-            editProduct(product);
+            editJob(job);
         }
     }
 }

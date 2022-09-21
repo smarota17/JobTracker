@@ -3,18 +3,23 @@ package com.group21.jobTracker.backend.data;
 import java.io.Serializable;
 import java.util.Date;
 //import javax.validation.constraints.*;
+import java.util.Set;
 
 
 public class Jobs implements Serializable{
 	
 	//@NotNull(message="id must not be null")
     private int id;
+
+	private String name;
 	
     //@NotNull(message="jobTitle must not be null")
     private String jobTitle;
     
     //@NotNull(message="company must not be null")
     private String company;
+
+	private Set<Category> category;
     
     //@NotNull(message="dateApplied must not be null")
 	private Date dateApplied;
@@ -32,6 +37,14 @@ public class Jobs implements Serializable{
         this.id = id;
     }
     
+	public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -44,6 +57,13 @@ public class Jobs implements Serializable{
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public Set<Category> getCategory() {
+		return category;
+	}
+	public void setCategory(Set<Category> category) {
+		this.category = category;
 	}
 	
 	public Date getDateApplied() {
@@ -79,8 +99,8 @@ public class Jobs implements Serializable{
 		}
 		this.priority = priority;
 	}
-	
 	//checking whther this is a new job or exiting one
+
 	public boolean isNewJob() {
         return getId() == -1;
     }
