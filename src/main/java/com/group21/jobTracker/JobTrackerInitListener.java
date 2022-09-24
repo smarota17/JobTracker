@@ -2,6 +2,7 @@ package com.group21.jobTracker;
 
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
+import com.group21.jobTracker.ui.jobBoard.JobBoardView;
 import com.group21.jobTracker.ui.login.LoginScreen;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
@@ -23,6 +24,7 @@ public class JobTrackerInitListener implements VaadinServiceInitListener {
                 if (!accessControl.isUserSignedIn() && !LoginScreen.class
                         .equals(enterEvent.getNavigationTarget()))
                     enterEvent.rerouteTo(LoginScreen.class);
+                // enterEvent.rerouteTo(JobBoardView.class);
             });
         });
     }

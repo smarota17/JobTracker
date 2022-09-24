@@ -35,7 +35,7 @@ public class ApplicationView extends HorizontalLayout
     private TextField filter;
 
     private final ApplicationViewLogic viewLogic = new ApplicationViewLogic(this);
-    private Button newProduct;
+    private Button newApplication;
 
     private final ApplicationDataProvider dataProvider = new ApplicationDataProvider();
 
@@ -73,18 +73,18 @@ public class ApplicationView extends HorizontalLayout
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-        newProduct = new Button("New product");
+        newApplication = new Button("New application");
         // Setting theme variant of new production button to LUMO_PRIMARY that
         // changes its background color to blue and its text color to white
-        newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
-        newProduct.addClickListener(click -> viewLogic.newJob());
+        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
+        newApplication.addClickListener(click -> viewLogic.newJob());
         // A shortcut to click the new product button by pressing ALT + N
-        newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
-        topLayout.add(newProduct);
+        topLayout.add(newApplication);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
         return topLayout;
@@ -109,8 +109,8 @@ public class ApplicationView extends HorizontalLayout
      * 
      * @param enabled
      */
-    public void setNewProductEnabled(boolean enabled) {
-        newProduct.setEnabled(enabled);
+    public void setnewApplicationEnabled(boolean enabled) {
+        newApplication.setEnabled(enabled);
     }
 
     /**
