@@ -26,17 +26,20 @@ public class ApplicationGrid extends Grid<Jobs> {
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
-                .setFlexGrow(20).setSortable(true).setKey("jobtitle");
+                .setFlexGrow(20).setSortable(true).setKey("jobTitle");
 
-        addColumn(Jobs::getName).setHeader("Job Name")
-                .setFlexGrow(20).setSortable(true).setKey("jobname");
-        
         addColumn(Jobs::getCompany).setHeader("Job Company")
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
 
         // Show all categories the product is in, separated by commas
         addColumn(this::formatCategories).setHeader("Category").setFlexGrow(12)
                 .setKey("category");
+
+        addColumn(Jobs::getNextAction).setHeader("Job Next Action")
+                .setFlexGrow(20).setSortable(true).setKey("jobNextAction");
+
+        addColumn(Jobs::getStatus).setHeader("Job Status")
+                .setFlexGrow(20).setSortable(true).setKey("jobStatus");
 
         // If the browser window size changes, check if all columns fit on
         // screen
@@ -47,20 +50,23 @@ public class ApplicationGrid extends Grid<Jobs> {
 
     private void setColumnVisibility(int width) {
         if (width > 800) {
-            getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
+            getColumnByKey("jobTitle").setVisible(true);
             getColumnByKey("jobCompany").setVisible(true);
             getColumnByKey("category").setVisible(true);
+            getColumnByKey("jobNextAction").setVisible(true);
+            getColumnByKey("jobStatus").setVisible(true);
         } else if (width > 550) {
-            getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
-            getColumnByKey("jobCompany").setVisible(false);
-            getColumnByKey("category").setVisible(false);
+            getColumnByKey("jobTitle").setVisible(true);
+            getColumnByKey("jobCompany").setVisible(true);
+            getColumnByKey("category").setVisible(true);
+            getColumnByKey("jobNextAction").setVisible(false);
+            getColumnByKey("jobStatus").setVisible(false);
         } else {
-            getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
-            getColumnByKey("jobCompany").setVisible(false);
+            getColumnByKey("jobTitle").setVisible(true);
+            getColumnByKey("jobCompany").setVisible(true);
             getColumnByKey("category").setVisible(false);
+            getColumnByKey("jobNextAction").setVisible(false);
+            getColumnByKey("jobStatus").setVisible(false);
         }
     }
 

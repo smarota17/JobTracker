@@ -39,6 +39,7 @@ public class ApplicationForm extends Div {
     private final TextField jobName;
     private final TextField jobTitle;
     private final TextField jobCompany;
+    private final TextField jobPriority;
     private final CheckboxGroup<Category> category;
     private Button save;
     private Button discard;
@@ -70,13 +71,19 @@ public class ApplicationForm extends Div {
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
         jobTitle.setValueChangeMode(ValueChangeMode.EAGER);
-        content.add(jobName);
+        content.add(jobTitle);
 
         jobCompany = new TextField("Job Company");
         jobCompany.setWidth("100%");
         jobCompany.setRequired(true);
         jobCompany.setValueChangeMode(ValueChangeMode.EAGER);
-        content.add(jobName);
+        content.add(jobCompany);
+
+        jobPriority = new TextField("Job Priority");
+        jobPriority.setWidth("100%");
+        jobPriority.setRequired(true);
+        jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
+        content.add(jobPriority);
 
 
         category = new CheckboxGroup<>();

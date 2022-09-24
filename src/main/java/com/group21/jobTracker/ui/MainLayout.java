@@ -2,9 +2,9 @@ package com.group21.jobTracker.ui;
 
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
-import com.group21.jobTracker.ui.about.ProfileView;
 import com.group21.jobTracker.ui.application.ApplicationView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
+import com.group21.jobTracker.ui.profile.ProfileView;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;

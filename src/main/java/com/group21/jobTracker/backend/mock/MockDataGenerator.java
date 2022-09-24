@@ -17,8 +17,8 @@ public class MockDataGenerator {
     private static int nextJobId = 1;
     private static final Random random = new Random(1);
     private static final String categoryNames[] = new String[] {
-            "Children's books", "Best sellers", "Romance", "Mystery",
-            "Thriller", "Sci-fi", "Non-fiction", "Cookbooks" };
+            "Software Development", "Project/Program/Product Management--Technical", "Business Intelligence", "Human Resources",
+            "Operations, IT, & Support Engineering", "Project/Program/Product Management--Non-Tech"};
 
     private static String[] word1 = new String[] { "The art of", "Mastering",
             "The secrets of", "Avoiding", "For fun and profit: ",
