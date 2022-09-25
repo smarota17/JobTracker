@@ -36,14 +36,13 @@ import com.vaadin.flow.theme.lumo.Lumo;
  */
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
+@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
 public class MainLayout extends AppLayout implements RouterLayout {
 
     private final Button logoutButton;
 
     public MainLayout() {
-
-        // Header of the menu (the navbar)
-
+    	
         // menu toggle
         final DrawerToggle drawerToggle = new DrawerToggle();
         drawerToggle.addClassName("menu-toggle");

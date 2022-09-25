@@ -83,18 +83,18 @@ public class JobBoardView extends HorizontalLayout
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-        newApplication = new Button("New application");
-        // Setting theme variant of new production button to LUMO_PRIMARY that
-        // changes its background color to blue and its text color to white
-        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
-        newApplication.addClickListener(click -> viewLogic.newJob());
-        // A shortcut to click the new product button by pressing ALT + N
-        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+//        newApplication = new Button("New application");
+//        // Setting theme variant of new production button to LUMO_PRIMARY that
+//        // changes its background color to blue and its text color to white
+//        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
+//        newApplication.addClickListener(click -> viewLogic.newJob());
+//        // A shortcut to click the new product button by pressing ALT + N
+//        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
-        topLayout.add(newApplication);
+//        topLayout.add(newApplication);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
         return topLayout;
