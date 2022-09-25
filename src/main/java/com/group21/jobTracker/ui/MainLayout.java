@@ -9,6 +9,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -21,6 +22,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -61,10 +63,23 @@ public class MainLayout extends AppLayout implements RouterLayout {
         final Label title = new Label("Job Tracker");
         top.add(image, title);
         top.add(title);
+        
+        Button darkMode = new Button("Dark Mode", click -> {
+            ThemeList themeList = UI.getCurrent().getElement().getThemeList(); // (1)
+
+            if (themeList.contains(Lumo.DARK)) { // (2)
+              themeList.remove(Lumo.DARK);
+            } else {
+              themeList.add(Lumo.DARK);
+            }
+          });
+        
+        top.add(darkMode);
         addToNavbar(top);
 
         addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
                 VaadinIcon.DOCTOR.create()));
+        
         // Navigation items
         addToDrawer(createMenuLink(JobBoardView.class, JobBoardView.VIEW_NAME,
                 VaadinIcon.BOOK.create()));

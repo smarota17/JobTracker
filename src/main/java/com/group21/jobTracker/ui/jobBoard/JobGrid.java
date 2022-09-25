@@ -28,10 +28,10 @@ public class JobGrid extends Grid<Jobs> {
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
                 .setFlexGrow(20).setSortable(true).setKey("jobtitle");
 
-        addColumn(Jobs::getName).setHeader("Job Name")
-                .setFlexGrow(20).setSortable(true).setKey("jobname");
+//        addColumn(Jobs::getName).setHeader("Job Name")
+//                .setFlexGrow(20).setSortable(true).setKey("jobname");
         
-        addColumn(Jobs::getCompany).setHeader("Job Company")
+        addColumn(Jobs::getCompany).setHeader("Company")
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
 
         // Show all categories the product is in, separated by commas
@@ -48,17 +48,17 @@ public class JobGrid extends Grid<Jobs> {
     private void setColumnVisibility(int width) {
         if (width > 800) {
             getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
+//            getColumnByKey("jobname").setVisible(true);
             getColumnByKey("jobCompany").setVisible(true);
             getColumnByKey("category").setVisible(true);
         } else if (width > 550) {
             getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
+//            getColumnByKey("jobname").setVisible(true);
             getColumnByKey("jobCompany").setVisible(false);
             getColumnByKey("category").setVisible(false);
         } else {
             getColumnByKey("jobtitle").setVisible(true);
-            getColumnByKey("jobname").setVisible(true);
+//            getColumnByKey("jobname").setVisible(true);
             getColumnByKey("jobCompany").setVisible(false);
             getColumnByKey("category").setVisible(false);
         }
