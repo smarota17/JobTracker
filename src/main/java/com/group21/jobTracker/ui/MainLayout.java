@@ -3,6 +3,7 @@ package com.group21.jobTracker.ui;
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
 import com.group21.jobTracker.ui.application.ApplicationView;
+import com.group21.jobTracker.ui.applicationSearch.ApplicationSearchView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
 import com.group21.jobTracker.ui.profile.ProfileView;
 import com.vaadin.flow.component.AttachEvent;
@@ -76,17 +77,23 @@ public class MainLayout extends AppLayout implements RouterLayout {
         
         top.add(darkMode);
         addToNavbar(top);
-
-        addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
-                VaadinIcon.DOCTOR.create()));
         
-        // Navigation items
+        // dashboard tab
         addToDrawer(createMenuLink(JobBoardView.class, JobBoardView.VIEW_NAME,
                 VaadinIcon.BOOK.create()));
 
+        // my applications tab
         addToDrawer(createMenuLink(ApplicationView.class, ApplicationView.VIEW_NAME,
                 VaadinIcon.EDIT.create()));
 
+        // application search tab
+        addToDrawer(createMenuLink(ApplicationSearchView.class, ApplicationSearchView.VIEW_NAME,
+                VaadinIcon.SEARCH.create()));
+        
+        // profile tab
+        addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
+                VaadinIcon.USER.create()));
+        
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
         logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());

@@ -29,12 +29,12 @@ import com.vaadin.flow.theme.Theme;
  * See also {@link JobBoardViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
-@Route(value = "JobBoard", layout = MainLayout.class)
+@Route(value = "Dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    public static final String VIEW_NAME = "JobBoard";
+    public static final String VIEW_NAME = "Dashboard";
     
     private final JobGrid grid;
     private final JobApplicationForm form;

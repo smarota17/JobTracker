@@ -96,7 +96,7 @@ public class ApplicationViewLogic implements Serializable {
         view.clearSelection();
         view.updateProduct(job);
         setFragmentParameter("");
-        view.showNotification(job.getName()
+        view.showNotification(job.getJobTitle()
                 + (newJob ? " created" : " updated"));
     }
 
@@ -104,7 +104,7 @@ public class ApplicationViewLogic implements Serializable {
         view.clearSelection();
         view.removeProduct(job);
         setFragmentParameter("");
-        view.showNotification(job.getName() + " removed");
+        view.showNotification(job.getJobTitle() + " removed");
     }
 
     public void editJob(Jobs job) {

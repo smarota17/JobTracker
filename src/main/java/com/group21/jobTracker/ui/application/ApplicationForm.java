@@ -36,7 +36,6 @@ public class ApplicationForm extends Div {
 
     private final VerticalLayout content;
 
-    private final TextField jobName;
     private final TextField jobTitle;
     private final TextField jobCompany;
     private final TextField jobPriority;
@@ -61,25 +60,19 @@ public class ApplicationForm extends Div {
 
         viewLogic = sampleCrudLogic;
 
-        jobName = new TextField("Job name");
-        jobName.setWidth("100%");
-        jobName.setRequired(true);
-        jobName.setValueChangeMode(ValueChangeMode.EAGER);
-        content.add(jobName);
-
         jobTitle = new TextField("Job Title");
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
         jobTitle.setValueChangeMode(ValueChangeMode.EAGER);
         content.add(jobTitle);
 
-        jobCompany = new TextField("Job Company");
+        jobCompany = new TextField("Company");
         jobCompany.setWidth("100%");
         jobCompany.setRequired(true);
         jobCompany.setValueChangeMode(ValueChangeMode.EAGER);
         content.add(jobCompany);
 
-        jobPriority = new TextField("Job Priority");
+        jobPriority = new TextField("Priority");
         jobPriority.setWidth("100%");
         jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
