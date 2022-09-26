@@ -2,105 +2,176 @@ package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
 import java.util.Date;
-//import javax.validation.constraints.*;
-import java.util.Set;
+import javax.validation.constraints.*;
+import javax.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 public class Jobs implements Serializable{
 	
-	//@NotNull(message="id must not be null")
-    private int id;
 
-	private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private int id; 
 	
-    //@NotNull(message="jobTitle must not be null")
     private String jobTitle;
-    
-    //@NotNull(message="company must not be null")
     private String company;
-
-	private Set<Category> category;
-    
-    //@NotNull(message="dateApplied must not be null")
 	private Date dateApplied;
-    
+	private Date dueDate;
+	private int salary;
+	private String jobDescription;
 	private String nextAction;
 	private String status;
 	private int priority;
-	 
-    /*Is id necessary? */
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-	public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+	
+	/**\
+	 * Constructs the Jobs object
+	 * @param jobTitle title of the job
+	 * @param company name of the company
+	 * @param dateApplied date of the application
+	 * @param dueDate due date of job
+	 * @param salary salary of job
+	 * @param jobDescription description of job
+	 * @param nextAction next action for job
+	 * @param status status of job
+	 * @param priority priority for job
+	 */
+	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, int priority) {
+		setJobTitle(jobTitle);
+		setCompany(company);
+		setDateApplied(dateApplied);
+		setDueDate(dueDate);
+		setSalary(salary);
+		setJobDescription(jobDescription);
+		setNextAction(nextAction);
+		setStaus(status);
+		setPriority(priority);
+	}
+	
+	/**
+	 * @return the name
+	 */
 	public String getJobTitle() {
 		return jobTitle;
 	}
+	/**
+	 * @param name the name to set
+	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
 	
+	/**
+	 * @return the company
+	 */
 	public String getCompany() {
 		return company;
 	}
+	/**
+	 * @param company the company to set
+	 */
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
-	public Set<Category> getCategory() {
-		return category;
-	}
-	public void setCategory(Set<Category> category) {
-		this.category = category;
-	}
 	
+	/**
+	 * @return the dateApplied
+	 */
 	public Date getDateApplied() {
 		return dateApplied;
 	}
+	/**
+	 * @param dateApplied dateApplied to set
+	 */
 	public void setDateApplied(Date dateApplied) {
 		this.dateApplied = dateApplied;
 	}
 	
+	/**
+	 * @return the dueDate
+	 */
+	public Date getDueDate() {
+		return dueDate;
+	}
+	/**
+	 * @param dueDate dueDate to set
+	 */
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+	
+	/**
+	 * @return the salary
+	 */
+	public int getSalary() {
+		return salary;
+	}
+	/**
+	 * @param salary salary to set
+	 */
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	
+	/**
+	 * @return the jobDescription
+	 */
+	public String getJobDescription() {
+		return jobDescription;
+	}
+	/**
+	 * @param jobDescription jobDescription to set
+	 */
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+	
+	/**
+	 * @return the nextAction
+	 */
 	public String getNextAction() {
 		return nextAction;
 	}
+	/**
+	 * @param nextAction nextAction to set
+	 */
 	public void setNextAction(String nextAction) {
 		this.nextAction = nextAction;
 	}
 	
+	/**
+	 * @return the status
+	 */
 	public String getStatus() {
-		return status;
+		return this.status;
 	}
+	/**
+	 * @param status status to set
+	 */
 	public void setStaus(String status) {
-		if (!status.equals("In progress") && !status.equals("Rejected") && !status.equals("Accepted")) {
-			throw new IllegalArgumentException();
+		if (status.toLowerCase().equals("in progress")) {
+			this.status = "in progress";
+		} else if (status.toLowerCase().equals("rejected")) {
+			this.status = "rejected";
+		} else if (status.toLowerCase().equals("accepted")) {
+			this.status = "accepted";
+		} else {
+			this.status = status;
 		}
-		this.status = status;
 	}
 	
+	/**
+	 * @return the priority
+	 */
 	public int getPriority() {
 		return priority;
 	}
+	/**
+	 * @param priority priority to set
+	 */
 	public void setPriority(int priority) {
-		if (priority > 3 || priority < 1) {
-			throw new IllegalArgumentException();
-		}
 		this.priority = priority;
 	}
-
-	public boolean isNewJob() {
-        return getId() == -1;
-    }
 }
