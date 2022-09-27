@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.compress.utils.Sets;
+
 import com.group21.jobTracker.backend.data.Availability;
 import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
@@ -75,38 +77,30 @@ public class MockDataGenerator {
     private static Category createCategory(String name) {
         Category c = new Category();
         c.setId(nextCategoryId++);
-        c.setName(name);
+        c.setjobType(name);
         return c;
     }
 
     private static Jobs createJob(List<Category> categories) {
         Jobs p = new Jobs();
         p.setId(nextJobId++);
-        p.setName(generateName());
+        //p.setJobTitle(generateName());
         p.setJobTitle(generateTitle());
         p.setCompany(generateCompany());
-
-//        p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
-//        p.setAvailability(Availability.values()[random.nextInt(Availability
-//                .values().length)]);
-//        if (p.getAvailability() == Availability.AVAILABLE) {
-//            p.setStockCount(random.nextInt(523));
-//        }
-
-        p.setCategory(getCategory(categories, 1, 2));
+        p.setJobType(getCategory(categories));
         return p;
     }
 
-    private static Set<Category> getCategory(List<Category> categories,
-        int min, int max) {
-        int nr = random.nextInt(max) + min;
-        HashSet<Category> productCategories = new HashSet<Category>();
-        for (int i = 0; i < nr; i++) {
-            productCategories.add(categories.get(random.nextInt(categories
-                    .size())));
+    private static Set<Category> getCategory(List<Category> categories) {
+        HashSet<Category> jobCategories = new HashSet<Category>();
+        for (int i = 0; i < categories.size(); i++) {
+        	if (jobCategories.contains(categories.get(i))==false){
+        		jobCategories.add(categories.get(i));
+        	}
+        	
         }
 
-        return productCategories;
+        return jobCategories;
     }
 
     private static String generateName() {

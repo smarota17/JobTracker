@@ -90,7 +90,7 @@ public class MockDataService extends DataService {
     public void deleteCategory(int categoryId) {
         if (categories.removeIf(category -> category.getId() == categoryId)) {
             getAllJobs().forEach(job -> {
-                job.getCategory().removeIf(category -> category.getId() == categoryId);
+                job.getJobType().removeIf(category -> category.getId() == categoryId);
             });
         }
     }
