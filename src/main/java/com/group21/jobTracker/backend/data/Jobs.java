@@ -2,6 +2,8 @@ package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
 import javax.validation.constraints.*;
 import javax.*;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Jobs implements Serializable{
 	private String nextAction;
 	private String status;
 	private int priority;
+	private Set<Category> jobType;
 	
 	/**\
 	 * Constructs the Jobs object
@@ -38,6 +41,11 @@ public class Jobs implements Serializable{
 	 * @param status status of job
 	 * @param priority priority for job
 	 */
+	
+	public Jobs() {
+		this.jobTitle = "";				
+	}
+	
 	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, int priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
@@ -50,6 +58,22 @@ public class Jobs implements Serializable{
 		setPriority(priority);
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Set<Category>  getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(Set<Category>  jobType) {
+		this.jobType = jobType;
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -174,4 +198,8 @@ public class Jobs implements Serializable{
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	
+	public boolean isNewJob() {
+        return getId() == -1;
+    }
 }
