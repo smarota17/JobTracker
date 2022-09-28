@@ -198,7 +198,7 @@ public class Jobs implements Serializable{
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	
+
 	public boolean isNewJob() {
         return getId() == -1;
     }

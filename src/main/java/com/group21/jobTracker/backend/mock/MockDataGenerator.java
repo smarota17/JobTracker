@@ -84,7 +84,9 @@ public class MockDataGenerator {
     private static Jobs createJob(List<Category> categories) {
         Jobs p = new Jobs();
         p.setId(nextJobId++);
-        //p.setJobTitle(generateName());
+        p.setJobTitle(generateName());
+
+
         p.setJobTitle(generateTitle());
         p.setCompany(generateCompany());
         p.setJobType(getCategory(categories));
