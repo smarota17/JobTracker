@@ -90,11 +90,11 @@ public class ApplicationGrid extends Grid<Jobs> {
     }
 
     private String formatCategories(Jobs job) {
-        if (job.getCategory() == null || job.getCategory().isEmpty()) {
+        if (job.getJobType() == null || job.getJobType().isEmpty()) {
             return "";
         }
-        return job.getCategory().stream()
+        return job.getJobType().stream()
                 .sorted(Comparator.comparing(Category::getId))
-                .map(Category::getName).collect(Collectors.joining(", "));
+                .map(Category::getjobType).collect(Collectors.joining(", "));
     }
 }

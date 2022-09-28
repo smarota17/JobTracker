@@ -28,7 +28,7 @@ public class JobGrid extends Grid<Jobs> {
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
                 .setFlexGrow(20).setSortable(true).setKey("jobtitle");
 
-        addColumn(Jobs::getName).setHeader("Job Name")
+        addColumn(Jobs::getJobTitle).setHeader("Job Name")
                 .setFlexGrow(20).setSortable(true).setKey("jobname");
         
         addColumn(Jobs::getCompany).setHeader("Job Company")
@@ -84,11 +84,11 @@ public class JobGrid extends Grid<Jobs> {
     }
 
     private String formatCategories(Jobs job) {
-        if (job.getCategory() == null || job.getCategory().isEmpty()) {
+        if (job.getJobType() == null || job.getJobType().isEmpty()) {
             return "";
         }
-        return job.getCategory().stream()
+        return job.getJobType().stream()
                 .sorted(Comparator.comparing(Category::getId))
-                .map(Category::getName).collect(Collectors.joining(", "));
+                .map(Category::getjobType).collect(Collectors.joining(", "));
     }
 }
