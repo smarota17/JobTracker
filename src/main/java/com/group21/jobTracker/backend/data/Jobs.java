@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.validation.constraints.*;
-import javax.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

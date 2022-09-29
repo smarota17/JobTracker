@@ -45,6 +45,10 @@ configurations {
 	}
 }
 
+configurations.all {
+    exclude module: 'slf4j-simple'
+}
+
 
 dependencies {
 	implementation 'com.vaadin:vaadin-core:23.1.3'
