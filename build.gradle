@@ -69,6 +69,10 @@ dependencies {
 	
 	implementation(group: 'com.aspose', name: 'aspose-email', version: '22.4', classifier: 'jdk16')
 
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+	implementation 'javax.persistence:javax.persistence-api:2.2'
 }
 
 dependencyManagement {

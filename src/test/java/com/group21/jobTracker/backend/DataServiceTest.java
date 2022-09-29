@@ -35,9 +35,9 @@ public class DataServiceTest {
     @Test
     public void testUpdateProduct_updatesTheProduct() throws Exception {
         Jobs p = service.getAllJobs().iterator().next();
-        p.setName("My Test Name");
+        p.setJobTitle("My Test Name");
         service.updateJob(p);
         Jobs p2 = service.getAllJobs().iterator().next();
-        assertEquals("My Test Name", p2.getName());
+        assertEquals("My Test Name", p2.getJobTitle());
     }
 }

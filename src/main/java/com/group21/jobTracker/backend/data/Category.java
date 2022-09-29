@@ -10,8 +10,8 @@ public class Category implements Serializable {
 
     @NotNull
     private int id = -1;
-    @Size(min = 2, message = "Category name must be at least two characters")
-    private String name;
+    
+    private String jobType;
 
     public int getId() {
         return id;
@@ -21,17 +21,17 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getjobType() {
+        return jobType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setjobType(String jobType) {
+        this.jobType = jobType;
     }
 
     @Override
     public String toString() {
-        return getName();
+        return getjobType();
     }
 
     /*
