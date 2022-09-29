@@ -3,12 +3,14 @@ package com.group21.jobTracker.ui;
 import com.group21.jobTracker.authentication.AccessControl;
 import com.group21.jobTracker.authentication.AccessControlFactory;
 import com.group21.jobTracker.ui.application.ApplicationView;
+import com.group21.jobTracker.ui.applicationSearch.ApplicationSearchView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
 import com.group21.jobTracker.ui.profile.ProfileView;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -21,6 +23,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -33,14 +36,13 @@ import com.vaadin.flow.theme.lumo.Lumo;
  */
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
+//@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
 public class MainLayout extends AppLayout implements RouterLayout {
 
     private final Button logoutButton;
 
     public MainLayout() {
-
-        // Header of the menu (the navbar)
-
+    	
         // menu toggle
         final DrawerToggle drawerToggle = new DrawerToggle();
         drawerToggle.addClassName("menu-toggle");
@@ -54,24 +56,47 @@ public class MainLayout extends AppLayout implements RouterLayout {
         // Note! Image resource url is resolved here as it is dependent on the
         // execution mode (development or production) and browser ES level
         // support
-        final String resolvedImage = VaadinService.getCurrent().resolveResource(
-                "img/table-logo.png");
-
-        final Image image = new Image(resolvedImage, "");
+//        final String resolvedImage = VaadinService.getCurrent().resolveResource(
+//                "img/table-logo.png");
+//
+//        final Image image = new Image(resolvedImage, "");
         final Label title = new Label("Job Tracker");
-        top.add(image, title);
+       // top.add(image, title);
         top.add(title);
-        addToNavbar(top);
+        //Button darkMode = new Button("Dark Mode");
+        
+        Button darkMode = new Button("Dark Mode", click -> {
+            ThemeList themeList = UI.getCurrent().getElement().getThemeList(); // (1)
 
-        addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
-                VaadinIcon.DOCTOR.create()));
-        // Navigation items
+            if (themeList.contains(Lumo.DARK)) { // (2)
+              themeList.remove(Lumo.DARK);
+              //darkMode.setText("Light Mode");
+            } else {
+              themeList.add(Lumo.DARK);
+              //darkMode.setText("Dark Mode");
+            }
+          });
+        darkMode.setClassName("dark-mode-button");
+        
+        top.add(darkMode);
+        addToNavbar(top);
+        
+        // dashboard tab
         addToDrawer(createMenuLink(JobBoardView.class, JobBoardView.VIEW_NAME,
                 VaadinIcon.BOOK.create()));
 
+        // my applications tab
         addToDrawer(createMenuLink(ApplicationView.class, ApplicationView.VIEW_NAME,
                 VaadinIcon.EDIT.create()));
 
+        // application search tab
+        addToDrawer(createMenuLink(ApplicationSearchView.class, ApplicationSearchView.VIEW_NAME,
+                VaadinIcon.SEARCH.create()));
+        
+        // profile tab
+        addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
+                VaadinIcon.USER.create()));
+        
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
         logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());

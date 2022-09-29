@@ -32,6 +32,10 @@ repositories {
 	maven { setUrl("https://repo.maven.apache.org/maven2/") }
 	maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
 	maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
+	maven { 
+		url "http://repository.aspose.com/repo/" 
+		allowInsecureProtocol = true
+		}
 }
 
 configurations {
@@ -58,10 +62,13 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	implementation 'javax.mail:mail:1.5.0-b01'
 	
 	// jsoup HTML parser library @ https://jsoup.org/
 	implementation 'org.jsoup:jsoup:1.15.3'
 	
+	implementation(group: 'com.aspose', name: 'aspose-email', version: '22.4', classifier: 'jdk16')
+
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
@@ -85,6 +92,7 @@ vaadin {
 	pnpmEnable = true
     productionMode = true
 }
+
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

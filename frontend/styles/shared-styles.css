@@ -1,3 +1,11 @@
+html {
+  --lumo-font-family: Arial, Helvetica, sans-serif;
+  --lumo-primary-text-color: hsl(204, 9%, 34%); 
+  --lumo-primary-color: hsl(204, 100%, 31%);
+  --lumo-primary-color-50pct: hsla(204, 100%, 31%, 0.5);
+  --lumo-primary-color-10pct: hsla(204, 100%, 31%, 0.1);
+}
+
 .login-information {
     min-width: 300px;
     flex: 0;
@@ -22,11 +30,24 @@ body {
     --overlay-box-shadow: 0 0 3px 2px var(--lumo-contrast-10pct);
 }
 
+body[theme="dark"] .dark-mode-button {
+    background: white;
+}
+
+.dark-mode-button {
+    background: #BBBDBF;
+}
+
 .menu-header {
     padding: 11px 16px;
     padding-left: 32px;
     font-size: var(--lumo-font-size-l);
 }
+
+.nav-bar {
+    background: var(--lumo-primary-color-50pct);
+}
+
 
 .menu-toggle {
     display: none;

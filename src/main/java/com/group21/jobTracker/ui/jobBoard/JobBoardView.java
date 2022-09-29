@@ -9,6 +9,8 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -19,6 +21,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.theme.Theme;
 
 /**
  * A view for performing create-read-update-delete operations on products.
@@ -26,12 +29,13 @@ import com.vaadin.flow.router.RouteAlias;
  * See also {@link JobBoardViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
-@Route(value = "JobBoard", layout = MainLayout.class)
+@Route(value = "Dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    public static final String VIEW_NAME = "JobBoard";
+    public static final String VIEW_NAME = "Dashboard";
+    
     private final JobGrid grid;
     private final JobApplicationForm form;
     private TextField filter;
@@ -43,6 +47,9 @@ public class JobBoardView extends HorizontalLayout
     public JobBoardView() {
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
+        HorizontalLayout helloLayout = new HorizontalLayout();
+        helloLayout.add( new H1("Hello, User!") );
+        
         final HorizontalLayout topLayout = createTopBar();
         grid = new JobGrid();
         grid.setItems(dataProvider);
@@ -52,6 +59,7 @@ public class JobBoardView extends HorizontalLayout
         form = new JobApplicationForm(viewLogic);
         form.setCategories(DataService.get().getAllCategories());
         final VerticalLayout barAndGridLayout = new VerticalLayout();
+        barAndGridLayout.add(helloLayout);
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
         barAndGridLayout.setFlexGrow(1, grid);
@@ -59,6 +67,7 @@ public class JobBoardView extends HorizontalLayout
         barAndGridLayout.setSizeFull();
         barAndGridLayout.expand(grid);
 
+       // add(helloLayout);
         add(barAndGridLayout);
         add(form);
 
@@ -74,18 +83,18 @@ public class JobBoardView extends HorizontalLayout
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-        newApplication = new Button("New application");
-        // Setting theme variant of new production button to LUMO_PRIMARY that
-        // changes its background color to blue and its text color to white
-        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
-        newApplication.addClickListener(click -> viewLogic.newJob());
-        // A shortcut to click the new product button by pressing ALT + N
-        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+//        newApplication = new Button("New application");
+//        // Setting theme variant of new production button to LUMO_PRIMARY that
+//        // changes its background color to blue and its text color to white
+//        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
+//        newApplication.addClickListener(click -> viewLogic.newJob());
+//        // A shortcut to click the new product button by pressing ALT + N
+//        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
-        topLayout.add(newApplication);
+//        topLayout.add(newApplication);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
         return topLayout;
