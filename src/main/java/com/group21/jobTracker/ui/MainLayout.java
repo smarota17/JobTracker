@@ -36,7 +36,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
  */
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
-@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
+//@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
 public class MainLayout extends AppLayout implements RouterLayout {
 
     private final Button logoutButton;
@@ -56,23 +56,27 @@ public class MainLayout extends AppLayout implements RouterLayout {
         // Note! Image resource url is resolved here as it is dependent on the
         // execution mode (development or production) and browser ES level
         // support
-        final String resolvedImage = VaadinService.getCurrent().resolveResource(
-                "img/table-logo.png");
-
-        final Image image = new Image(resolvedImage, "");
+//        final String resolvedImage = VaadinService.getCurrent().resolveResource(
+//                "img/table-logo.png");
+//
+//        final Image image = new Image(resolvedImage, "");
         final Label title = new Label("Job Tracker");
-        top.add(image, title);
+       // top.add(image, title);
         top.add(title);
+        //Button darkMode = new Button("Dark Mode");
         
         Button darkMode = new Button("Dark Mode", click -> {
             ThemeList themeList = UI.getCurrent().getElement().getThemeList(); // (1)
 
             if (themeList.contains(Lumo.DARK)) { // (2)
               themeList.remove(Lumo.DARK);
+              //darkMode.setText("Light Mode");
             } else {
               themeList.add(Lumo.DARK);
+              //darkMode.setText("Dark Mode");
             }
           });
+        darkMode.setClassName("dark-mode-button");
         
         top.add(darkMode);
         addToNavbar(top);

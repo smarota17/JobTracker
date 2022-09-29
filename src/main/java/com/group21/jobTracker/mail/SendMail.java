@@ -1,4 +1,4 @@
-package mail;
+package com.group21.jobTracker.mail;
 
 import java.util.Properties;
 
