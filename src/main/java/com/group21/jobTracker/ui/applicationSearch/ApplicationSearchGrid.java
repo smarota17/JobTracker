@@ -31,10 +31,6 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
         addColumn(Jobs::getCompany).setHeader("Job Company")
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
 
-        // Show all categories the product is in, separated by commas
-        addColumn(this::formatCategories).setHeader("Category").setFlexGrow(12)
-                .setKey("category");
-
         addColumn(Jobs::getNextAction).setHeader("Job Next Action")
                 .setFlexGrow(20).setSortable(true).setKey("jobNextAction");
 
@@ -87,14 +83,5 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
 
     public void refresh(Jobs job) {
         getDataCommunicator().refresh(job);
-    }
-
-    private String formatCategories(Jobs job) {
-        if (job.getCategory() == null || job.getCategory().isEmpty()) {
-            return "";
-        }
-        return job.getCategory().stream()
-                .sorted(Comparator.comparing(Category::getId))
-                .map(Category::getName).collect(Collectors.joining(", "));
     }
 }
