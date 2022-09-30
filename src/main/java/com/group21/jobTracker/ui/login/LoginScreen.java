@@ -1,9 +1,5 @@
 package com.group21.jobTracker.ui.login;
 
-import com.group21.jobTracker.authentication.AccessControl;
-import com.group21.jobTracker.authentication.AccessControlFactory;
-import com.group21.jobTracker.ui.AdminView;
-import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
@@ -14,7 +10,6 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteConfiguration;
 
 /**
  * UI content when the user is not logged in yet.
@@ -24,10 +19,8 @@ import com.vaadin.flow.router.RouteConfiguration;
 @CssImport("./styles/shared-styles.css")
 public class LoginScreen extends FlexLayout {
 
-    private AccessControl accessControl;
 
     public LoginScreen() {
-        accessControl = AccessControlFactory.getInstance().createAccessControl();
         buildUI();
     }
 
@@ -73,7 +66,8 @@ public class LoginScreen extends FlexLayout {
     }
 
     private void login(LoginForm.LoginEvent event) {
-        if (accessControl.signIn(event.getUsername(), event.getPassword())) {
+        //check authentication
+        if (true) {
             getUI().get().navigate("");
         } else {
             event.getSource().setError(true);

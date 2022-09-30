@@ -1,7 +1,5 @@
 package com.group21.jobTracker.ui;
 
-import com.group21.jobTracker.authentication.AccessControl;
-import com.group21.jobTracker.authentication.AccessControlFactory;
 import com.group21.jobTracker.ui.application.ApplicationView;
 import com.group21.jobTracker.ui.applicationSearch.ApplicationSearchView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
@@ -37,7 +35,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
 //@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
-public class MainLayout extends AppLayout implements RouterLayout {
+public class MainLayout extends AppLayout {
 
     private final Button logoutButton;
 
@@ -102,11 +100,13 @@ public class MainLayout extends AppLayout implements RouterLayout {
         logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());
         logoutButton.addClickListener(e -> logout());
         logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
+        addToDrawer(logoutButton);
 
     }
 
     private void logout() {
-        AccessControlFactory.getInstance().createAccessControl().signOut();
+        //logout logic
+        getUI().get().navigate("Login");
     }
 
     private RouterLink createMenuLink(Class<? extends Component> viewClass,
@@ -128,42 +128,42 @@ public class MainLayout extends AppLayout implements RouterLayout {
         return routerButton;
     }
 
-    private void registerAdminViewIfApplicable(AccessControl accessControl) {
-        // register the admin view dynamically only for any admin user logged in
-        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
-                && !RouteConfiguration.forSessionScope()
-                        .isRouteRegistered(AdminView.class)) {
-            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
-                    AdminView.class, MainLayout.class);
-            // as logout will purge the session route registry, no need to
-            // unregister the view on logout
-        }
-    }
+//     private void registerAdminViewIfApplicable(AccessControl accessControl) {
+//         // register the admin view dynamically only for any admin user logged in
+//         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
+//                 && !RouteConfiguration.forSessionScope()
+//                         .isRouteRegistered(AdminView.class)) {
+//             RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
+//                     AdminView.class, MainLayout.class);
+//             // as logout will purge the session route registry, no need to
+//             // unregister the view on logout
+//         }
+//     }
 
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
+//     @Override
+//     protected void onAttach(AttachEvent attachEvent) {
+//         super.onAttach(attachEvent);
 
-        // User can quickly activate logout with Ctrl+L
-        attachEvent.getUI().addShortcutListener(() -> logout(), Key.KEY_L,
-                KeyModifier.CONTROL);
+//         // User can quickly activate logout with Ctrl+L
+//         attachEvent.getUI().addShortcutListener(() -> logout(), Key.KEY_L,
+//                 KeyModifier.CONTROL);
 
-        // add the admin view menu item if user has admin role
-        final AccessControl accessControl = AccessControlFactory.getInstance()
-                .createAccessControl();
-        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
+//         // add the admin view menu item if user has admin role
+//         final AccessControl accessControl = AccessControlFactory.getInstance()
+//                 .createAccessControl();
+//         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
 
-            // Create extra navigation target for admins
-            registerAdminViewIfApplicable(accessControl);
+//             // Create extra navigation target for admins
+//             registerAdminViewIfApplicable(accessControl);
 
-            // The link can only be created now, because the RouterLink checks
-            // that the target is valid.
-            addToDrawer(createMenuLink(AdminView.class, AdminView.VIEW_NAME,
-                    VaadinIcon.INFO_CIRCLE_O.create()));
-        }
+//             // The link can only be created now, because the RouterLink checks
+//             // that the target is valid.
+//             addToDrawer(createMenuLink(AdminView.class, AdminView.VIEW_NAME,
+//                     VaadinIcon.INFO_CIRCLE_O.create()));
+//         }
 
-        // Finally, add logout button for all users
-        addToDrawer(logoutButton);
-    }
+//         // Finally, add logout button for all users
+//         addToDrawer(logoutButton);
+//     }
 
 }

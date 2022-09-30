@@ -1,5 +1,6 @@
 package com.group21.jobTracker.ui.applicationSearch;
 
+
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;

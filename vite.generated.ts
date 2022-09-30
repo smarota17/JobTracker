@@ -8,9 +8,9 @@ import path from 'path';
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import * as net from 'net';
 
-import { processThemeResources } from './build/plugins/application-theme-plugin/theme-handle';
-import { rewriteCssUrls } from './build/plugins/theme-loader/theme-loader-utils';
-import settings from './build/vaadin-dev-server-settings.json';
+import { processThemeResources } from './target/plugins/application-theme-plugin/theme-handle';
+import { rewriteCssUrls } from './target/plugins/theme-loader/theme-loader-utils';
+import settings from './target/vaadin-dev-server-settings.json';
 import { defineConfig, mergeConfig, PluginOption, ResolvedConfig, UserConfigFn, OutputOptions, AssetInfo, ChunkInfo } from 'vite';
 import { getManifest } from 'workbox-build';
 
@@ -18,7 +18,7 @@ import * as rollup from 'rollup';
 import brotli from 'rollup-plugin-brotli';
 import replace from '@rollup/plugin-replace';
 import checker from 'vite-plugin-checker';
-import postcssLit from './build/plugins/rollup-plugin-postcss-lit-custom/rollup-plugin-postcss-lit.js';
+import postcssLit from './target/plugins/rollup-plugin-postcss-lit-custom/rollup-plugin-postcss-lit.js';
 
 const appShellUrl = '.';
 
@@ -407,12 +407,12 @@ function lenientLitImportPlugin(): PluginOption {
     name: 'vaadin:lenient-lit-import',
     async transform(code, id) {
       const decoratorImports = [
-        /import (.*) from (['"])(lit\/decorators)(['"])/,
-        /import (.*) from (['"])(lit-element\/decorators)(['"])/
+        /import (.*?) from (['"])(lit\/decorators)(['"])/,
+        /import (.*?) from (['"])(lit-element\/decorators)(['"])/
       ];
       const directiveImports = [
-        /import (.*) from (['"])(lit\/directives\/)([^\\.]*)(['"])/,
-        /import (.*) from (['"])(lit-html\/directives\/)([^\\.]*)(['"])/
+        /import (.*?) from (['"])(lit\/directives\/)([^\\.]*?)(['"])/,
+        /import (.*?) from (['"])(lit-html\/directives\/)([^\\.]*?)(['"])/
       ];
 
       decoratorImports.forEach((decoratorImport) => {
@@ -474,6 +474,14 @@ function setHmrPortToServerPort(): PluginOption {
         config.server.hmr = config.server.hmr || {};
         config.server.hmr.clientPort = config.server.port;
       }
+    }
+  };
+}
+function showRecompileReason(): PluginOption {
+  return {
+    name: 'vaadin:why-you-compile',
+    handleHotUpdate(context) {
+      console.log('Recompiling because', context.file, 'changed');
     }
   };
 }
@@ -539,6 +547,7 @@ export const vaadinConfig: UserConfigFn = (env) => {
       !devMode && brotli(),
       devMode && vaadinBundlesPlugin(),
       devMode && setHmrPortToServerPort(),
+      devMode && showRecompileReason(),
       settings.offlineEnabled && buildSWPlugin({ devMode }),
       !devMode && statsExtracterPlugin(),
       themePlugin({devMode}),
