@@ -15,7 +15,7 @@ public class Jobs implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int id; 
+    private int id = -1; 
 	
     private String jobTitle;
     private String company;
@@ -25,7 +25,7 @@ public class Jobs implements Serializable{
 	private String jobDescription;
 	private String nextAction;
 	private String status;
-	private int priority;
+	private String priority;
 	private Set<Category> jobType;
 	
 	/**\
@@ -45,7 +45,7 @@ public class Jobs implements Serializable{
 		this.jobTitle = "";				
 	}
 	
-	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, int priority) {
+	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, String priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -188,17 +188,21 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the priority
 	 */
-	public int getPriority() {
+	public String getPriority() {
 		return priority;
 	}
 	/**
 	 * @param priority priority to set
 	 */
-	public void setPriority(int priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
 	public boolean isNewJob() {
         return getId() == -1;
     }
+	public String toString() {
+	      return this.jobTitle+" "+this.company+" "+this.priority;
+	}
+	
 }
