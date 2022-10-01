@@ -47,7 +47,7 @@ public class ApplicationForm extends Div {
     private final Button delete;
 
     private final ApplicationViewLogic viewLogic;
-    // private final Binder<Jobs> binder;
+    private final Binder<Jobs> binder;
     private Jobs currentJob;
 
 
@@ -103,12 +103,13 @@ public class ApplicationForm extends Div {
         category.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
         content.add(category);
 
-        // binder = new BeanValidationBinder<>(Jobs.class);
-        // binder.forField(price).withConverter(new PriceConverter())
-        //         .bind("price");
-        // binder.forField(stockCount).withConverter(new StockCountConverter())
-        //         .bind("stockCount");
-        // binder.bindInstanceFields(this);
+        binder = new BeanValidationBinder<>(Jobs.class);
+        binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
+        binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
+        binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
+        binder.forField(category).bind(Jobs::getJobType,Jobs::setJobType);
+        binder.bindInstanceFields(this);
+        binder.readBean(currentJob);
 
         // // enable/disable save button while editing
         // binder.addStatusChangeListener(event -> {
@@ -157,7 +158,7 @@ public class ApplicationForm extends Div {
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
                 ButtonVariant.LUMO_PRIMARY);
         delete.addClickListener(event -> {
-            if (currentJob != null) {
+            if (currentJob != null && binder.writeBeanIfValid(currentJob)) {
                 viewLogic.deleteJob(currentJob);
             }
         });
@@ -176,5 +177,14 @@ public class ApplicationForm extends Div {
         delete.setVisible(!job.isNewJob());
         currentJob = job;
         // binder.readBean(job);
+    }
+    public void setJob(Jobs job) {
+        this.currentJob = job;
+        binder.setBean(currentJob);
+
+//        // Show delete button for only customers already in the database
+//        delete.setVisible(customer.isPersisted());
+//        setVisible(true);
+//        firstName.selectAll();
     }
 }
