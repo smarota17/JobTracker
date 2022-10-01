@@ -55,8 +55,11 @@ public class JobBoardView extends HorizontalLayout
         // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
+        
         form = new JobApplicationForm(viewLogic);
         form.setCategories(DataService.get().getAllCategories());
+        
+        
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(helloLayout);
         barAndGridLayout.add(topLayout);
@@ -163,6 +166,8 @@ public class JobBoardView extends HorizontalLayout
      */
     public void editJob(Jobs job) {
         showForm(job != null);
+        //form.setCategories(job.getJobType());
+        form.setJob(job);
         form.editJob(job);
     }
 

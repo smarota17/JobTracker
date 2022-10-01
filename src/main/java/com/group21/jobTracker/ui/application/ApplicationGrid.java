@@ -9,9 +9,12 @@ import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.data.renderer.LitRenderer;
+import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 
 /**
@@ -22,7 +25,8 @@ import com.vaadin.flow.data.renderer.TemplateRenderer;
 public class ApplicationGrid extends Grid<Jobs> {
 
     public ApplicationGrid() {
-
+    	
+    	System.out.println("inside the application grid: ");
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
@@ -40,6 +44,16 @@ public class ApplicationGrid extends Grid<Jobs> {
 
         addColumn(Jobs::getStatus).setHeader("Job Status")
                 .setFlexGrow(20).setSortable(true).setKey("jobStatus");
+        
+        addComponentColumn(job -> {
+            Button editButton = new Button("Edit");
+            editButton.addClickListener(e -> {
+                if (getEditor().isOpen())
+                	getEditor().cancel();
+                	getEditor().editItem(job);
+            });
+            return editButton;
+        }).setWidth("150px").setFlexGrow(0);
 
         // If the browser window size changes, check if all columns fit on
         // screen
@@ -47,7 +61,7 @@ public class ApplicationGrid extends Grid<Jobs> {
         UI.getCurrent().getPage().addBrowserWindowResizeListener(
                 e -> setColumnVisibility(e.getWidth()));
     }
-
+    
     private void setColumnVisibility(int width) {
         if (width > 800) {
             getColumnByKey("jobTitle").setVisible(true);
