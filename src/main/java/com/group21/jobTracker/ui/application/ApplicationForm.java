@@ -18,6 +18,7 @@ import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -52,7 +53,7 @@ public class ApplicationForm extends Div {
 
     public ApplicationForm(ApplicationViewLogic sampleCrudLogic) {
         setClassName("job-form");
-
+        System.out.println("inside application form: ");
         content = new VerticalLayout();
         content.setSizeUndefined();
         content.addClassName("job-form-content");
@@ -64,19 +65,36 @@ public class ApplicationForm extends Div {
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
         jobTitle.setValueChangeMode(ValueChangeMode.EAGER);
+//        jobTitle.addValueChangeListener(event -> {
+//        	String val = event.getValue();      
+//        	System.out.println(event.getValue());
+//        });
+        
         content.add(jobTitle);
-
+        
         jobCompany = new TextField("Company");
         jobCompany.setWidth("100%");
         jobCompany.setRequired(true);
         jobCompany.setValueChangeMode(ValueChangeMode.EAGER);
+//        jobCompany.addValueChangeListener(event -> {
+//        	String val = event.getValue(); 
+//        	System.out.println(event.getValue());
+//        });
+        
         content.add(jobCompany);
+        
 
         jobPriority = new TextField("Priority");
         jobPriority.setWidth("100%");
         jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
+//        jobPriority.addValueChangeListener(event -> {
+//        	String val = event.getValue();         
+//        	System.out.println(event.getValue());
+//        });
+        
         content.add(jobPriority);
+        
 
 
         category = new CheckboxGroup<>();
@@ -99,11 +117,20 @@ public class ApplicationForm extends Div {
         //     save.setEnabled(hasChanges && isValid);
         //     discard.setEnabled(hasChanges);
         // });
-
+        
         save = new Button("Save");
         save.setWidth("100%");
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         save.addClickListener(event -> {
+        	//System.out.println("length of checkbox group: "+category.getValue());
+        	currentJob = new Jobs();
+        	currentJob.setJobTitle(jobTitle.getValue());
+        	currentJob.setCompany(jobCompany.getValue());
+        	currentJob.setPriority(jobPriority.getValue());
+        	currentJob.setJobType(category.getValue());
+//        	System.out.println("TextField on the text field: "+jobTitle.getValue());
+//            System.out.println("Company on the text field: "+jobCompany.getValue());
+//            System.out.println("Priority on the text field: "+jobPriority.getValue());
             if (currentJob != null
                     // && binder.writeBeanIfValid(currentJob)
                 ) {
