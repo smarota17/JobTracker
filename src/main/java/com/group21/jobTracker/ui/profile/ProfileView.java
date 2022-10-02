@@ -29,8 +29,6 @@ import com.vaadin.flow.server.Version;
 @Route(value = "Profile", layout = MainLayout.class)
 @PageTitle("My Profile")
 public class ProfileView extends HorizontalLayout {
-	private Button save;
-	private final Binder<User> binder;
     public static final String VIEW_NAME = "My Profile";
 
     public ProfileView() {
@@ -90,36 +88,6 @@ public class ProfileView extends HorizontalLayout {
 
         add(profileLayout);
         
-        
-        binder = new BeanValidationBinder<>(User.class);
-        
-        
-//         save = new Button("Save");
-//         save.setWidth("12em");
-//         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-//         save.addClickListener(event -> {
-//         	//System.out.println("length of checkbox group: "+category.getValue());
-//         	User user = new User(firstNameField.getValue(),lastNameField.getValue(),
-//         			emailField.getValue());
-//         	user.setGender(radioGroup.getValue());
-//         	binder.forField(firstNameField).bind(User::getFirstName,User::setFirstName);
-//             binder.forField(lastNameField).bind(User::getLastName,User::setLastName);
-//             binder.forField(emailField).bind(User::getEmailAddress,User::setEmailAddress);
-//             binder.forField(radioGroup).bind(User::getGender,User::setGender);
-//             binder.bindInstanceFields(this);
-//             binder.readBean(user);
-// //        	System.out.println("TextField on the text field: "+jobTitle.getValue());
-// //            System.out.println("Company on the text field: "+jobCompany.getValue());
-// //            System.out.println("Priority on the text field: "+jobPriority.getValue());
-// //            if (user != null
-// //                    // && binder.writeBeanIfValid(currentJob)
-// //                ) {
-// //                //viewLogic.saveProduct(currentJob);
-// //            }
-//         });
-//         save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
-        
-        profileLayout.add(save);
 
     }
 }
