@@ -89,21 +89,20 @@ public class MockDataGenerator {
 
         p.setJobTitle(generateTitle());
         p.setCompany(generateCompany());
-        p.setJobType(getCategory(categories));
         return p;
     }
 
-    private static Set<Category> getCategory(List<Category> categories) {
-        HashSet<Category> jobCategories = new HashSet<Category>();
-        for (int i = 0; i < categories.size(); i++) {
-        	if (jobCategories.contains(categories.get(i))==false){
-        		jobCategories.add(categories.get(i));
-        	}
-        	
-        }
-
-        return jobCategories;
-    }
+//    private static Set<Category> getCategory(List<Category> categories) {
+//        HashSet<Category> jobCategories = new HashSet<Category>();
+//        for (int i = 0; i < categories.size(); i++) {
+//        	if (jobCategories.contains(categories.get(i))==false){
+//        		jobCategories.add(categories.get(i));
+//        	}
+//        	
+//        }
+//
+//        return jobCategories;
+//    }
 
     private static String generateName() {
         return word1[random.nextInt(word1.length)] + " "

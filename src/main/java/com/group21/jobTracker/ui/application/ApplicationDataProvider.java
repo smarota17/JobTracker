@@ -67,9 +67,8 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
             return;
         }
         this.filterText = filterText.trim().toLowerCase(Locale.ENGLISH);
-
-        setFilter(job -> passesFilter(job.getJobTitle(), this.filterText)
-                || passesFilter(job.getJobType(), this.filterText));
+        //                || passesFilter(job.getJobType(), this.filterText)
+        setFilter(job -> passesFilter(job.getJobTitle(), this.filterText));
     }
 
     @Override

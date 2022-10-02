@@ -31,23 +31,13 @@ public class JobGrid extends Grid<Jobs> {
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
-                .setFlexGrow(20).setSortable(true).setKey("jobtitle");
+                .setFlexGrow(20).setSortable(true).setKey("jobTitle");
                 
         addColumn(Jobs::getCompany).setHeader("Company")
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
-
-        // Show all categories the product is in, separated by commas
-        addColumn(this::formatCategories).setHeader("Category").setFlexGrow(12)
-                .setKey("category");
-        addComponentColumn(job -> {
-            Button editButton = new Button("Edit");
-            editButton.addClickListener(e -> {
-                if (getEditor().isOpen())
-                	getEditor().cancel();
-                	getEditor().editItem(job);
-            });
-            return editButton;
-        }).setWidth("150px").setFlexGrow(0);
+        
+        addColumn(Jobs::getStatus).setHeader("Status")
+        .setFlexGrow(20).setSortable(true).setKey("jobStatus");
 
         // If the browser window size changes, check if all columns fit on
         // screen
@@ -58,22 +48,9 @@ public class JobGrid extends Grid<Jobs> {
 
 
 	private void setColumnVisibility(int width) {
-        if (width > 800) {
-            getColumnByKey("jobtitle").setVisible(true);
-//            getColumnByKey("jobname").setVisible(true);
-            getColumnByKey("jobCompany").setVisible(true);
-            getColumnByKey("category").setVisible(true);
-        } else if (width > 550) {
-            getColumnByKey("jobtitle").setVisible(true);
-//            getColumnByKey("jobname").setVisible(true);
-            getColumnByKey("jobCompany").setVisible(false);
-            getColumnByKey("category").setVisible(false);
-        } else {
-            getColumnByKey("jobtitle").setVisible(true);
-//            getColumnByKey("jobname").setVisible(true);
-            getColumnByKey("jobCompany").setVisible(false);
-            getColumnByKey("category").setVisible(false);
-        }
+		getColumnByKey("jobTitle").setVisible(true);
+        getColumnByKey("jobCompany").setVisible(true);
+        getColumnByKey("jobStatus").setVisible(true);
     }
 
     @Override
@@ -93,14 +70,5 @@ public class JobGrid extends Grid<Jobs> {
 
     public void refresh(Jobs job) {
         getDataCommunicator().refresh(job);
-    }
-
-    private String formatCategories(Jobs job) {
-        if (job.getJobType() == null || job.getJobType().isEmpty()) {
-            return "";
-        }
-        return job.getJobType().stream()
-                .sorted(Comparator.comparing(Category::getId))
-                .map(Category::getjobType).collect(Collectors.joining(", "));
     }
 }

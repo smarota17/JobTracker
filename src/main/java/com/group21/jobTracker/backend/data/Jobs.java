@@ -1,6 +1,7 @@
 package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -64,7 +65,6 @@ public class Jobs implements Serializable{
 		setStatus(status);
 		setPriority(priority);
 		
-		
 	}
 	
 	private void verifyInput(String input) {
@@ -73,9 +73,7 @@ public class Jobs implements Serializable{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 	}
-	
 	
 	public int getId() {
 		return id;
@@ -85,13 +83,13 @@ public class Jobs implements Serializable{
 		this.id = id;
 	}
 
-	public Set<Category>  getJobType() {
-		return jobType;
-	}
+//	public Set<Category>  getJobType() {
+//		return jobType;
+//	}
 
-	public void setJobType(Set<Category>  jobType) {
-		this.jobType = jobType;
-	}
+//	public void setJobType(Set<Category>  jobType) {
+//		this.jobType = jobType;
+//	}
 
 	/**
 	 * @return the name

@@ -10,9 +10,12 @@ import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
@@ -32,28 +35,30 @@ public class ApplicationGrid extends Grid<Jobs> {
         addColumn(Jobs::getJobTitle).setHeader("Job Title")
                 .setFlexGrow(20).setSortable(true).setKey("jobTitle");
 
-        addColumn(Jobs::getCompany).setHeader("Job Company")
+        addColumn(Jobs::getCompany).setHeader("Company")
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
+        
+        addColumn(Jobs::getDateApplied).setHeader("Date Applied")
+        .setFlexGrow(20).setSortable(true).setKey("jobDateApplied");
+        
+        addColumn(Jobs::getDueDate).setHeader("Due Date")
+        .setFlexGrow(20).setSortable(true).setKey("jobDueDate");
+                
+        addColumn(Jobs::getSalary).setHeader("Salary")
+        .setFlexGrow(20).setSortable(true).setKey("jobSalary");
+        
+        addColumn(Jobs::getJobDescription).setHeader("Description")
+        .setFlexGrow(20).setSortable(true).setKey("jobDescription");
 
-        // Show all categories the product is in, separated by commas
-        addColumn(this::formatCategories).setHeader("Category").setFlexGrow(12)
-                .setKey("category");
-
-        addColumn(Jobs::getNextAction).setHeader("Job Next Action")
+        addColumn(Jobs::getNextAction).setHeader("Next Action")
                 .setFlexGrow(20).setSortable(true).setKey("jobNextAction");
 
-        addColumn(Jobs::getStatus).setHeader("Job Status")
+        addColumn(Jobs::getStatus).setHeader("Status")
                 .setFlexGrow(20).setSortable(true).setKey("jobStatus");
         
-        addComponentColumn(job -> {
-            Button editButton = new Button("Edit");
-            editButton.addClickListener(e -> {
-                if (getEditor().isOpen())
-                	getEditor().cancel();
-                	getEditor().editItem(job);
-            });
-            return editButton;
-        }).setWidth("150px").setFlexGrow(0);
+        addColumn(Jobs::getPriority).setHeader("Priority")
+        .setFlexGrow(20).setSortable(true).setKey("jobPriority");
+        
 
         // If the browser window size changes, check if all columns fit on
         // screen
@@ -66,21 +71,34 @@ public class ApplicationGrid extends Grid<Jobs> {
         if (width > 800) {
             getColumnByKey("jobTitle").setVisible(true);
             getColumnByKey("jobCompany").setVisible(true);
-            getColumnByKey("category").setVisible(true);
-            getColumnByKey("jobNextAction").setVisible(true);
             getColumnByKey("jobStatus").setVisible(true);
+            getColumnByKey("jobDescription").setVisible(false);
+            getColumnByKey("jobDateApplied").setVisible(true);
+            getColumnByKey("jobDueDate").setVisible(true);
+            getColumnByKey("jobSalary").setVisible(true);
+            getColumnByKey("jobNextAction").setVisible(false);
+            getColumnByKey("jobPriority").setVisible(true);
+
         } else if (width > 550) {
             getColumnByKey("jobTitle").setVisible(true);
             getColumnByKey("jobCompany").setVisible(true);
-            getColumnByKey("category").setVisible(true);
+            getColumnByKey("jobStatus").setVisible(true);
+            getColumnByKey("jobDescription").setVisible(false);
+            getColumnByKey("jobDateApplied").setVisible(false);
+            getColumnByKey("jobDueDate").setVisible(false);
+            getColumnByKey("jobSalary").setVisible(true);
             getColumnByKey("jobNextAction").setVisible(false);
-            getColumnByKey("jobStatus").setVisible(false);
+            getColumnByKey("jobPriority").setVisible(true);
         } else {
             getColumnByKey("jobTitle").setVisible(true);
             getColumnByKey("jobCompany").setVisible(true);
-            getColumnByKey("category").setVisible(false);
+            getColumnByKey("jobStatus").setVisible(true);
+            getColumnByKey("jobDescription").setVisible(false);
+            getColumnByKey("jobDateApplied").setVisible(false);
+            getColumnByKey("jobDueDate").setVisible(false);
+            getColumnByKey("jobSalary").setVisible(false);
             getColumnByKey("jobNextAction").setVisible(false);
-            getColumnByKey("jobStatus").setVisible(false);
+            getColumnByKey("jobPriority").setVisible(true);
         }
     }
 
@@ -103,12 +121,12 @@ public class ApplicationGrid extends Grid<Jobs> {
         getDataCommunicator().refresh(job);
     }
 
-    private String formatCategories(Jobs job) {
-        if (job.getJobType() == null || job.getJobType().isEmpty()) {
-            return "";
-        }
-        return job.getJobType().stream()
-                .sorted(Comparator.comparing(Category::getId))
-                .map(Category::getjobType).collect(Collectors.joining(", "));
-    }
+//    private String formatCategories(Jobs job) {
+//        if (job.getJobType() == null || job.getJobType().isEmpty()) {
+//            return "";
+//        }
+//        return job.getJobType().stream()
+//                .sorted(Comparator.comparing(Category::getId))
+//                .map(Category::getjobType).collect(Collectors.joining(", "));
+//    }
 }
