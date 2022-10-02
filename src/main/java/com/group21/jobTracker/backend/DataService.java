@@ -22,10 +22,6 @@ public abstract class DataService implements Serializable {
 
     public abstract Jobs getJobsbyId(int jobId);
 
-    public abstract void updateCategory(Category category);
-
-    public abstract void deleteCategory(int categoryId);
-
     public static DataService get() {
         return MockDataService.getInstance();
     }

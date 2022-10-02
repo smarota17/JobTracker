@@ -77,23 +77,23 @@ public class MockDataService extends DataService {
         return null;
     }
 
-    @Override
-    public void updateCategory(Category category) {
-        if (category.getId() < 0) {
-            category.setId(nextCategoryId++);
-            categories.add(category);
-        }
-    }
+//    @Override
+//    public void updateCategory(Category category) {
+//        if (category.getId() < 0) {
+//            category.setId(nextCategoryId++);
+//            categories.add(category);
+//        }
+//    }
 
-    /* delete  jobs based on the category*/
-    @Override
-    public void deleteCategory(int categoryId) {
-        if (categories.removeIf(category -> category.getId() == categoryId)) {
-            getAllJobs().forEach(job -> {
-                job.getJobType().removeIf(category -> category.getId() == categoryId);
-            });
-        }
-    }
+//    /* delete  jobs based on the category*/
+//    @Override
+//    public void deleteCategory(int categoryId) {
+//        if (categories.removeIf(category -> category.getId() == categoryId)) {
+//            getAllJobs().forEach(job -> {
+//                job.getJobType().removeIf(category -> category.getId() == categoryId);
+//            });
+//        }
+//    }
 
     /* Delete method for Jobs*/
     @Override
