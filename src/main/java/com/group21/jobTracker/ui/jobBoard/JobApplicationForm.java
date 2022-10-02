@@ -42,7 +42,7 @@ public class JobApplicationForm extends Div {
     private final TextField jobCompany;
     private final DatePicker jobDateApplied;
     private final DatePicker jobDueDate;
-    private final NumberField jobSalary;
+    private final TextField jobSalary;
     private final TextField jobDescription;
     private final TextField jobNextAction;
     private final TextField jobStatus;
@@ -92,7 +92,7 @@ public class JobApplicationForm extends Div {
         
         content.add(jobDueDate);
         
-        jobSalary = new NumberField("Salary");
+        jobSalary = new TextField("Salary");
         jobSalary.setWidth("100%");
         Div dollarPrefix = new Div();
         dollarPrefix.setText("$");

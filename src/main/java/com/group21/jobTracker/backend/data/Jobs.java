@@ -22,7 +22,7 @@ public class Jobs implements Serializable{
     private String company;
 	private LocalDate dateApplied;
 	private LocalDate dueDate;
-	private double salary;
+	private String salary;
 	private String jobDescription;
 	private String nextAction;
 	private String status;
@@ -46,7 +46,7 @@ public class Jobs implements Serializable{
 		this.jobTitle = "";				
 	}
 	
-	public Jobs(String jobTitle, String company, LocalDate dateApplied, LocalDate dueDate, double salary, String jobDescription, String nextAction, String status, String priority) {
+	public Jobs(String jobTitle, String company, LocalDate dateApplied, LocalDate dueDate, String salary, String jobDescription, String nextAction, String status, String priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -129,13 +129,13 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the salary
 	 */
-	public double getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 	/**
 	 * @param salary salary to set
 	 */
-	public void setSalary(double salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 	
