@@ -17,7 +17,7 @@ public class SendMail {
 
 		final String fromEmail = "jobtracker21@outlook.com"; 
 		final String password = "Gr0up#21!"; 
-		final String toEmail = "smarota1861@gmail.com"; 
+		final String toEmail = tEmail; 
 		
 		System.out.println("TLSEmail Start");
 		Properties props = new Properties();
