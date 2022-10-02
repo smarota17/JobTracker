@@ -1,7 +1,5 @@
 package com.group21.jobTracker.ui.jobBoard;
 
-import java.util.*;
-
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
@@ -15,9 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
-import com.vaadin.flow.router.Location;
 import com.vaadin.flow.router.OptionalParameter;
-import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
@@ -33,8 +29,6 @@ public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Dashboard";
-    private H1 helloLabel = new H1();
-    private String candidateName;
     private final JobGrid grid;
     private final JobApplicationForm form;
     private TextField filter;
@@ -47,7 +41,7 @@ public class JobBoardView extends HorizontalLayout
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         HorizontalLayout helloLayout = new HorizontalLayout();
-        helloLayout.add(helloLabel);
+        helloLayout.add(new H1("Hello, "+ MainLayout.candidateName + "!"));
         
         final HorizontalLayout topLayout = createTopBar();
         grid = new JobGrid();
@@ -185,12 +179,12 @@ public class JobBoardView extends HorizontalLayout
     public void setParameter(BeforeEvent event,
             @OptionalParameter String parameter) {
 
-        Location location = event.getLocation();
-        QueryParameters queryParameters = location.getQueryParameters();
+        // Location location = event.getLocation();
+        // QueryParameters queryParameters = location.getQueryParameters();
 
-        Map<String, List<String>> parametersMap = queryParameters.getParameters();
-        candidateName = parametersMap.get("candidateName").get(0);
-        helloLabel.setText("Hello, " + candidateName + "!");
+        // Map<String, List<String>> parametersMap = queryParameters.getParameters();
+        // candidateName = parametersMap.get("candidateName").get(0);
+        // helloLabel.setText("Hello, " + candidateName + "!");
     }
     
 }

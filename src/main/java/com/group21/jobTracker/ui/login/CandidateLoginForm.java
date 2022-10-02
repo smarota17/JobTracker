@@ -4,6 +4,7 @@ package com.group21.jobTracker.ui.login;
 import java.io.*;
 import java.util.*;
 
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -58,7 +59,6 @@ public class CandidateLoginForm extends Div {
         login.addClickListener(event -> {
             boolean hasName = false;
             String name = candidateName.getValue();
-            List<List<String>> records = new ArrayList<>();
             try (BufferedReader br = new BufferedReader(new FileReader("./data/candidate_data.csv"))) {
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -72,8 +72,8 @@ public class CandidateLoginForm extends Div {
             }
 
             if (hasName) {
-                QueryParameters parameter = QueryParameters.of("candidateName", name);
-                getUI().get().navigate("", parameter);
+                MainLayout.candidateName = name;
+                getUI().get().navigate("");
             } else {
                 Notification.show("The Candidate does not exist", 3000, Position.TOP_CENTER);
             }
