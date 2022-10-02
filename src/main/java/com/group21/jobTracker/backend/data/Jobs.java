@@ -6,17 +6,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
+/*
 import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+*/
 
 public class Jobs implements Serializable{
 	
-
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	*/
+	
     private int id = -1; 
 	
     private String jobTitle;
@@ -57,7 +60,7 @@ public class Jobs implements Serializable{
 		setSalary(salary);
 		setJobDescription(jobDescription);
 		setNextAction(nextAction);
-		setStaus(status);
+		setStatus(status);
 		setPriority(priority);
 		
 	}
@@ -188,7 +191,7 @@ public class Jobs implements Serializable{
 	/**
 	 * @param status status to set
 	 */
-	public void setStaus(String status) {
+	public void setStatus(String status) {
 		if (status.toLowerCase().equals("in progress")) {
 			this.status = "in progress";
 		} else if (status.toLowerCase().equals("rejected")) {
