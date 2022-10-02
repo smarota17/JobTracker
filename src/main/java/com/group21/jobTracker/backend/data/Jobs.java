@@ -1,32 +1,38 @@
 package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
+/*
 import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+*/
 
 public class Jobs implements Serializable{
 	
-
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	*/
+	
     private int id = -1; 
 	
     private String jobTitle;
     private String company;
-	private Date dateApplied;
-	private Date dueDate;
+	private String dateApplied;
+	private String dueDate;
 	private int salary;
 	private String jobDescription;
 	private String nextAction;
 	private String status;
 	private String priority;
 	private Set<Category> jobType;
+	private String remindMeOn;
 	
 	/**\
 	 * Constructs the Jobs object
@@ -39,13 +45,14 @@ public class Jobs implements Serializable{
 	 * @param nextAction next action for job
 	 * @param status status of job
 	 * @param priority priority for job
+	 * @param remindMeOn date for reminder to remind
 	 */
 	
 	public Jobs() {
 		this.jobTitle = "";				
 	}
 	
-	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, String priority) {
+	public Jobs(String jobTitle, String company, String dateApplied, String dueDate, int salary, String jobDescription, String nextAction, String status, String priority, String remindMeOn) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -53,8 +60,17 @@ public class Jobs implements Serializable{
 		setSalary(salary);
 		setJobDescription(jobDescription);
 		setNextAction(nextAction);
-		setStaus(status);
+		setStatus(status);
 		setPriority(priority);
+		
+	}
+	
+	private void verifyInput(String input) {
+		try {
+			new SimpleDateFormat("MM/dd/yyyy").parse(input);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int getId() {
@@ -102,26 +118,28 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the dateApplied
 	 */
-	public Date getDateApplied() {
+	public String getDateApplied() {
 		return dateApplied;
 	}
 	/**
 	 * @param dateApplied dateApplied to set
 	 */
-	public void setDateApplied(Date dateApplied) {
+	public void setDateApplied(String dateApplied) {
+		this.verifyInput(dateApplied);
 		this.dateApplied = dateApplied;
 	}
 	
 	/**
 	 * @return the dueDate
 	 */
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 	/**
 	 * @param dueDate dueDate to set
 	 */
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
+		this.verifyInput(dueDate);
 		this.dueDate = dueDate;
 	}
 	
@@ -173,7 +191,7 @@ public class Jobs implements Serializable{
 	/**
 	 * @param status status to set
 	 */
-	public void setStaus(String status) {
+	public void setStatus(String status) {
 		if (status.toLowerCase().equals("in progress")) {
 			this.status = "in progress";
 		} else if (status.toLowerCase().equals("rejected")) {
@@ -196,6 +214,20 @@ public class Jobs implements Serializable{
 	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+	
+	/**
+	 * @return the dueDate
+	 */
+	public String getRemindMeOn() {
+		return this.remindMeOn;
+	}
+	/**
+	 * @param dueDate dueDate to set
+	 */
+	public void setRemindMeOn(String remindMeOn) {
+		this.verifyInput(remindMeOn);
+		this.remindMeOn = remindMeOn;
 	}
 
 	public boolean isNewJob() {
