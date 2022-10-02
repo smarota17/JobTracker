@@ -3,7 +3,7 @@
 .settings
 .project
 .classpath
-data/candidate_data
+data/candidate_data.csv
 
 *.iml
 .DS_Store
