@@ -1,14 +1,14 @@
 name: Build Workflow
 on: workflow_dispatch
+
 jobs:
   build:
     name: Build job
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1    
-    
-    - name: Build with Maven
-      run: mvn -B test
+    uses: actions/checkout@v1    
+
+  - name: Build with Maven
+    run: mvn -B test
 
     - name: Generate JaCoCo Badge
       uses: cicirello/jacoco-badge-generator@v2
