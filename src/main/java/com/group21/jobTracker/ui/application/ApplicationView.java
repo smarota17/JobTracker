@@ -49,7 +49,7 @@ public class ApplicationView extends HorizontalLayout
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
         form = new ApplicationForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
+
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
@@ -154,11 +154,6 @@ public class ApplicationView extends HorizontalLayout
      */
     public void editJob(Jobs job) {
         showForm(job != null);
-//        if (job!=null) {
-//        	form.setCategories(job.getJobType());
-//            
-//            
-//        }
         form.setJob(job);
         form.editJob(job);
         
