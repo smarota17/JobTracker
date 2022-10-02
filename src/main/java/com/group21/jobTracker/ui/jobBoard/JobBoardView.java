@@ -7,6 +7,9 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -44,6 +47,7 @@ public class JobBoardView extends HorizontalLayout
         helloLayout.add(new H1("Hello, "+ MainLayout.candidateName + "!"));
         
         final HorizontalLayout topLayout = createTopBar();
+        
         grid = new JobGrid();
         grid.setItems(dataProvider);
         // Allows user to select a single row in the grid.
@@ -51,17 +55,28 @@ public class JobBoardView extends HorizontalLayout
                 event -> viewLogic.rowSelected(event.getValue()));
         
         form = new JobApplicationForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
         
+        HorizontalLayout upcomingDeadlinesLayout = new HorizontalLayout();
+        upcomingDeadlinesLayout.add( new H3("Upcoming Deadlines:") );
+        upcomingDeadlinesLayout.setWidth("50%");
         
+        HorizontalLayout gridAndDeadlinesLayout = new HorizontalLayout();
+        gridAndDeadlinesLayout.add(grid);
+        gridAndDeadlinesLayout.add(upcomingDeadlinesLayout);
+        gridAndDeadlinesLayout.setFlexGrow(3, grid);
+        gridAndDeadlinesLayout.setFlexGrow(1, upcomingDeadlinesLayout);
+        gridAndDeadlinesLayout.expand(grid);
+        gridAndDeadlinesLayout.setSizeFull();
+
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(helloLayout);
         barAndGridLayout.add(topLayout);
-        barAndGridLayout.add(grid);
-        barAndGridLayout.setFlexGrow(1, grid);
+//        barAndGridLayout.add(grid);
+        barAndGridLayout.add(gridAndDeadlinesLayout);
+//        barAndGridLayout.setFlexGrow(1, grid);
         barAndGridLayout.setFlexGrow(0, topLayout);
         barAndGridLayout.setSizeFull();
-        barAndGridLayout.expand(grid);
+//        barAndGridLayout.expand(grid);
 
        // add(helloLayout);
         add(barAndGridLayout);
@@ -79,18 +94,9 @@ public class JobBoardView extends HorizontalLayout
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-//        newApplication = new Button("New application");
-//        // Setting theme variant of new production button to LUMO_PRIMARY that
-//        // changes its background color to blue and its text color to white
-//        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-//        newApplication.setIcon(VaadinIcon.PLUS_CIRCLE.create());
-//        newApplication.addClickListener(click -> viewLogic.newJob());
-//        // A shortcut to click the new product button by pressing ALT + N
-//        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
-//        topLayout.add(newApplication);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
         return topLayout;

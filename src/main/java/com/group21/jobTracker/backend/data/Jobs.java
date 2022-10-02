@@ -1,6 +1,7 @@
 package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,9 +25,11 @@ public class Jobs implements Serializable{
 	
     private String jobTitle;
     private String company;
-	private String dateApplied;
-	private String dueDate;
-	private int salary;
+
+    private LocalDate dateApplied;
+    private LocalDate dueDate;
+    private String salary;
+
 	private String jobDescription;
 	private String nextAction;
 	private String status;
@@ -52,7 +55,7 @@ public class Jobs implements Serializable{
 		this.jobTitle = "";				
 	}
 	
-	public Jobs(String jobTitle, String company, String dateApplied, String dueDate, int salary, String jobDescription, String nextAction, String status, String priority, String remindMeOn) {
+	public Jobs(String jobTitle, String company, LocalDate dateApplied, LocalDate dueDate, String salary, String jobDescription, String nextAction, String status, String priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -81,13 +84,13 @@ public class Jobs implements Serializable{
 		this.id = id;
 	}
 
-	public Set<Category>  getJobType() {
-		return jobType;
-	}
+//	public Set<Category>  getJobType() {
+//		return jobType;
+//	}
 
-	public void setJobType(Set<Category>  jobType) {
-		this.jobType = jobType;
-	}
+//	public void setJobType(Set<Category>  jobType) {
+//		this.jobType = jobType;
+//	}
 
 	/**
 	 * @return the name
@@ -118,27 +121,27 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the dateApplied
 	 */
-	public String getDateApplied() {
+	public LocalDate getDateApplied() {
 		return dateApplied;
 	}
 	/**
 	 * @param dateApplied dateApplied to set
 	 */
-	public void setDateApplied(String dateApplied) {
+	public void setDateApplied(LocalDate dateApplied) {
 		this.verifyInput(dateApplied);
-		this.dateApplied = dateApplied;
+    this.dateApplied = dateApplied;
 	}
 	
 	/**
 	 * @return the dueDate
 	 */
-	public String getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 	/**
 	 * @param dueDate dueDate to set
 	 */
-	public void setDueDate(String dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.verifyInput(dueDate);
 		this.dueDate = dueDate;
 	}
@@ -146,13 +149,13 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the salary
 	 */
-	public int getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 	/**
 	 * @param salary salary to set
 	 */
-	public void setSalary(int salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 	

@@ -16,11 +16,13 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -38,10 +40,15 @@ public class ApplicationSearchForm extends Div {
 
     private final TextField jobTitle;
     private final TextField jobCompany;
+    private final DatePicker jobDateApplied;
+    private final DatePicker jobDueDate;
+    private final NumberField jobSalary;
+    private final TextField jobDescription;
+    private final TextField jobNextAction;
+    private final TextField jobStatus;
     private final TextField jobPriority;
-    private final CheckboxGroup<Category> category;
+    
     private Button save;
-    private Button discard;
     private Button cancel;
     private final Button delete;
 
@@ -64,26 +71,65 @@ public class ApplicationSearchForm extends Div {
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
         jobTitle.setValueChangeMode(ValueChangeMode.EAGER);
+        
         content.add(jobTitle);
-
-        jobCompany = new TextField("Job Company");
+        
+        jobCompany = new TextField("Company");
         jobCompany.setWidth("100%");
         jobCompany.setRequired(true);
         jobCompany.setValueChangeMode(ValueChangeMode.EAGER);
+        
         content.add(jobCompany);
-
-        jobPriority = new TextField("Job Priority");
+        
+        jobDateApplied = new DatePicker("Date Applied");
+        jobDateApplied.setWidth("100%");
+        jobDateApplied.setRequired(true);
+        
+        content.add(jobDateApplied);
+        
+        jobDueDate = new DatePicker("Due Date");
+        jobDueDate.setWidth("100%");
+        jobDueDate.setRequired(true);
+        
+        content.add(jobDueDate);
+        
+        jobSalary = new NumberField("Salary");
+        jobSalary.setWidth("100%");
+        Div dollarPrefix = new Div();
+        dollarPrefix.setText("$");
+        jobSalary.setPrefixComponent(dollarPrefix);
+        jobSalary.setValueChangeMode(ValueChangeMode.EAGER);
+        
+        content.add(jobSalary);
+        
+        jobDescription = new TextField("Description");
+        jobDescription.setWidth("100%");
+        jobDescription.setRequired(true);
+        jobDescription.setValueChangeMode(ValueChangeMode.EAGER);
+        
+        content.add(jobDescription);
+        
+        jobNextAction = new TextField("Next Actions");
+        jobNextAction.setWidth("100%");
+        jobNextAction.setRequired(true);
+        jobNextAction.setValueChangeMode(ValueChangeMode.EAGER);
+       
+        content.add(jobNextAction);
+        
+        jobStatus = new TextField("Status");
+        jobStatus.setWidth("100%");
+        jobStatus.setRequired(true);
+        jobStatus.setValueChangeMode(ValueChangeMode.EAGER);
+        
+        content.add(jobStatus);
+        
+        jobPriority = new TextField("Priority");
         jobPriority.setWidth("100%");
         jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
+        
         content.add(jobPriority);
 
-
-        category = new CheckboxGroup<>();
-        category.setLabel("Categories");
-        category.setId("category");
-        category.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
-        content.add(category);
 
         // binder = new BeanValidationBinder<>(Jobs.class);
         // binder.forField(price).withConverter(new PriceConverter())
@@ -91,14 +137,6 @@ public class ApplicationSearchForm extends Div {
         // binder.forField(stockCount).withConverter(new StockCountConverter())
         //         .bind("stockCount");
         // binder.bindInstanceFields(this);
-
-        // // enable/disable save button while editing
-        // binder.addStatusChangeListener(event -> {
-        //     final boolean isValid = !event.hasValidationErrors();
-        //     final boolean hasChanges = binder.hasChanges();
-        //     save.setEnabled(hasChanges && isValid);
-        //     discard.setEnabled(hasChanges);
-        // });
 
         save = new Button("Save");
         save.setWidth("100%");
@@ -111,11 +149,6 @@ public class ApplicationSearchForm extends Div {
             }
         });
         save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
-
-        discard = new Button("Discard changes");
-        discard.setWidth("100%");
-        discard.addClickListener(
-                event -> viewLogic.editJob(currentJob));
 
         cancel = new Button("Cancel");
         cancel.setWidth("100%");
@@ -135,12 +168,9 @@ public class ApplicationSearchForm extends Div {
             }
         });
 
-        content.add(save, discard, delete, cancel);
+        content.add(save, delete, cancel);
     }
 
-    public void setCategories(Collection<Category> categories) {
-        category.setItems(categories);
-    }
 
     public void editJob(Jobs job) {
         if (job == null) {
