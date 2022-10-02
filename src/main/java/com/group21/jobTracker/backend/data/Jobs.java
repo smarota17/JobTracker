@@ -21,7 +21,7 @@ public class Jobs implements Serializable{
     private String company;
 	private Date dateApplied;
 	private Date dueDate;
-	private int salary;
+	private String salary;
 	private String jobDescription;
 	private String nextAction;
 	private String status;
@@ -45,7 +45,7 @@ public class Jobs implements Serializable{
 		this.jobTitle = "";				
 	}
 	
-	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, int salary, String jobDescription, String nextAction, String status, String priority) {
+	public Jobs(String jobTitle, String company, Date dateApplied, Date dueDate, String salary, String jobDescription, String nextAction, String status, String priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -128,13 +128,13 @@ public class Jobs implements Serializable{
 	/**
 	 * @return the salary
 	 */
-	public int getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 	/**
 	 * @param salary salary to set
 	 */
-	public void setSalary(int salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 	
@@ -191,18 +191,82 @@ public class Jobs implements Serializable{
 	public String getPriority() {
 		return priority;
 	}
+	
 	/**
 	 * @param priority priority to set
 	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-
+	
+	/**
+	 * Determines if the job is a new job or not
+	 * @return true if the job is new
+	 */
 	public boolean isNewJob() {
         return getId() == -1;
     }
+	
+	/**
+	 * Overrides the toString method to convert the object into a string
+	 */
+	@Override
 	public String toString() {
 	      return this.jobTitle+" "+this.company+" "+this.priority;
 	}
 	
+	/**
+	 * Determines if this job application is equal to another
+	 * @param job2 the other job being compared to 
+	 * @return true if the objects are equal
+	 */
+	public boolean equals(Jobs job2) {
+		return this.toSaveString().equals(job2.toSaveString());
+	}
+	
+	/**
+	 * Expresses the job as a string that is used to save the file
+	 * @return the string representation of the job
+	 */
+	public String toSaveString() {
+		String output = "";
+		String[] list = {Integer.toString(id), jobTitle, company, dateToString(dateApplied), dateToString(dueDate), salary, jobDescription, nextAction, status, priority};
+		for (int i = 0; i < list.length; i++) {
+			if (list[i] != null) {
+				output += list[i] + ",";
+			} else {
+				output += "NULL,";
+			}
+		}
+		if (jobType == null || jobType.isEmpty()) {
+			output += "NULL,";
+		} else {
+			//Add Category
+		}
+		
+		return output;
+		
+	}
+	
+	/**
+	 * Helper function that formats the date into a string
+	 * @param date the date being formatted	
+	 * @return the string representation of the date
+	 */
+	@SuppressWarnings("deprecation")
+	private String dateToString(Date date) {
+		if (date == null) {
+			return "NULL";
+		}
+		String output = "";
+		if(date.getDate() < 10) {
+			output += "0";
+		}
+		output += date.getDate()  + "/";
+		if(date.getMonth() + 1 < 10) { 
+			output += "0";
+		}
+		output += (date.getMonth() + 1) + "/" + (date.getYear() + 1900);
+		return output;
+	}
 }
