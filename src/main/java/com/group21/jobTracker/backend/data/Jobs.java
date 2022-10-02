@@ -78,6 +78,14 @@ public class Jobs implements Serializable{
 	public int getId() {
 		return id;
 	}
+	
+	public String getStringId() {
+		return String.valueOf(id);
+	}
+	
+	public void setStringId(String id) {
+		this.id = Integer.valueOf(id);
+	}
 
 	public void setId(int id) {
 		this.id = id;

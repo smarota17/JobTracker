@@ -137,7 +137,7 @@ public class ApplicationView extends HorizontalLayout
      * @throws ParseException 
      * @throws NumberFormatException 
      */
-    public void updateProduct(Jobs job) throws NumberFormatException, ParseException {
+    public void updateProduct(Jobs job) {
         dataProvider.save(job);
     }
 

@@ -67,8 +67,8 @@ public class JobDataService extends DataService {
     @Override
     public synchronized void updateJob(Jobs j) {
         if (j.getId() < 0) {
-            // New product
-            j.setId(nextJobId++);
+//            // New product
+//            j.setId(nextJobId++);
             jobs.add(j);
             return;
         }
@@ -78,7 +78,7 @@ public class JobDataService extends DataService {
                 return;
             }
         }
-
+       
         throw new IllegalArgumentException("No Job with id " + j.getId()
                 + " found");
     }

@@ -41,6 +41,7 @@ public class ApplicationForm extends Div {
 
     private final VerticalLayout content;
 
+    private final TextField jobId;
     private final TextField jobTitle;
     private final TextField jobCompany;
     private final DatePicker jobDateApplied;
@@ -70,6 +71,11 @@ public class ApplicationForm extends Div {
 
         viewLogic = sampleCrudLogic;
 
+        jobId = new TextField("Job Title");
+        jobId.setWidth("100%");
+        jobId.setRequired(true);
+        jobId.setValueChangeMode(ValueChangeMode.EAGER);
+                
         jobTitle = new TextField("Job Title");
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
@@ -134,6 +140,7 @@ public class ApplicationForm extends Div {
         
 
         binder = new BeanValidationBinder<>(Jobs.class);
+        binder.forField(jobId).bind(Jobs::getStringId,Jobs::setStringId);
         binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
         binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
         binder.forField(jobDateApplied).bind(Jobs::getDateApplied,Jobs::setDateApplied);
@@ -160,6 +167,7 @@ public class ApplicationForm extends Div {
         save.addClickListener(event -> {
         	//System.out.println("length of checkbox group: "+category.getValue());
         	currentJob = new Jobs();
+        	currentJob.setId(Integer.parseInt(jobId.getValue()));
         	currentJob.setJobTitle(jobTitle.getValue());
         	currentJob.setCompany(jobCompany.getValue());
         	currentJob.setDateApplied(jobDateApplied.getValue());

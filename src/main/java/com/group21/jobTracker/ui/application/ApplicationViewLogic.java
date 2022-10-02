@@ -99,9 +99,7 @@ public class ApplicationViewLogic implements Serializable {
 			view.updateProduct(job);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Cannot read/write to file.");
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("Cannot read/write to file.");
-		}
+		} 
         
         setFragmentParameter("");
         view.showNotification(job.getJobTitle()

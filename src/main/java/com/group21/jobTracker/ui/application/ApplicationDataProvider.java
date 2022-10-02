@@ -48,8 +48,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("Cannot read/write to file.");
 		}
-		
-        JobDataService.get().updateJob(job);
+        
         if (newProduct) {
             refreshAll();
             currentUser.addJob(job);
@@ -58,8 +57,10 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
             currentUser.deleteExistingJob(job);
             currentUser.addJob(job);
         }
-        
+                
         Csv.saveUser(currentUser);
+        JobDataService.get().updateJob(job);
+
     }
 
     /**
