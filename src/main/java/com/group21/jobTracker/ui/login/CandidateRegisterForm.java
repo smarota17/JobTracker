@@ -1,9 +1,15 @@
 package com.group21.jobTracker.ui.login;
 
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.hibernate.query.QueryParameter;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -61,8 +67,58 @@ public class CandidateRegisterForm extends Div {
 
     public void newCandidate() {
         String name = fullName.getValue();
-        QueryParameters parameter = QueryParameters.of("candidateName", name);
-        getUI().get().navigate("", parameter);
+        List<String[]> newCandidateAttributes = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("./data/candidate_data.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                newCandidateAttributes.add(values);
+                if(values[0].equals(name)){
+                    Notification.show("Account already exists!");
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            Notification.show("Error reading account data");
+        }
+        
+        newCandidateAttributes.add(new String[]{
+            name,
+            email.getValue(),
+            age.getValue(),
+            experience.getValue().toString(),
+            keywords.getValue()
+        });
+
+        this.wirteData(newCandidateAttributes);
+        Notification.show("Registeration success! Please go back and log in.");
+    }
+
+    private void wirteData(List<String[]> newCandidateAttributes){
+        File csvOutputFile = new File("./data/candidate_data.csv");
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            newCandidateAttributes.stream()
+            .map(this::convertToCSV)
+            .forEach(pw::println);
+        } catch (Exception e) {
+            Notification.show(e.getMessage());
+        }
+    }
+
+    public String convertToCSV(String[] data) {
+        return Stream.of(data)
+          .map(this::escapeSpecialCharacters)
+          .collect(Collectors.joining(","));
+    }
+
+    public String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
     }
 
 }

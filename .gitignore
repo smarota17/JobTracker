@@ -3,6 +3,7 @@
 .settings
 .project
 .classpath
+data/candidate_data
 
 *.iml
 .DS_Store

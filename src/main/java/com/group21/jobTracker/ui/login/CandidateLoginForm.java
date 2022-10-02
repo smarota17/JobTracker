@@ -1,6 +1,9 @@
 package com.group21.jobTracker.ui.login;
 
 
+import java.io.*;
+import java.util.*;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -53,8 +56,22 @@ public class CandidateLoginForm extends Div {
         login.setWidth("100%");
         login.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> {
-            if (true) {
-                String name = candidateName.getValue();
+            boolean hasName = false;
+            String name = candidateName.getValue();
+            List<List<String>> records = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader("./data/candidate_data.csv"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(",");
+                    if(values[0].equals(name)) hasName = true;
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                Notification.show(e.getMessage());
+                Notification.show("Error reading account data");
+            }
+
+            if (hasName) {
                 QueryParameters parameter = QueryParameters.of("candidateName", name);
                 getUI().get().navigate("", parameter);
             } else {
