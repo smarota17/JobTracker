@@ -50,6 +50,7 @@ public class User {
 	 */
 	public User(String firstName,String lastName, String gender, String field, String education, String keywords) {
 		setFirstName(firstName);
+		setLastName(lastName);
 		setGender(gender);
 		setField(field);
 		setEducation(education);
