@@ -30,7 +30,6 @@ public class JobDataService extends DataService {
     private JobDataService() { 
 	    try {
 			jobs = Csv.loadUser(MainLayout.userName).getJobs();
-			System.out.println("printing jobs in ds");
 			for(Jobs j: jobs) {
 				System.out.println(j);
 			}
@@ -51,9 +50,6 @@ public class JobDataService extends DataService {
     /* returning jobs */
     public synchronized List<Jobs> getAllJobs() {
     	System.out.println("Getting jobs");
-    	for (Jobs j:jobs) {
-    		System.out.println(j);
-    	}
         return Collections.unmodifiableList(jobs);
     }
 
@@ -72,15 +68,11 @@ public class JobDataService extends DataService {
             jobs.add(j);
             return;
         }
-        for (int i = 0; i < jobs.size(); i++) {
-            if (jobs.get(i).getId() == j.getId()) {
-            	jobs.set(i, j);
-                return;
-            }
-        }
-       
-        throw new IllegalArgumentException("No Job with id " + j.getId()
-                + " found");
+        jobs.set(j.getId(), j);
+       return;
+//        throw new IllegalArgumentException("No Job with id " + j.getId()
+//                + " found");
+    	
     }
 
     /* Search jobs by Id*/

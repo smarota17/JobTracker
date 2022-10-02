@@ -49,18 +49,14 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
 			throw new IllegalArgumentException("Cannot read/write to file.");
 		}
         
-        if (newProduct) {
-            refreshAll();
-            currentUser.addJob(job);
-        } else {
-            refreshAll();
+        if (!newProduct) {
             currentUser.deleteExistingJob(job);
-            currentUser.addJob(job);
         }
-                
+        
+        currentUser.addJob(job);
         Csv.saveUser(currentUser);
-        JobDataService.get().updateJob(job);
-
+        JobDataService.getInstance();
+        refreshAll();
     }
 
     /**
@@ -70,8 +66,24 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
      *            the product to be deleted
      */
     public void delete(Jobs job) {
+    	final boolean newProduct = job.isNewJob();
+        User currentUser;
         JobDataService.get().deleteJob(job.getId());
+		try {
+			currentUser = Csv.loadUser(MainLayout.userName);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		}
+        
+        if (!newProduct) {
+            currentUser.deleteExistingJob(job);
+        }
+        Csv.saveUser(currentUser);
+        
         refreshAll();
+        
     }
 
     /**

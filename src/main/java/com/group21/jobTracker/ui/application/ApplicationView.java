@@ -6,6 +6,7 @@ import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -139,6 +140,7 @@ public class ApplicationView extends HorizontalLayout
      */
     public void updateProduct(Jobs job) {
         dataProvider.save(job);
+        UI.getCurrent().getPage().reload();
     }
 
     /**
@@ -148,6 +150,7 @@ public class ApplicationView extends HorizontalLayout
      */
     public void removeProduct(Jobs job) {
         dataProvider.delete(job);
+        UI.getCurrent().getPage().reload();
     }
 
     /**

@@ -263,7 +263,7 @@ public class Jobs implements Serializable{
 	public boolean equals(Jobs job2) {
 		return this.toSaveString().equals(job2.toSaveString());
 	}
-	
+
 	/**
 	 * Expresses the job as a string that is used to save the file
 	 * @return the string representation of the job
