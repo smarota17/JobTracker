@@ -5,14 +5,35 @@ package com.group21.jobTracker.backend.data;
 
 import java.util.ArrayList;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  *
  */
 public class User {
 
 	/** Name of the user */
-	private String name;
+	@NotBlank
+	private String firstName;
+	
+	@NotBlank
+	private String lastName;
 	/** Gender of the user **/
+	@NotBlank
+	private String emailAddress;
+	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+	
 	private int gender;
 	/** The job field of the user **/
 	private String field;
@@ -31,8 +52,9 @@ public class User {
 	 * @param education education level of the user
 	 * @param keywords job searching keywords for the user
 	 */
-	public User(String name, String gender, String field, String education, String keywords) {
-		setName(name);
+	public User(String firstName,String lastName, String gender, String field, String education, String keywords) {
+		setFirstName(firstName);
+		setLastName(lastName);
 		setGender(gender);
 		setField(field);
 		setEducation(education);
@@ -40,17 +62,31 @@ public class User {
 		jobs = new ArrayList<Jobs>();
 	}
 	
+	public User(String firstName,String lastName,String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = email;
+	}
+	
 	/**
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
+	
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String name) {
+		this.firstName = name;
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setLastName(String name) {
+		this.lastName = name;
 	}
 
 	/**
@@ -137,9 +173,9 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		String[] list = {getName(), getGender(), getField(), getEducation(), getKeywords()};
+		String[] list = {getFirstName(), getLastName(), getGender(), getField(), getEducation(), getKeywords()};
 		String output = "";
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			if (list[i] != null) {
 				output += list[i] + ",";
 			} else {

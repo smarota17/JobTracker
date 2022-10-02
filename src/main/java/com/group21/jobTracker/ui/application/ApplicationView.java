@@ -154,7 +154,14 @@ public class ApplicationView extends HorizontalLayout
      */
     public void editJob(Jobs job) {
         showForm(job != null);
+//        if (job!=null) {
+//        	form.setCategories(job.getJobType());
+//            
+//            
+//        }
+        form.setJob(job);
         form.editJob(job);
+        
     }
 
     /**

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.group21.jobTracker.backend.data.Jobs;
@@ -28,7 +29,7 @@ public class Csv {
 		if (!data.exists()){
 			data.mkdirs();
 		}
-		File file = new File("data/" + user.getName() + ".csv");
+		File file = new File("data/" + user.getFirstName() + ".csv");
 		file.delete();
 		try {
 		file.createNewFile();
@@ -60,7 +61,7 @@ public class Csv {
 					list[i] = null;
 				}
 			}
-			User user = new User(list[0], list[1], list[2], list[3], list[4]);
+			User user = new User(list[0], list[1], list[2], list[3], list[4], list[5]);
 			while (scan.hasNext()) {
 				user.addJob(loadJobs(scan.nextLine()));
 			}
@@ -89,10 +90,10 @@ public class Csv {
 		}
 		Jobs job = new Jobs(list[1], list[2], null, null, list[5], list[6], list[7], list[8], list[9]);
 		if (list[3] != null) {
-			job.setDateApplied(formatter.parse(list[3]));
+			job.setDateApplied(LocalDate.parse(list[3]));
 		}
 		if (list[4] != null) {
-			job.setDueDate(formatter.parse(list[4]));
+			job.setDueDate(LocalDate.parse(list[4]));
 		}
 		return job;
 		

@@ -36,7 +36,7 @@ public class JobApplicationForm extends Div {
 
     private final VerticalLayout content;
 
-    private final TextField jobName;
+    //private final TextField jobName;
     private final TextField jobTitle;
     private final TextField jobCompany;
     private final TextField jobPriority;
@@ -47,13 +47,13 @@ public class JobApplicationForm extends Div {
     private final Button delete;
 
     private final JobBoardViewLogic viewLogic;
-    // private final Binder<Jobs> binder;
+    private final Binder<Jobs> binder;
     private Jobs currentJob;
 
 
     public JobApplicationForm(JobBoardViewLogic sampleCrudLogic) {
         setClassName("job-form");
-
+        System.out.println("inside the job board application");
         content = new VerticalLayout();
         content.setSizeUndefined();
         content.addClassName("job-form-content");
@@ -61,11 +61,11 @@ public class JobApplicationForm extends Div {
 
         viewLogic = sampleCrudLogic;
 
-        jobName = new TextField("Job name");
-        jobName.setWidth("100%");
-        jobName.setRequired(true);
-        jobName.setValueChangeMode(ValueChangeMode.EAGER);
-        content.add(jobName);
+//        jobName = new TextField("Job name");
+//        jobName.setWidth("100%");
+//        jobName.setRequired(true);
+//        jobName.setValueChangeMode(ValueChangeMode.EAGER);
+//        content.add(jobName);
 
         jobTitle = new TextField("Job Title");
         jobTitle.setWidth("100%");
@@ -92,13 +92,13 @@ public class JobApplicationForm extends Div {
         category.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
         content.add(category);
 
-        // binder = new BeanValidationBinder<>(Jobs.class);
-        // binder.forField(price).withConverter(new PriceConverter())
-        //         .bind("price");
-        // binder.forField(stockCount).withConverter(new StockCountConverter())
-        //         .bind("stockCount");
-        // binder.bindInstanceFields(this);
-
+        binder = new BeanValidationBinder<>(Jobs.class);
+        binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
+        binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
+        binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
+        binder.forField(category).bind(Jobs::getJobType,Jobs::setJobType);
+        binder.bindInstanceFields(this);
+        binder.readBean(currentJob);
         // // enable/disable save button while editing
         // binder.addStatusChangeListener(event -> {
         //     final boolean isValid = !event.hasValidationErrors();
@@ -137,7 +137,7 @@ public class JobApplicationForm extends Div {
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
                 ButtonVariant.LUMO_PRIMARY);
         delete.addClickListener(event -> {
-            if (currentJob != null) {
+            if (currentJob != null && binder.writeBeanIfValid(currentJob)) {
                 viewLogic.deleteJob(currentJob);
             }
         });
@@ -147,6 +147,16 @@ public class JobApplicationForm extends Div {
 
     public void setCategories(Collection<Category> categories) {
         category.setItems(categories);
+    }
+    
+    public void setJob(Jobs job) {
+        this.currentJob = job;
+        binder.setBean(currentJob);
+
+//        // Show delete button for only customers already in the database
+//        delete.setVisible(customer.isPersisted());
+//        setVisible(true);
+//        firstName.selectAll();
     }
 
     public void editJob(Jobs job) {
