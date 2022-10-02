@@ -3,6 +3,8 @@
  */
 package com.group21.jobTracker.backend.data;
 
+import java.util.ArrayList;
+
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -39,6 +41,8 @@ public class User {
 	private String education;
 	/** Job searching keywords for the user **/
 	private String keywords;
+	/** List of job applications saved to the user **/
+	private ArrayList<Jobs> jobs;
 	
 	/**\
 	 * Constructs the user object
@@ -55,6 +59,7 @@ public class User {
 		setField(field);
 		setEducation(education);
 		setKeywords(keywords);
+		jobs = new ArrayList<Jobs>();
 	}
 	
 	public User(String firstName,String lastName,String email) {
@@ -146,5 +151,50 @@ public class User {
 		this.keywords = keywords;
 	}
 	
+	/**
+	 * Adds a job to the list of user jobs
+	 */
+	public void addJob(Jobs job) {
+		jobs.add(job);
+	}
+	
+	/**
+	 * Gets the list of jobs 
+	 * @return the list of jobs
+	 */
+	public ArrayList<Jobs> getJobs() {
+		return jobs;
+	}
+	
+	/**
+	 * Overrides the toString method to express the user as a string
+	 * 
+	 * @returns the user as a string
+	 */
+	@Override
+	public String toString() {
+		String[] list = {getFirstName(), getLastName(), getGender(), getField(), getEducation(), getKeywords()};
+		String output = "";
+		for (int i = 0; i < 6; i++) {
+			if (list[i] != null) {
+				output += list[i] + ",";
+			} else {
+				output += "NULL,";
+			}
+		}
+		return output;
+	}
+	
+	/**
+	 * Converts the user into a string to be saved to a file
+	 * @return the string representation of the user
+	 */
+	public String toSaveString() {
+		String output = this.toString();
+		for(Jobs j : jobs) {
+			output += "\n" + j.toSaveString();
+		}
+		return output;
+	}
 	
 }

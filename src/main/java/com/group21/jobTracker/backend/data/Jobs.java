@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,11 +26,9 @@ public class Jobs implements Serializable{
 	
     private String jobTitle;
     private String company;
-
-    private LocalDate dateApplied;
-    private LocalDate dueDate;
-    private String salary;
-
+	private LocalDate dateApplied;
+	private LocalDate dueDate;
+	private String salary;
 	private String jobDescription;
 	private String nextAction;
 	private String status;
@@ -128,8 +127,7 @@ public class Jobs implements Serializable{
 	 * @param dateApplied dateApplied to set
 	 */
 	public void setDateApplied(LocalDate dateApplied) {
-		this.verifyInput(dateApplied);
-    this.dateApplied = dateApplied;
+		this.dateApplied = dateApplied;
 	}
 	
 	/**
@@ -142,7 +140,6 @@ public class Jobs implements Serializable{
 	 * @param dueDate dueDate to set
 	 */
 	public void setDueDate(LocalDate dueDate) {
-		this.verifyInput(dueDate);
 		this.dueDate = dueDate;
 	}
 	
@@ -212,6 +209,7 @@ public class Jobs implements Serializable{
 	public String getPriority() {
 		return priority;
 	}
+	
 	/**
 	 * @param priority priority to set
 	 */
@@ -232,12 +230,75 @@ public class Jobs implements Serializable{
 		this.verifyInput(remindMeOn);
 		this.remindMeOn = remindMeOn;
 	}
-
+	
+	/**
+	 * Determines if the job is a new job or not
+	 * @return true if the job is new
+	 */
 	public boolean isNewJob() {
         return getId() == -1;
     }
+	
+	/**
+	 * Overrides the toString method to convert the object into a string
+	 */
+	@Override
 	public String toString() {
 	      return this.jobTitle+" "+this.company+" "+this.priority;
 	}
 	
+	/**
+	 * Determines if this job application is equal to another
+	 * @param job2 the other job being compared to 
+	 * @return true if the objects are equal
+	 */
+	public boolean equals(Jobs job2) {
+		return this.toSaveString().equals(job2.toSaveString());
+	}
+	
+	/**
+	 * Expresses the job as a string that is used to save the file
+	 * @return the string representation of the job
+	 */
+	public String toSaveString() {
+		String output = "";
+		String[] list = {Integer.toString(id), jobTitle, company, dateToString(dateApplied), dateToString(dueDate), salary, jobDescription, nextAction, status, priority};
+		for (int i = 0; i < list.length; i++) {
+			if (list[i] != null) {
+				output += list[i] + ",";
+			} else {
+				output += "NULL,";
+			}
+		}
+		if (jobType == null || jobType.isEmpty()) {
+			output += "NULL,";
+		} else {
+			//Add Category
+		}
+		
+		return output;
+		
+	}
+	
+	/**
+	 * Helper function that formats the date into a string
+	 * @param date the date being formatted	
+	 * @return the string representation of the date
+	 */
+	@SuppressWarnings("deprecation")
+	private String dateToString(LocalDate date) {
+		if (date == null) {
+			return "NULL";
+		}
+		String output = "" + date.getYear() + "-";
+		if(date.getMonthValue() < 10) { 
+			output += "0";
+		}
+		output += date.getMonthValue() + "-";
+		if(date.getDayOfMonth() < 10) {
+			output += "0";
+		}
+		output += date.getDayOfMonth();
+		return output;
+	}
 }
