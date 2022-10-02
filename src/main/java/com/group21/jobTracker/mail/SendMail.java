@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
 
 	public static void sendEmail(String fEmail, String pass, String tEmail) {
-//	public static void main(String[] args) {
 
 		final String fromEmail = "jobtracker21@outlook.com"; 
 		final String password = "Gr0up#21!"; 
@@ -50,6 +49,5 @@ public class SendMail {
             throw new RuntimeException(e);
         }	
         
-//        return true;
 	}
 }
