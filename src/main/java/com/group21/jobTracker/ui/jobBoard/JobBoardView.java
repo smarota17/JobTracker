@@ -3,12 +3,9 @@ package com.group21.jobTracker.ui.jobBoard;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
-import com.group21.jobTracker.ui.application.ApplicationForm;
-import com.group21.jobTracker.ui.application.ApplicationViewLogic;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
@@ -22,7 +19,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.flow.theme.Theme;
 
 /**
  * A view for performing create-read-update-delete operations on products.
@@ -36,7 +32,6 @@ public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Dashboard";
-    
     private final JobGrid grid;
     private final JobApplicationForm form;
     private TextField filter;
@@ -49,7 +44,7 @@ public class JobBoardView extends HorizontalLayout
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         HorizontalLayout helloLayout = new HorizontalLayout();
-        helloLayout.add( new H1("Hello, User!") );
+        helloLayout.add(new H1("Hello, "+ MainLayout.candidateName + "!"));
         
         final HorizontalLayout topLayout = createTopBar();
         
@@ -189,6 +184,13 @@ public class JobBoardView extends HorizontalLayout
     @Override
     public void setParameter(BeforeEvent event,
             @OptionalParameter String parameter) {
-        viewLogic.enter(parameter);
+
+        // Location location = event.getLocation();
+        // QueryParameters queryParameters = location.getQueryParameters();
+
+        // Map<String, List<String>> parametersMap = queryParameters.getParameters();
+        // candidateName = parametersMap.get("candidateName").get(0);
+        // helloLabel.setText("Hello, " + candidateName + "!");
     }
+    
 }

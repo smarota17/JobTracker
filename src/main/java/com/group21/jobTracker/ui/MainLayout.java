@@ -23,6 +23,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.dom.ThemeList;
+import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -39,9 +40,9 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class MainLayout extends AppLayout {
 
     private final Button logoutButton;
+    public static String candidateName;
 
     public MainLayout() {
-    	
         // menu toggle
         final DrawerToggle drawerToggle = new DrawerToggle();
         drawerToggle.addClassName("menu-toggle");
