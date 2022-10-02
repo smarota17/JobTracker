@@ -14,31 +14,44 @@ public class User {
 
 	/** Name of the user */
 	@NotBlank
-	private String firstName;
+	private String fullName;
 	
-	@NotBlank
-	private String lastName;
-	/** Gender of the user **/
 	@NotBlank
 	private String emailAddress;
 	
+	/**
+	 * @return the emailAddress
+	 */
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
+	/**
+	 * @param emailAddress the email Address to set
+	*/
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
 
-	public String getLastName() {
-		return lastName;
+	/**
+	 * @return the full name
+	 */
+	public String getFullName() {
+		return fullName;
+	}
+
+	/**
+	 * @param fullName the full name to set
+	*/
+	public String setFullName(String fullName) {
+		return this.fullName = fullName;
 	}
 	
-	private int gender;
+	private String gender;
 	/** The job field of the user **/
-	private String field;
+	private String age;
 	/** Education level of the user **/
-	private String education;
+	private String experience;
 	/** Job searching keywords for the user **/
 	private String keywords;
 	/** List of job applications saved to the user **/
@@ -46,97 +59,63 @@ public class User {
 	
 	/**\
 	 * Constructs the user object
-	 * @param name name of the user
+	 * @param fullName fullName of the user
 	 * @param gender gender of the user
 	 * @param field job field of the user
-	 * @param education education level of the user
+	 * @param experience education level of the user
 	 * @param keywords job searching keywords for the user
 	 */
-	public User(String firstName,String lastName, String gender, String field, String education, String keywords) {
-		setFirstName(firstName);
-		setLastName(lastName);
+	public User(String fullName, String email, String gender, String age, String experience, String keywords) {
+		setFullName(fullName);
+		setEmailAddress(email);
 		setGender(gender);
-		setField(field);
-		setEducation(education);
+		setAge(age);
+		setExperience(experience);
 		setKeywords(keywords);
 		jobs = new ArrayList<Jobs>();
 	}
 	
-	public User(String firstName,String lastName,String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public User(String fullName,String email) {
+		this.fullName = fullName;
 		this.emailAddress = email;
 	}
 	
-	/**
-	 * @return the name
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	/**
-	 * @param name the name to set
-	 */
-	public void setFirstName(String name) {
-		this.firstName = name;
-	}
-	
-	/**
-	 * @param name the name to set
-	 */
-	public void setLastName(String name) {
-		this.lastName = name;
-	}
 
 	/**
 	 * @return the gender
 	 */
 	public String getGender() {
-		if(gender == 1) {
-			return "Male";
-		} else if(gender == 2) {
-			return "Female";
-		} else if(gender == 0) {
-			return "Nonbinary";
-		}
-		return null;
+		return gender;
 	}
 	/**
 	 * @param gender the gender to set
 	 */
 	public void setGender(String gender) {
-		if(gender.toLowerCase().equals("male")) {
-			this.gender = 1;
-		} else if(gender.toLowerCase().equals("female")) {
-			this.gender = 2;
-		} else if(gender.toLowerCase().equals("nonbinary")) {
-			this.gender = 0;
-		}
+		this.gender = gender;
 	}
 	/**
 	 * @return the major
 	 */
-	public String getField() {
-		return field;
+	public String getAge() {
+		return age;
 	}
 	/**
 	 * @param major the major to set
 	 */
-	public void setField(String field) {
-		this.field = field;
+	public void setAge(String age) {
+		this.age = age;
 	}
 	/**
 	 * @return the education
 	 */
-	public String getEducation() {
-		return education;
+	public String getExperience() {
+		return experience;
 	}
 	/**
 	 * @param education the education to set
 	 */
-	public void setEducation(String education) {
-		this.education = education;
+	public void setExperience(String experience) {
+		this.experience = experience;
 	}
 	/**
 	 * @return the keywords
@@ -171,9 +150,10 @@ public class User {
 	 * 
 	 * @returns the user as a string
 	 */
+
 	@Override
 	public String toString() {
-		String[] list = {getFirstName(), getLastName(), getGender(), getField(), getEducation(), getKeywords()};
+		String[] list = {getFullName(), getEmailAddress(), getGender(), getAge(), getExperience(), getKeywords()};
 		String output = "";
 		for (int i = 0; i < 6; i++) {
 			if (list[i] != null) {
@@ -195,6 +175,10 @@ public class User {
 			output += "\n" + j.toSaveString();
 		}
 		return output;
+	}
+
+	public String getProcessedFullName(){
+		return this.fullName.replace(" ", "");
 	}
 	
 }

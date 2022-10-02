@@ -1,12 +1,16 @@
 package com.group21.jobTracker.backend.mock;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.group21.jobTracker.Api.ApiCalls;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 
 /**
  * Mock data model. This implementation has very simplistic locking and does not
@@ -23,7 +27,13 @@ public class MockDataService extends DataService {
 
     private MockDataService() {
         categories = MockDataGenerator.createCategories();
-        jobs = MockDataGenerator.createJobs(categories);
+        
+        try {
+            jobs = ApiCalls.careerOneStopJobSearch(null);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+        }
         nextJobId = jobs.size() + 1;
         nextCategoryId = categories.size() + 1;
     }

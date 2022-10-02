@@ -14,14 +14,13 @@ class UserTest {
 
 	@Test
 	void test() {
-		User user = new User("John", "Smith", "male", "Field", "Education", "Keywords");
-		assertEquals(user.getFirstName(), "John");
-		assertEquals(user.getLastName(), "Smith");
-		assertEquals(user.getGender(), "Male");
-		assertEquals(user.getField(), "Field");
-		assertEquals(user.getEducation(), "Education");
+		User user = new User("TestFullName", "TestEmail", "male", "12", "1.5", "Keywords");
+		assertEquals(user.getFullName(), "TestFullName");
+		assertEquals(user.getEmailAddress(), "TestEmail");
+		assertEquals(user.getGender(), "male");
+		assertEquals(user.getAge(), "12");
+		assertEquals(user.getExperience(), "1.5");
 		assertEquals(user.getKeywords(), "Keywords");
-		assertNull(user.getEmailAddress());
 	}
 
 }

@@ -29,7 +29,7 @@ public class Csv {
 		if (!data.exists()){
 			data.mkdirs();
 		}
-		File file = new File("data/" + user.getFirstName() + ".csv");
+		File file = new File("data/" + user.getProcessedFullName() + ".csv");
 		file.delete();
 		try {
 		file.createNewFile();

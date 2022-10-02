@@ -40,7 +40,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class MainLayout extends AppLayout {
 
     private final Button logoutButton;
-    public static String candidateName;
+    public static String userName;
 
     public MainLayout() {
         // menu toggle
@@ -111,6 +111,7 @@ public class MainLayout extends AppLayout {
 
     private void logout() {
         //logout logic
+        MainLayout.userName = null;
         getUI().get().navigate("Login");
     }
 
@@ -132,43 +133,5 @@ public class MainLayout extends AppLayout {
         icon.setSize("24px");
         return routerButton;
     }
-
-//     private void registerAdminViewIfApplicable(AccessControl accessControl) {
-//         // register the admin view dynamically only for any admin user logged in
-//         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
-//                 && !RouteConfiguration.forSessionScope()
-//                         .isRouteRegistered(AdminView.class)) {
-//             RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
-//                     AdminView.class, MainLayout.class);
-//             // as logout will purge the session route registry, no need to
-//             // unregister the view on logout
-//         }
-//     }
-
-//     @Override
-//     protected void onAttach(AttachEvent attachEvent) {
-//         super.onAttach(attachEvent);
-
-//         // User can quickly activate logout with Ctrl+L
-//         attachEvent.getUI().addShortcutListener(() -> logout(), Key.KEY_L,
-//                 KeyModifier.CONTROL);
-
-//         // add the admin view menu item if user has admin role
-//         final AccessControl accessControl = AccessControlFactory.getInstance()
-//                 .createAccessControl();
-//         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
-
-//             // Create extra navigation target for admins
-//             registerAdminViewIfApplicable(accessControl);
-
-//             // The link can only be created now, because the RouterLink checks
-//             // that the target is valid.
-//             addToDrawer(createMenuLink(AdminView.class, AdminView.VIEW_NAME,
-//                     VaadinIcon.INFO_CIRCLE_O.create()));
-//         }
-
-//         // Finally, add logout button for all users
-//         addToDrawer(logoutButton);
-//     }
 
 }
