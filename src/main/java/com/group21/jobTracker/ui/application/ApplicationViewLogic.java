@@ -3,6 +3,7 @@ package com.group21.jobTracker.ui.application;
 import java.io.Serializable;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.backend.mock.JobDataService;
 import com.vaadin.flow.component.UI;
 
 /**
@@ -85,7 +86,7 @@ public class ApplicationViewLogic implements Serializable {
     }
 
     private Jobs findJob(int jobId) {
-        return DataService.get().getJobsbyId(jobId);
+        return JobDataService.get().getJobsbyId(jobId);
     }
 
     public void saveProduct(Jobs job) {

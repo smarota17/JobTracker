@@ -1,6 +1,5 @@
 package com.group21.jobTracker.ui.application;
 
-import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
@@ -44,7 +43,7 @@ public class ApplicationView extends HorizontalLayout
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
         grid = new ApplicationGrid();
-        grid.setItems(dataProvider);
+        grid.setItems(dataProvider.getItems());
         // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));

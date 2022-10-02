@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import com.group21.jobTracker.backend.data.Jobs;
 
-import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.backend.mock.JobDataService;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -22,7 +22,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     private String filterText = "";
 
     public ApplicationDataProvider() {
-        super(DataService.get().getAllJobs());
+        super(JobDataService.get().getAllJobs());
     }
 
     /**
@@ -34,7 +34,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();
 
-        DataService.get().updateJob(job);
+        JobDataService.get().updateJob(job);
         if (newProduct) {
             refreshAll();
         } else {
@@ -49,7 +49,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
      *            the product to be deleted
      */
     public void delete(Jobs job) {
-        DataService.get().deleteJob(job.getId());
+        JobDataService.get().deleteJob(job.getId());
         refreshAll();
     }
 

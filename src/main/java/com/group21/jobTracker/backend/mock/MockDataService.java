@@ -27,13 +27,13 @@ public class MockDataService extends DataService {
 
     private MockDataService() {
         categories = MockDataGenerator.createCategories();
-        
-        try {
-            jobs = ApiCalls.careerOneStopJobSearch(null);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
-        }
+        jobs = MockDataGenerator.createJobs(categories);
+//        try {
+//            jobs = ApiCalls.careerOneStopJobSearch(null);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+//        }
         nextJobId = jobs.size() + 1;
         nextCategoryId = categories.size() + 1;
     }
