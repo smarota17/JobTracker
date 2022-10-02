@@ -80,7 +80,13 @@ public class CandidateRegisterForm extends Div {
             }
         } catch (Exception e) {
             // TODO: handle exception
-            Notification.show("Error reading account data");
+            File temp = new File("./data/candidate_data.csv");
+            boolean exists = temp.exists();
+            if(!exists){
+                Notification.show("Creating data file");
+            } else {
+                Notification.show("Error reading account data");
+            }
         }
         
         newCandidateAttributes.add(new String[]{
