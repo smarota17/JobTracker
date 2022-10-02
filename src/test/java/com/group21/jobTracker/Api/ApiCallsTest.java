@@ -26,8 +26,8 @@ class ApiCallsTest {
 	void linkedInTest(){
 		try {
 			ArrayList<Jobs> jobs = ApiCalls.linkedInJobSearch("Software Developer");
-//			assertEquals(5, jobs.size());
-//			assertNotNull(jobs.get(1).getName());
+			assertEquals(5, jobs.size());
+			assertNotNull(jobs.get(1).getJobTitle());
 		} catch (Exception e) {
 			fail();
 		}
@@ -42,8 +42,8 @@ class ApiCallsTest {
 	void careerOneStopTest(){
 		try {
 			ArrayList<Jobs> jobs = ApiCalls.careerOneStopJobSearch("Software Developer");
-//			assertEquals(5, jobs.size());
-//			assertNotNull(jobs.get(1).getName());
+			assertEquals(5, jobs.size());
+			assertNotNull(jobs.get(1).getJobTitle());
 		} catch (Exception e) {
 			fail();
 		}

@@ -28,7 +28,10 @@ public class ApiCalls {
 		Document doc = Jsoup.connect(url).get();
 		String title = doc.select("h1.top-card-layout__title").text();
 		String company = doc.select("a.topcard__org-name-link").text();
-		Jobs job = null; //Initialize with constructor
+		Jobs job = new Jobs();
+		job.setJobTitle(title);
+		job.setCompany(company);
+		job.setJobDescription(url);
 		return job;
 	}
 	
@@ -44,7 +47,7 @@ public class ApiCalls {
 		Elements links = doc.select("a.base-card__full-link");
 		ArrayList<Jobs> results = new ArrayList<Jobs>();
 		for (Element link : links) {
-			if (results.size() > NUM_JOBS) {
+			if (results.size() == NUM_JOBS) {
 				break;
 			}
 			results.add(linkedInSelectJob(link.attr("href")));
@@ -59,14 +62,17 @@ public class ApiCalls {
 	 * @throws IOException if the CareerOneStop url cannot be reached
 	 */
 	public static Jobs careerOneStopSelectJob(String url) throws IOException {
-		System.out.println(url);
 		if (!url.contains("careeronestop.org/Toolkit/Jobs/")) {
 			throw new IllegalArgumentException("Invalid URL");
 		}
 		Document doc = Jsoup.connect(url).get();
 		String title = doc.select("#ctl17_lblJobTitle").text();
 		String company = doc.select("#ctl17_lblCompany").text();
-		Jobs job = null; //Initialize with constructor
+		String desc = doc.select("#ctl17_lblDesc p").text();
+		Jobs job = new Jobs();
+		job.setJobTitle(title);
+		job.setCompany(company);
+		job.setJobDescription(desc);
 		return job;
 	}
 	

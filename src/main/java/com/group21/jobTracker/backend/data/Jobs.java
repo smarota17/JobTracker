@@ -2,32 +2,40 @@ package com.group21.jobTracker.backend.data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
+/*
 import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+*/
 
 public class Jobs implements Serializable{
 	
-
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	*/
+	
     private int id = -1; 
 	
     private String jobTitle;
     private String company;
-	private LocalDate dateApplied;
-	private LocalDate dueDate;
-	private String salary;
+
+    private LocalDate dateApplied;
+    private LocalDate dueDate;
+    private String salary;
+
 	private String jobDescription;
 	private String nextAction;
 	private String status;
 	private String priority;
 	private Set<Category> jobType;
+	private String remindMeOn;
 	
 	/**\
 	 * Constructs the Jobs object
@@ -40,6 +48,7 @@ public class Jobs implements Serializable{
 	 * @param nextAction next action for job
 	 * @param status status of job
 	 * @param priority priority for job
+	 * @param remindMeOn date for reminder to remind
 	 */
 	
 	public Jobs() {
@@ -56,6 +65,15 @@ public class Jobs implements Serializable{
 		setNextAction(nextAction);
 		setStatus(status);
 		setPriority(priority);
+		
+	}
+	
+	private void verifyInput(String input) {
+		try {
+			new SimpleDateFormat("MM/dd/yyyy").parse(input);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int getId() {
@@ -110,7 +128,8 @@ public class Jobs implements Serializable{
 	 * @param dateApplied dateApplied to set
 	 */
 	public void setDateApplied(LocalDate dateApplied) {
-		this.dateApplied = dateApplied;
+		this.verifyInput(dateApplied);
+    this.dateApplied = dateApplied;
 	}
 	
 	/**
@@ -123,6 +142,7 @@ public class Jobs implements Serializable{
 	 * @param dueDate dueDate to set
 	 */
 	public void setDueDate(LocalDate dueDate) {
+		this.verifyInput(dueDate);
 		this.dueDate = dueDate;
 	}
 	
@@ -197,6 +217,20 @@ public class Jobs implements Serializable{
 	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+	
+	/**
+	 * @return the dueDate
+	 */
+	public String getRemindMeOn() {
+		return this.remindMeOn;
+	}
+	/**
+	 * @param dueDate dueDate to set
+	 */
+	public void setRemindMeOn(String remindMeOn) {
+		this.verifyInput(remindMeOn);
+		this.remindMeOn = remindMeOn;
 	}
 
 	public boolean isNewJob() {
