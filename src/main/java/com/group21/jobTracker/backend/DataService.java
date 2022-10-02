@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.backend.mock.JobDataService;
 import com.group21.jobTracker.backend.mock.MockDataService;
 
 /**
@@ -24,6 +25,10 @@ public abstract class DataService implements Serializable {
 
     public static DataService get() {
         return MockDataService.getInstance();
+    }
+    
+    public static DataService getJob() {
+        return JobDataService.getInstance();
     }
 
 }

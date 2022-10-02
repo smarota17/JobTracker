@@ -27,10 +27,13 @@ public class JobDataService extends DataService {
     private int nextJobId = 0;
 //    private int nextCategoryId = 0;
 
-    private JobDataService() {
-        
+    private JobDataService() { 
 	    try {
 			jobs = Csv.loadUser(MainLayout.userName).getJobs();
+			System.out.println("printing jobs in ds");
+			for(Jobs j: jobs) {
+				System.out.println(j);
+			}
 		} catch (NumberFormatException e) {
 	        Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
 		} catch (ParseException e) {
@@ -41,14 +44,11 @@ public class JobDataService extends DataService {
     }
 
     public synchronized static DataService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new JobDataService();
-        }
+        INSTANCE = new JobDataService();
         return INSTANCE;
     }
 
     /* returning jobs */
-    @Override
     public synchronized List<Jobs> getAllJobs() {
     	System.out.println("Getting jobs");
     	for (Jobs j:jobs) {

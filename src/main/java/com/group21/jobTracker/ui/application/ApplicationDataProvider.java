@@ -1,12 +1,16 @@
 package com.group21.jobTracker.ui.application;
 
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.Objects;
 
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.backend.mock.JobDataService;
+import com.group21.jobTracker.csv.Csv;
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -22,7 +26,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     private String filterText = "";
 
     public ApplicationDataProvider() {
-        super(JobDataService.get().getAllJobs());
+        super(JobDataService.getJob().getAllJobs());
     }
 
     /**
@@ -30,16 +34,32 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
      *
      * @param product
      *            the updated or new product
+     * @throws ParseException 
+     * @throws NumberFormatException 
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();
-
+        User currentUser;
+        
+		try {
+			currentUser = Csv.loadUser(MainLayout.userName);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		}
+		
         JobDataService.get().updateJob(job);
         if (newProduct) {
             refreshAll();
+            currentUser.addJob(job);
         } else {
-            refreshItem(job);
+            refreshAll();
+            currentUser.deleteExistingJob(job);
+            currentUser.addJob(job);
         }
+        
+        Csv.saveUser(currentUser);
     }
 
     /**

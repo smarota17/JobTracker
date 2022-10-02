@@ -135,6 +135,7 @@ public class User {
 	 */
 	public void addJob(Jobs job) {
 		jobs.add(job);
+		updateId();
 	}
 	
 	/**
@@ -180,5 +181,15 @@ public class User {
 	public String getProcessedFullName(){
 		return this.fullName.replace(" ", "");
 	}
+
+	public void deleteExistingJob(Jobs job) {
+		this.getJobs().remove(job.getId());
+		updateId();
+	}
 	
+	public void updateId() {
+		for (int i = 0; i < this.getJobs().size(); i++) {
+			this.getJobs().get(i).setId(i);
+		}
+	}
 }

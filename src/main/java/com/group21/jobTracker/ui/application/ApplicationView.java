@@ -1,5 +1,7 @@
 package com.group21.jobTracker.ui.application;
 
+import java.text.ParseException;
+
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
@@ -132,8 +134,10 @@ public class ApplicationView extends HorizontalLayout
      * Updates a product in the list of products.
      * 
      * @param product
+     * @throws ParseException 
+     * @throws NumberFormatException 
      */
-    public void updateProduct(Jobs job) {
+    public void updateProduct(Jobs job) throws NumberFormatException, ParseException {
         dataProvider.save(job);
     }
 
