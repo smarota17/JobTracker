@@ -29,7 +29,7 @@ public class LoginScreen extends FlexLayout {
         setClassName("login-screen");
 
         // login form, centered in the available part of the screen
-        CandidateLoginForm loginForm = new CandidateLoginForm();
+        UserLoginForm loginForm = new UserLoginForm();
 
         // layout to center login form when there is sufficient screen space
         FlexLayout centeringLayout = new FlexLayout();

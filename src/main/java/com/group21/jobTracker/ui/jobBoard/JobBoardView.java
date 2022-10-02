@@ -44,7 +44,7 @@ public class JobBoardView extends HorizontalLayout
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         HorizontalLayout helloLayout = new HorizontalLayout();
-        helloLayout.add(new H1("Hello, "+ MainLayout.candidateName + "!"));
+        helloLayout.add(new H1("Hello, "+ MainLayout.userName + "!"));
         
         final HorizontalLayout topLayout = createTopBar();
         

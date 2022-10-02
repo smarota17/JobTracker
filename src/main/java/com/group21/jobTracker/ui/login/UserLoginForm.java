@@ -4,6 +4,8 @@ package com.group21.jobTracker.ui.login;
 import java.io.*;
 import java.util.*;
 
+import com.group21.jobTracker.backend.data.User;
+import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -22,16 +24,16 @@ import com.vaadin.flow.router.QueryParameters;
 /**
  * A form for editing a single product.
  */
-public class CandidateLoginForm extends Div {
+public class UserLoginForm extends Div {
 
     private final VerticalLayout content;
 
-    private final TextField candidateName;
+    private final TextField UserName;
     private Button login;
     private Button register;
 
 
-    public CandidateLoginForm() {
+    public UserLoginForm() {
         
 
         content = new VerticalLayout();
@@ -39,17 +41,17 @@ public class CandidateLoginForm extends Div {
         content.addClassName("job-form-content");
         add(content);
         
-        setClassName("candidateLogin-form");
-        H1 label = new H1("Welcome, candidate!");
+        setClassName("UserLogin-form");
+        H1 label = new H1("Welcome, User!");
         label.setClassName("form-header");
         content.add(label);
 
-        candidateName = new TextField("Candidate Name");
-        candidateName.setWidth("100%");
-        candidateName.setRequired(true);
-        candidateName.setValueChangeMode(ValueChangeMode.EAGER);
+        UserName = new TextField("User Name");
+        UserName.setWidth("100%");
+        UserName.setRequired(true);
+        UserName.setValueChangeMode(ValueChangeMode.EAGER);
         
-        content.add(candidateName);
+        content.add(UserName);
         
         
         
@@ -57,25 +59,14 @@ public class CandidateLoginForm extends Div {
         login.setWidth("100%");
         login.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> {
-            boolean hasName = false;
-            String name = candidateName.getValue();
-            try (BufferedReader br = new BufferedReader(new FileReader("./data/candidate_data.csv"))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String[] values = line.split(",");
-                    if(values[0].equals(name)) hasName = true;
-                }
+            String processedName = UserName.getValue().replace(" ", "");
+            try {
+                User user = Csv.loadUser(processedName);
+                MainLayout.userName = user.getFullName();
+                getUI().get().navigate("");
             } catch (Exception e) {
                 // TODO: handle exception
-                Notification.show(e.getMessage());
-                Notification.show("Error reading account data");
-            }
-
-            if (hasName) {
-                MainLayout.candidateName = name;
-                getUI().get().navigate("");
-            } else {
-                Notification.show("The Candidate does not exist", 3000, Position.TOP_CENTER);
+                Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
             }
         });
 
@@ -83,9 +74,9 @@ public class CandidateLoginForm extends Div {
 
         Dialog dialog = new Dialog();
 
-        dialog.setHeaderTitle("New Candidate");
+        dialog.setHeaderTitle("New User");
 
-        dialog.add(new CandidateRegisterForm());
+        dialog.add(new UserRegisterForm());
         Button cancelButton = new Button("Cancel", e -> dialog.close());
         dialog.getFooter().add(cancelButton);
 

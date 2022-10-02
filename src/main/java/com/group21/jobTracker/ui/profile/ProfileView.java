@@ -4,6 +4,7 @@ import java.io.*;
 
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.User;
+import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
@@ -33,31 +34,16 @@ public class ProfileView extends HorizontalLayout {
 
     public ProfileView() {
     	setClassName("profile-form");
-        // add(VaadinIcon.INFO_CIRCLE.create());
-        // add(new Span(" This application is using Vaadin version "
-        //         + Version.getFullVersion() + "."));
-        // setSizeFull();
-        // setJustifyContentMode(JustifyContentMode.CENTER);
-        // setAlignItems(Alignment.CENTER);
         VerticalLayout profileLayout = new VerticalLayout();
-        String[] targetvalue = null;
-        try (BufferedReader br = new BufferedReader(new FileReader("./data/candidate_data.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                if(values[0].equals(MainLayout.candidateName)) targetvalue = values;
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-            Notification.show(e.getMessage());
-            Notification.show("Error reading account data");
-        }
 
         TextField nameField = new TextField();
         nameField.setLabel("Full Name");
 
         EmailField emailField = new EmailField();
         emailField.setLabel("Email address");
+
+        TextField genderField = new TextField();
+        genderField.setLabel("Gender");
 
         TextField ageField = new TextField();
         ageField.setLabel("Age");
@@ -76,14 +62,23 @@ public class ProfileView extends HorizontalLayout {
 
         profileLayout.add(nameField, emailField, ageField, experienceField, keywordField);
 
-        if(targetvalue != null &&targetvalue.length == 5){
-            nameField.setValue(targetvalue[0]);
-            emailField.setValue(targetvalue[1]);
-            ageField.setValue(targetvalue[2]);
-            experienceField.setValue(Double.valueOf(targetvalue[3]));
-            keywordField.setValue(targetvalue[4]);
-        } else {
-            Notification.show("There are errors with the retieved data");
+        if(MainLayout.userName != null){
+            try{
+                User user = Csv.loadUser(MainLayout.userName.replace(" ", ""));
+                try{
+                    nameField.setValue(user.getFullName());
+                    emailField.setValue(user.getEmailAddress());
+                    genderField.setValue(user.getGender());
+                    ageField.setValue(user.getAge());
+                    experienceField.setValue(Double.valueOf(user.getExperience()));
+                    keywordField.setValue(user.getKeywords());
+                } catch (Exception e) {
+                    Notification.show("There are errors with the retieved data");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                Notification.show(e.getMessage());
+            }
         }
 
         add(profileLayout);
