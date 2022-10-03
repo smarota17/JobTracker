@@ -41,6 +41,7 @@ public class MainLayout extends AppLayout {
 
     private final Button logoutButton;
     public static String userName;
+    public static String email;
 
     public MainLayout() {
         // menu toggle
@@ -112,6 +113,7 @@ public class MainLayout extends AppLayout {
     private void logout() {
         //logout logic
         MainLayout.userName = null;
+        MainLayout.email = null;
         getUI().get().navigate("Login");
     }
 

@@ -63,6 +63,7 @@ public class UserLoginForm extends Div {
             try {
                 User user = Csv.loadUser(processedName);
                 MainLayout.userName = user.getFullName();
+                MainLayout.email = user.getEmailAddress();
                 getUI().get().navigate("");
             } catch (Exception e) {
                 // TODO: handle exception

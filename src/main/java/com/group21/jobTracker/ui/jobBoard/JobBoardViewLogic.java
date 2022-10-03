@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.mail.SendMail;
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.UI;
 
 /**
@@ -126,4 +128,8 @@ public class JobBoardViewLogic implements Serializable {
             editJob(job);
         }
     }
+
+	public void sendEmail() {
+		SendMail.sendEmail(MainLayout.email);
+	}
 }

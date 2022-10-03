@@ -6,6 +6,7 @@ import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
@@ -56,9 +57,21 @@ public class JobBoardView extends HorizontalLayout
         
         form = new JobApplicationForm(viewLogic);
         
-        HorizontalLayout upcomingDeadlinesLayout = new HorizontalLayout();
-        upcomingDeadlinesLayout.add( new H3("Upcoming Deadlines:") );
+        HorizontalLayout upcomingDeadlinesHeader = new HorizontalLayout();
+        upcomingDeadlinesHeader.add( new H3("Upcoming Deadlines:") );
+        upcomingDeadlinesHeader.setWidth("50%");
+        
+        VerticalLayout upcomingDeadlinesLayout = new VerticalLayout();
+        Button reminderEmail = new Button("Send reminder email");
+        // Setting theme variant of new production button to LUMO_PRIMARY that
+        // changes its background color to blue and its text color to white
+        reminderEmail.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        reminderEmail.setIcon(VaadinIcon.PLUS_CIRCLE.create());
+        reminderEmail.addClickListener(click -> viewLogic.sendEmail());
+        upcomingDeadlinesLayout.add(upcomingDeadlinesHeader);
+        upcomingDeadlinesLayout.add(reminderEmail);
         upcomingDeadlinesLayout.setWidth("50%");
+
         
         HorizontalLayout gridAndDeadlinesLayout = new HorizontalLayout();
         gridAndDeadlinesLayout.add(grid);
@@ -80,7 +93,7 @@ public class JobBoardView extends HorizontalLayout
 
        // add(helloLayout);
         add(barAndGridLayout);
-        add(form);
+//        add(form);
 
         viewLogic.init();
     }

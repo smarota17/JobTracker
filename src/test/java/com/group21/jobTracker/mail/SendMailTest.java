@@ -10,10 +10,10 @@ public class SendMailTest {
 
 	@Test
 	public void test() {
-		SendMail.sendEmail("jobtracker21@outlook.com", "Gr0up#21!", "jobtracker21@outlook.com");
+		SendMail.sendEmail("jobtracker21@outlook.com");
 		
 		try {
-			SendMail.sendEmail("jobtracker21@outlook.com", "Gr0up#21!", "outlook.com");
+			SendMail.sendEmail("outlook.com");
 			fail();
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());

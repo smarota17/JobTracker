@@ -12,11 +12,12 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 
-	public static void sendEmail(String fEmail, String pass, String tEmail) {
+	public static void sendEmail(String tEmail) {
 
 		final String fromEmail = "jobtracker21@outlook.com"; 
 		final String password = "Gr0up#21!"; 
-		final String toEmail = tEmail; 
+		final String toEmail = tEmail.trim(); 
+		System.out.println("current email" + toEmail);
 		
 		System.out.println("TLSEmail Start");
 		Properties props = new Properties();
