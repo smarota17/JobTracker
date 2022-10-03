@@ -32,31 +32,31 @@ public class ApplicationGrid extends Grid<Jobs> {
     	System.out.println("inside the application grid: ");
         setSizeFull();
 
-        addColumn(Jobs::getJobTitle).setHeader("Job Title")
+        addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobTitle");
 
-        addColumn(Jobs::getCompany).setHeader("Company")
+        addColumn(Jobs::getCompany).setHeader("Company").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
         
-        addColumn(Jobs::getDateApplied).setHeader("Date Applied")
+        addColumn(Jobs::getDateApplied).setHeader("Date Applied").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobDateApplied");
         
-        addColumn(Jobs::getDueDate).setHeader("Due Date")
+        addColumn(Jobs::getDueDate).setHeader("Due Date").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobDueDate");
                 
-        addColumn(Jobs::getSalary).setHeader("Salary")
+        addColumn(Jobs::getSalary).setHeader("Salary").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobSalary");
         
-        addColumn(Jobs::getJobDescription).setHeader("Description")
+        addColumn(Jobs::getJobDescription).setHeader("Description").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobDescription");
 
-        addColumn(Jobs::getNextAction).setHeader("Next Action")
+        addColumn(Jobs::getNextAction).setHeader("Next Action").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobNextAction");
 
-        addColumn(Jobs::getStatus).setHeader("Status")
+        addColumn(Jobs::getStatus).setHeader("Status").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobStatus");
         
-        addColumn(Jobs::getPriority).setHeader("Priority")
+        addColumn(Jobs::getPriority).setHeader("Priority").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobPriority");
         
 
@@ -120,13 +120,4 @@ public class ApplicationGrid extends Grid<Jobs> {
     public void refresh(Jobs job) {
         getDataCommunicator().refresh(job);
     }
-
-//    private String formatCategories(Jobs job) {
-//        if (job.getJobType() == null || job.getJobType().isEmpty()) {
-//            return "";
-//        }
-//        return job.getJobType().stream()
-//                .sorted(Comparator.comparing(Category::getId))
-//                .map(Category::getjobType).collect(Collectors.joining(", "));
-//    }
 }

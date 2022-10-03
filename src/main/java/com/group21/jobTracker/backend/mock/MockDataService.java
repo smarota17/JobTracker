@@ -1,14 +1,13 @@
 package com.group21.jobTracker.backend.mock;
-
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.group21.jobTracker.Api.ApiCalls;
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
@@ -21,21 +20,21 @@ public class MockDataService extends DataService {
     private static MockDataService INSTANCE;
 
     private List<Jobs> jobs;
-    private List<Category> categories;
     private int nextJobId = 0;
-    private int nextCategoryId = 0;
 
     private MockDataService() {
-        categories = MockDataGenerator.createCategories();
-        
         try {
-            jobs = ApiCalls.careerOneStopJobSearch(null);
+            jobs = ApiCalls.linkedInJobSearch(MainLayout.userName);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
         }
+
+        if(jobs == null || jobs.size() == 0){
+            jobs = new ArrayList<>();
+            jobs.add(new Jobs("", "", null, null, "", "", "", "", ""));
+        }
         nextJobId = jobs.size() + 1;
-        nextCategoryId = categories.size() + 1;
     }
 
     public synchronized static DataService getInstance() {
@@ -51,10 +50,6 @@ public class MockDataService extends DataService {
         return Collections.unmodifiableList(jobs);
     }
 
-    @Override
-    public synchronized List<Category> getAllCategories() {
-        return Collections.unmodifiableList(categories);
-    }
 
     /* updating job */
     @Override
@@ -86,24 +81,6 @@ public class MockDataService extends DataService {
         }
         return null;
     }
-
-//    @Override
-//    public void updateCategory(Category category) {
-//        if (category.getId() < 0) {
-//            category.setId(nextCategoryId++);
-//            categories.add(category);
-//        }
-//    }
-
-//    /* delete  jobs based on the category*/
-//    @Override
-//    public void deleteCategory(int categoryId) {
-//        if (categories.removeIf(category -> category.getId() == categoryId)) {
-//            getAllJobs().forEach(job -> {
-//                job.getJobType().removeIf(category -> category.getId() == categoryId);
-//            });
-//        }
-//    }
 
     /* Delete method for Jobs*/
     @Override

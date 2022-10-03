@@ -25,13 +25,13 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
 
         setSizeFull();
 
-        addColumn(Jobs::getJobTitle).setHeader("Job Title")
+        addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobTitle");
 
-        addColumn(Jobs::getCompany).setHeader("Company")
+        addColumn(Jobs::getCompany).setHeader("Company").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
 
-        addColumn(Jobs::getNextAction).setHeader("Job Description")
+        addColumn(Jobs::getNextAction).setHeader("Job Description").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobDescription");
 
         // If the browser window size changes, check if all columns fit on

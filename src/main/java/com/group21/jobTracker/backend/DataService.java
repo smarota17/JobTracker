@@ -14,8 +14,6 @@ public abstract class DataService implements Serializable {
 
     public abstract Collection<Jobs> getAllJobs();
 
-    public abstract Collection<Category> getAllCategories();
-
     public abstract void updateJob(Jobs p);
 
     public abstract void deleteJob(int jobId);

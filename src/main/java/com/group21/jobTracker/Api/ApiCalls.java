@@ -42,7 +42,12 @@ public class ApiCalls {
 	 * @throws IOException if the linked in website cannot be reached
 	 */
 	public static ArrayList<Jobs> linkedInJobSearch(String keywords) throws IOException {
-		String url = "https://www.linkedin.com/jobs/search?" + "keywords=" + keywords.replaceAll(" ", "%20");
+		String url;
+		if(keywords == null){
+			url = "https://www.linkedin.com/jobs/search";
+		} else {
+			url = "https://www.linkedin.com/jobs/search?" + "keywords=" + keywords.replaceAll(" ", "%20");
+		}
 		Document doc = Jsoup.connect(url).get();
 		Elements links = doc.select("a.base-card__full-link");
 		ArrayList<Jobs> results = new ArrayList<Jobs>();
