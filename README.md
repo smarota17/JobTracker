@@ -16,7 +16,7 @@ When one user Setup their account, the system collects information about name, e
 ## Technologies we used
 <p align="left">
   <a href="https://www.java.com/en/" target="_blank"> 
-    <img src="https://github.com/smarota17/JobTracker/resources/java_logo.png" alt="java" width="40" height="40"/>
+    <img src="https://github.com/smarota17/JobTracker/blob/main/resources/java_logo.png" alt="java" width="40" height="40"/>
   </a>
   <a href="https://vaadin.com/" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaadin-logo.svg" alt="react" width="40" height="40"/>
