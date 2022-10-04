@@ -19,6 +19,8 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
+
 /**
  * A view for performing create-read-update-delete operations on products.
  *
@@ -33,12 +35,12 @@ public class ApplicationSearchView extends HorizontalLayout
     public static final String VIEW_NAME = "Application Search";
     private final ApplicationSearchGrid grid;
     private final ApplicationSearchForm form;
-    private TextField filter;
 
     private final ApplicationSearchViewLogic viewLogic = new ApplicationSearchViewLogic(this);
+    private TextField searchInput;
     private Button newApplication;
 
-    private final ApplicationSearchDataProvider dataProvider = new ApplicationSearchDataProvider();
+    private  ApplicationSearchDataProvider dataProvider = new ApplicationSearchDataProvider(null);
 
     public ApplicationSearchView() {
         // Sets the width and the height of InventoryView to "100%".
@@ -47,7 +49,10 @@ public class ApplicationSearchView extends HorizontalLayout
         topLayout.setAlignItems(Alignment.CENTER);
 
         grid = new ApplicationSearchGrid();
-
+        grid.setItems(dataProvider.getItems());
+        // Allows user to select a single row in the grid.
+        grid.asSingleSelect().addValueChangeListener(
+                event -> viewLogic.rowSelected(event.getValue()));
         // Allows user to select a single row in the grid.
 //        grid.asSingleSelect().addValueChangeListener(
 //                event -> viewLogic.rowSelected(event.getValue()));
@@ -68,6 +73,8 @@ public class ApplicationSearchView extends HorizontalLayout
     }
 
     public HorizontalLayout createTopBar() {
+        searchInput = new TextField();
+        searchInput.setPlaceholder("Input search keywords");
         newApplication = new Button("Search for more applications");
         // Setting theme variant of new production button to LUMO_PRIMARY that
         // changes its background color to blue and its text color to white
@@ -76,12 +83,19 @@ public class ApplicationSearchView extends HorizontalLayout
 //        newApplication.addClickListener(click -> viewLogic.newJob());
         // A shortcut to click the new product button by pressing ALT + N
         newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+        newApplication.addClickListener(event->startSearching());
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.setAlignItems(Alignment.CENTER);
-        topLayout.add(newApplication);
+        topLayout.add(searchInput,newApplication);
 
         return topLayout;
+    }
+
+
+    private void startSearching(){
+        dataProvider = new ApplicationSearchDataProvider(searchInput.getValue());
+        grid.setItems(dataProvider.getItems());
     }
 
     public void showError(String msg) {
@@ -148,6 +162,7 @@ public class ApplicationSearchView extends HorizontalLayout
      */
     public void editJob(Jobs job) {
         showForm(job != null);
+        form.setJob(job);
         form.editJob(job);
     }
 

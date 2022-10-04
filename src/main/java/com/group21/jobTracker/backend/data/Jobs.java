@@ -34,6 +34,7 @@ public class Jobs implements Serializable{
 	private double priority;
 	/** When the user wants to be reminded about the job **/
 	private String remindMeOn;
+	private String link;
 	
 	
 	
@@ -344,5 +345,13 @@ public class Jobs implements Serializable{
 		}
 		output += date.getDayOfMonth();
 		return output;
+	}
+
+	public void setLink(String link){
+		this.link = link;
+	}
+
+	public String getLink(){
+		return this.link;
 	}
 }

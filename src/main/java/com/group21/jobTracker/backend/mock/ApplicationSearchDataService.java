@@ -15,16 +15,16 @@ import com.vaadin.flow.component.notification.Notification.Position;
  * Mock data model. This implementation has very simplistic locking and does not
  * notify users of modifications.
  */
-public class MockDataService extends DataService {
+public class ApplicationSearchDataService extends DataService {
 
-    private static MockDataService INSTANCE;
+    private static ApplicationSearchDataService INSTANCE;
 
     private List<Jobs> jobs;
     private int nextJobId = 0;
 
-    private MockDataService() {
+    private ApplicationSearchDataService(String keywords) {
         try {
-            jobs = ApiCalls.linkedInJobSearch(MainLayout.userName);
+            jobs = ApiCalls.linkedInJobSearch(keywords);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
@@ -37,10 +37,8 @@ public class MockDataService extends DataService {
         nextJobId = jobs.size() + 1;
     }
 
-    public synchronized static DataService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new MockDataService();
-        }
+    public synchronized static DataService getInstance(String keywords) {
+        INSTANCE = new ApplicationSearchDataService(keywords);
         return INSTANCE;
     }
 
