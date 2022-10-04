@@ -46,7 +46,7 @@ public class JobApplicationForm extends Div {
     private final TextField jobDescription;
     private final TextField jobNextAction;
     private final TextField jobStatus;
-    private final TextField jobPriority;
+    private final NumberField jobPriority;
     
     private Button save;
     private Button cancel;
@@ -122,9 +122,8 @@ public class JobApplicationForm extends Div {
         
         content.add(jobStatus);
         
-        jobPriority = new TextField("Priority");
+        jobPriority = new NumberField("Priority");
         jobPriority.setWidth("100%");
-        jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
         
         content.add(jobPriority);
