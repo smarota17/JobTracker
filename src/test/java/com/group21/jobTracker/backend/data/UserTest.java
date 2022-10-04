@@ -22,13 +22,13 @@ class UserTest {
 		assertEquals(user.getEmailAddress(), "TestEmail");
 		assertEquals(user.getGender(), "male");
 		assertEquals(user.getAge(), "12");
-		assertEquals(user.getExperience(), "1.5");
+		assertEquals(user.getExperience(), "1.2");
 		assertEquals(user.getKeywords(), "Keywords");
 	}
 	
 	@Test
 	void getByDateTest() {
-		User user = new User("TestFullName", "TestEmail", "male", "12", "1.5", "Keywords");
+		User user = new User("TestFullName", "TestEmail", "male", "12", "1.2", "Keywords");
 		Jobs job = new Jobs();
 		job.setJobTitle("Job7");
 		job.setDueDate(LocalDate.parse("2022-10-07"));
