@@ -4,39 +4,47 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Set;
 
-/*
-import javax.validation.constraints.*;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-*/
-
+/**
+ * Representation of a Job application
+ *
+ */
+@SuppressWarnings("serial")
 public class Jobs implements Serializable{
 	
-	/*
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	*/
-	
+	/** Id number used for tracking the job's location in the User list **/
     private int id = -1; 
-	
+    /** Title of the job **/
     private String jobTitle;
+    /** Company that is hiring **/
     private String company;
+    /** The date that the user applied **/
 	private LocalDate dateApplied;
+	/** The date that the next action is due **/
 	private LocalDate dueDate;
+	/** The salary of the job **/
 	private String salary;
+	/** The description of the job **/
 	private String jobDescription;
+	/** The next action that needs to be taken **/
 	private String nextAction;
+	/** The status of the job **/
 	private String status;
-	private String priority;
-	private Set<Category> jobType;
+	/** The priority of the job **/
+	private double priority;
+	/** When the user wants to be reminded about the job **/
 	private String remindMeOn;
 	
-	/**\
+	
+	
+	/**
+	 * Constructs the Job without any parameters
+	 */
+	public Jobs() {
+		this.jobTitle = "";				
+	}
+	
+	/**
 	 * Constructs the Jobs object
 	 * @param jobTitle title of the job
 	 * @param company name of the company
@@ -47,14 +55,8 @@ public class Jobs implements Serializable{
 	 * @param nextAction next action for job
 	 * @param status status of job
 	 * @param priority priority for job
-	 * @param remindMeOn date for reminder to remind
 	 */
-	
-	public Jobs() {
-		this.jobTitle = "";				
-	}
-	
-	public Jobs(String jobTitle, String company, LocalDate dateApplied, LocalDate dueDate, String salary, String jobDescription, String nextAction, String status, String priority) {
+	public Jobs(String jobTitle, String company, LocalDate dateApplied, LocalDate dueDate, String salary, String jobDescription, String nextAction, String status, double priority) {
 		setJobTitle(jobTitle);
 		setCompany(company);
 		setDateApplied(dateApplied);
@@ -67,6 +69,10 @@ public class Jobs implements Serializable{
 		
 	}
 	
+	/**
+	 * Helper method to verify string input
+	 * @param input the string that is being verified as a date
+	 */
 	private void verifyInput(String input) {
 		try {
 			new SimpleDateFormat("MM/dd/yyyy").parse(input);
@@ -75,37 +81,47 @@ public class Jobs implements Serializable{
 		}
 	}
 	
+	/**
+	 * Getter for the Id field
+	 * @return the id of the job
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Gets the id as a string for front end use
+	 * @return the id as a string
+	 */
 	public String getStringId() {
 		return String.valueOf(id);
 	}
 	
+	/**
+	 * Sets the id from a string
+	 * @param id the new id
+	 */
 	public void setStringId(String id) {
 		this.id = Integer.valueOf(id);
 	}
 
+	/**
+	 * Sets the id
+	 * @param id the new id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-//	public Set<Category>  getJobType() {
-//		return jobType;
-//	}
-
-//	public void setJobType(Set<Category>  jobType) {
-//		this.jobType = jobType;
-//	}
-
 	/**
+	 * Getter method for the title
 	 * @return the name
 	 */
 	public String getJobTitle() {
 		return jobTitle;
 	}
 	/**
+	 * Setter method for the job title
 	 * @param name the name to set
 	 */
 	public void setJobTitle(String jobTitle) {
@@ -113,12 +129,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter method for the company
 	 * @return the company
 	 */
 	public String getCompany() {
 		return company;
 	}
+	
 	/**
+	 * Setter for the company
 	 * @param company the company to set
 	 */
 	public void setCompany(String company) {
@@ -126,12 +145,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the DateApplied field
 	 * @return the dateApplied
 	 */
 	public LocalDate getDateApplied() {
 		return dateApplied;
 	}
+	
 	/**
+	 * Setter for the DateApplied field
 	 * @param dateApplied dateApplied to set
 	 */
 	public void setDateApplied(LocalDate dateApplied) {
@@ -139,12 +161,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the DueDate field
 	 * @return the dueDate
 	 */
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
+	
 	/**
+	 * Setter for the DueDate field
 	 * @param dueDate dueDate to set
 	 */
 	public void setDueDate(LocalDate dueDate) {
@@ -152,12 +177,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the salary field
 	 * @return the salary
 	 */
 	public String getSalary() {
 		return salary;
 	}
+	
 	/**
+	 * Setter for the salary field
 	 * @param salary salary to set
 	 */
 	public void setSalary(String salary) {
@@ -165,12 +193,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the Job Description
 	 * @return the jobDescription
 	 */
 	public String getJobDescription() {
 		return jobDescription;
 	}
+	
 	/**
+	 * Setter for the Job Description
 	 * @param jobDescription jobDescription to set
 	 */
 	public void setJobDescription(String jobDescription) {
@@ -178,12 +209,15 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the nextAction field
 	 * @return the nextAction
 	 */
 	public String getNextAction() {
 		return nextAction;
 	}
+	
 	/**
+	 * Setter for the next action field
 	 * @param nextAction nextAction to set
 	 */
 	public void setNextAction(String nextAction) {
@@ -191,12 +225,14 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the status field
 	 * @return the status
 	 */
 	public String getStatus() {
 		return this.status;
 	}
 	/**
+	 * Setter for the status field
 	 * @param status status to set
 	 */
 	public void setStatus(String status) {
@@ -212,26 +248,31 @@ public class Jobs implements Serializable{
 	}
 	
 	/**
+	 * Getter for the priority field
 	 * @return the priority
 	 */
-	public String getPriority() {
+	public double getPriority() {
 		return priority;
 	}
 	
 	/**
+	 * Setter for the priority field
 	 * @param priority priority to set
 	 */
-	public void setPriority(String priority) {
+	public void setPriority(double priority) {
 		this.priority = priority;
 	}
 	
 	/**
+	 * Getter for the reminder field
 	 * @return the dueDate
 	 */
 	public String getRemindMeOn() {
 		return this.remindMeOn;
 	}
+	
 	/**
+	 * Setter for the reminder field
 	 * @param dueDate dueDate to set
 	 */
 	public void setRemindMeOn(String remindMeOn) {
@@ -249,6 +290,7 @@ public class Jobs implements Serializable{
 	
 	/**
 	 * Overrides the toString method to convert the object into a string
+	 * @return this object as a string
 	 */
 	@Override
 	public String toString() {
@@ -270,18 +312,13 @@ public class Jobs implements Serializable{
 	 */
 	public String toSaveString() {
 		String output = "";
-		String[] list = {Integer.toString(id), jobTitle, company, dateToString(dateApplied), dateToString(dueDate), salary, jobDescription, nextAction, status, priority};
+		String[] list = {Integer.toString(id), jobTitle, company, dateToString(dateApplied), dateToString(dueDate), salary, jobDescription, nextAction, status, Double.toString(priority)};
 		for (int i = 0; i < list.length; i++) {
 			if (list[i] != null) {
 				output += list[i] + ",";
 			} else {
 				output += "NULL,";
 			}
-		}
-		if (jobType == null || jobType.isEmpty()) {
-			output += "NULL,";
-		} else {
-			//Add Category
 		}
 		
 		return output;
@@ -293,8 +330,7 @@ public class Jobs implements Serializable{
 	 * @param date the date being formatted	
 	 * @return the string representation of the date
 	 */
-	@SuppressWarnings("deprecation")
-	private String dateToString(LocalDate date) {
+	public static String dateToString(LocalDate date) {
 		if (date == null) {
 			return "NULL";
 		}

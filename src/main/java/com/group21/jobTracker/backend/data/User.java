@@ -3,6 +3,7 @@
  */
 package com.group21.jobTracker.backend.data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.validation.constraints.NotBlank;
@@ -15,38 +16,10 @@ public class User {
 	/** Name of the user */
 	@NotBlank
 	private String fullName;
-	
+	/** Email address of the user */
 	@NotBlank
 	private String emailAddress;
-	
-	/**
-	 * @return the emailAddress
-	 */
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	/**
-	 * @param emailAddress the email Address to set
-	*/
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
-	/**
-	 * @return the full name
-	 */
-	public String getFullName() {
-		return fullName;
-	}
-
-	/**
-	 * @param fullName the full name to set
-	*/
-	public String setFullName(String fullName) {
-		return this.fullName = fullName;
-	}
-	
+	/** Gender of the user */
 	private String gender;
 	/** The job field of the user **/
 	private String age;
@@ -57,7 +30,7 @@ public class User {
 	/** List of job applications saved to the user **/
 	private ArrayList<Jobs> jobs;
 	
-	/**\
+	/**
 	 * Constructs the user object
 	 * @param fullName fullName of the user
 	 * @param gender gender of the user
@@ -75,13 +48,50 @@ public class User {
 		jobs = new ArrayList<Jobs>();
 	}
 	
+	/**
+	 * Constructs the user object with just a name and email
+	 * @param fullName
+	 * @param email
+	 */
 	public User(String fullName,String email) {
 		this.fullName = fullName;
 		this.emailAddress = email;
 	}
-	
 
 	/**
+	 * Getter for the email field
+	 * @return the emailAddress
+	 */
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	/**
+	 * Setter for the email field
+	 * @param emailAddress the email Address to set
+	*/
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * Getter for the fullName field
+	 * @return the full name
+	 */
+	public String getFullName() {
+		return fullName;
+	}
+
+	/**
+	 * Setter for the full name field
+	 * @param fullName the full name to set
+	*/
+	public String setFullName(String fullName) {
+		return this.fullName = fullName;
+	}
+	
+	/**
+	 * Getter
 	 * @return the gender
 	 */
 	public String getGender() {
@@ -147,11 +157,84 @@ public class User {
 	}
 	
 	/**
+	 * Gets the 5 jobs with the closest dates
+	 * @return a list of the 5 jobs with the closest dates
+	 */
+	public ArrayList<Jobs> getJobsByDate( String type ) {
+		ArrayList<Jobs> output = new ArrayList<Jobs>();
+		for (Jobs j : jobs) {
+			LocalDate oldDate = null;
+			if (type.equals("DueDate")) {
+				oldDate = j.getDueDate();
+			} else {
+				oldDate = j.getDateApplied();
+			}
+			
+			for (int i = 0; i < 5; i++) {
+				
+				if (i == output.size()) {
+					output.add(i, j);
+					break;
+				}
+				
+				LocalDate newDate = null;
+				if (type.equals("DueDate")) {
+					newDate = output.get(i).getDueDate();
+					if (oldDate.compareTo(newDate) < 0) {
+						output.add(i, j);
+						if (output.size() > 5) {
+							output.remove(5);
+						}
+						break;
+					}
+				} else {
+					newDate = output.get(i).getDateApplied();
+					if (oldDate.compareTo(newDate) > 0) {
+						output.add(i, j);
+						if (output.size() > 5) {
+							output.remove(5);
+						}
+						break;
+					}
+				}
+				
+			}
+		}
+		return output;
+	}
+	
+	/**
+	 * Gets the 5 jobs with the highest priority
+	 * @returns a list of the 5 jobs with the highest priority
+	 */
+	public ArrayList<Jobs> getJobsByPriority() {
+		ArrayList<Jobs> output = new ArrayList<Jobs>();
+		for (Jobs j : jobs) {
+			for (int i = 0; i < 5; i++) {
+				
+				if (i == output.size()) {
+					output.add(i, j);
+					break;
+				}
+				
+				if (j.getPriority() < output.get(i).getPriority()) {
+					output.add(i, j);
+					if (output.size() > 5) {
+						output.remove(5);
+					}
+					break;
+				}
+				
+			}
+		}
+		return output;
+	}
+	
+	/**
 	 * Overrides the toString method to express the user as a string
 	 * 
 	 * @returns the user as a string
 	 */
-
 	@Override
 	public String toString() {
 		String[] list = {getFullName(), getEmailAddress(), getGender(), getAge(), getExperience(), getKeywords()};
@@ -178,15 +261,26 @@ public class User {
 		return output;
 	}
 
+	/**
+	 * Gets the full name after being processed
+	 * @return the processed full name
+	 */
 	public String getProcessedFullName(){
 		return this.fullName.replace(" ", "");
 	}
 
+	/**
+	 * Deletes an existing job from the user
+	 * @param job the job being deleted
+	 */
 	public void deleteExistingJob(Jobs job) {
 		this.getJobs().remove(job.getId());
 		updateId();
 	}
 	
+	/**
+	 * Updates the id of all of the jobs saved to a user
+	 */
 	public void updateId() {
 		for (int i = 0; i < this.getJobs().size(); i++) {
 			this.getJobs().get(i).setId(i);

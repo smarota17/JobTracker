@@ -22,7 +22,7 @@ class UserTest {
 		assertEquals(user.getEmailAddress(), "TestEmail");
 		assertEquals(user.getGender(), "male");
 		assertEquals(user.getAge(), "12");
-		assertEquals(user.getExperience(), "1.2");
+		assertEquals(user.getExperience(), "1.5");
 		assertEquals(user.getKeywords(), "Keywords");
 	}
 	
@@ -76,6 +76,47 @@ class UserTest {
 		list = user.getJobsByDate("DateApplied");
 		for(int i = 0; i < 5; i++) {
 			assertEquals("Job" + (8 - i), list.get(i).getJobTitle());
+		}
+	}
+	
+	@Test
+	void getByPriorityTest() {
+		User user = new User("TestFullName", "TestEmail", "male", "12", "1.2", "Keywords");
+		Jobs job = new Jobs();
+		job.setJobTitle("Job7");
+		job.setPriority(7);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job1");
+		job.setPriority(1);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job4");
+		job.setPriority(4);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job5");
+		job.setPriority(5);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job2");
+		job.setPriority(2);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job8");
+		job.setPriority(8);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job6");
+		job.setPriority(6);
+		user.addJob(job);
+		job = new Jobs();
+		job.setJobTitle("Job3");
+		job.setPriority(3);
+		user.addJob(job);
+		ArrayList<Jobs> list = user.getJobsByPriority();
+		for(int i = 1; i < 6; i++) {
+			assertEquals("Job" + i, list.get(i - 1).getJobTitle());
 		}
 	}
 
