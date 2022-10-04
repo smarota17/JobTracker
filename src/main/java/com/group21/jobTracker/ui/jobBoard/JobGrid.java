@@ -30,13 +30,13 @@ public class JobGrid extends Grid<Jobs> {
     	System.out.println("inside the job grid:");
         setSizeFull();
 
-        addColumn(Jobs::getJobTitle).setHeader("Job Title")
+        addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobTitle");
                 
-        addColumn(Jobs::getCompany).setHeader("Company")
+        addColumn(Jobs::getCompany).setHeader("Company").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
         
-        addColumn(Jobs::getStatus).setHeader("Status")
+        addColumn(Jobs::getStatus).setHeader("Status").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobStatus");
 
         // If the browser window size changes, check if all columns fit on

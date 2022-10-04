@@ -7,6 +7,7 @@ import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**

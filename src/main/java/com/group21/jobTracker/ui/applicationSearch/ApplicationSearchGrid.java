@@ -9,9 +9,14 @@ import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H5;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 
 /**
@@ -25,15 +30,25 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
 
         setSizeFull();
 
-        addColumn(Jobs::getJobTitle).setHeader("Job Title")
+        addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobTitle");
 
-        addColumn(Jobs::getCompany).setHeader("Company")
+        addColumn(Jobs::getCompany).setHeader("Company").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobCompany");
 
-        addColumn(Jobs::getNextAction).setHeader("Job Description")
+        addColumn(Jobs::getNextAction).setHeader("Job Description").setResizable(true)
                 .setFlexGrow(20).setSortable(true).setKey("jobDescription");
-
+        addComponentColumn(job -> {
+                    HorizontalLayout layout = new HorizontalLayout();
+                    Button applyButton = new Button("Got To Job");
+                    applyButton.addClickListener(e -> {
+                        UI.getCurrent().getPage().open(job.getLink());
+                    });
+                    H5 applyhere = new H5("Apply here");
+                    applyhere.setClassName("apply-here-button");
+                    layout.add(applyButton, applyhere);
+                    return layout;
+                }).setHeader("Operations").setResizable(true).setFlexGrow(20).setKey("jobOperation");
         // If the browser window size changes, check if all columns fit on
         // screen
         // (e.g. switching from portrait to landscape mode)
@@ -45,6 +60,7 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
         getColumnByKey("jobTitle").setVisible(true);
         getColumnByKey("jobCompany").setVisible(true);
         getColumnByKey("jobDescription").setVisible(true);
+        getColumnByKey("jobOperation").setVisible(true);
     }
 
     @Override

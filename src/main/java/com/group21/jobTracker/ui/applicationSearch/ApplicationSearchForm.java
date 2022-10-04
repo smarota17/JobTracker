@@ -42,7 +42,7 @@ public class ApplicationSearchForm extends Div {
     private final TextField jobCompany;
     private final DatePicker jobDateApplied;
     private final DatePicker jobDueDate;
-    private final NumberField jobSalary;
+    private final TextField jobSalary;
     private final TextField jobDescription;
     private final TextField jobNextAction;
     private final TextField jobStatus;
@@ -53,7 +53,7 @@ public class ApplicationSearchForm extends Div {
     private final Button delete;
 
     private final ApplicationSearchViewLogic viewLogic;
-    // private final Binder<Jobs> binder;
+    private final Binder<Jobs> binder;
     private Jobs currentJob;
 
 
@@ -93,7 +93,7 @@ public class ApplicationSearchForm extends Div {
         
         content.add(jobDueDate);
         
-        jobSalary = new NumberField("Salary");
+        jobSalary = new TextField("Salary");
         jobSalary.setWidth("100%");
         Div dollarPrefix = new Div();
         dollarPrefix.setText("$");
@@ -130,13 +130,18 @@ public class ApplicationSearchForm extends Div {
         
         content.add(jobPriority);
 
-
-        // binder = new BeanValidationBinder<>(Jobs.class);
-        // binder.forField(price).withConverter(new PriceConverter())
-        //         .bind("price");
-        // binder.forField(stockCount).withConverter(new StockCountConverter())
-        //         .bind("stockCount");
-        // binder.bindInstanceFields(this);
+        binder = new BeanValidationBinder<>(Jobs.class);
+        binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
+        binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
+        binder.forField(jobDateApplied).bind(Jobs::getDateApplied,Jobs::setDateApplied);
+        binder.forField(jobDueDate).bind(Jobs::getDueDate,Jobs::setDueDate);
+        binder.forField(jobSalary).bind(Jobs::getSalary,Jobs::setSalary);
+        binder.forField(jobDescription).bind(Jobs::getJobDescription,Jobs::setJobDescription);
+        binder.forField(jobNextAction).bind(Jobs::getNextAction,Jobs::setNextAction);
+        binder.forField(jobStatus).bind(Jobs::getStatus,Jobs::setStatus);
+        binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
+        binder.bindInstanceFields(this);
+        binder.readBean(currentJob);
 
         save = new Button("Save");
         save.setWidth("100%");
@@ -179,5 +184,10 @@ public class ApplicationSearchForm extends Div {
         delete.setVisible(!job.isNewJob());
         currentJob = job;
         // binder.readBean(job);
+    }
+
+    public void setJob(Jobs job) {
+        this.currentJob = job;
+        binder.setBean(currentJob);
     }
 }

@@ -49,7 +49,7 @@ public class JobBoardView extends HorizontalLayout
         final HorizontalLayout topLayout = createTopBar();
         
         grid = new JobGrid();
-        grid.setItems(dataProvider);
+        grid.setItems(dataProvider.getItems());
         // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));

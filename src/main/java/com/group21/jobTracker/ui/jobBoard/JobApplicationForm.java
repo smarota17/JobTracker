@@ -142,14 +142,6 @@ public class JobApplicationForm extends Div {
         binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
         binder.bindInstanceFields(this);
         binder.readBean(currentJob);
-
-        // // enable/disable save button while editing
-        // binder.addStatusChangeListener(event -> {
-        //     final boolean isValid = !event.hasValidationErrors();
-        //     final boolean hasChanges = binder.hasChanges();
-        //     save.setEnabled(hasChanges && isValid);
-        //     discard.setEnabled(hasChanges);
-        // });
         
         save = new Button("Save");
         save.setWidth("100%");

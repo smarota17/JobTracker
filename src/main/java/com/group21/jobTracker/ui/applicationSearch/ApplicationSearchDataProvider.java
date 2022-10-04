@@ -20,9 +20,8 @@ public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
     private String filterText = "";
-
-    public ApplicationSearchDataProvider() {
-        super(DataService.get().getAllJobs());
+    public ApplicationSearchDataProvider(String keywords) {
+        super(DataService.getSearchResults(keywords).getAllJobs());
     }
 
     /**

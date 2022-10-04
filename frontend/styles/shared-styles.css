@@ -101,6 +101,15 @@ body[theme="dark"] .dark-mode-button {
     background-color: white;
 }
 
+.apply-here-button{
+    display: inline-block;
+    line-height: 1.2em;
+    font-family: arial, sans-serif;
+    font-size: 0.8em;
+    text-decoration: underline;
+}
+
+
 /* 
  * Special rules for narrow screens (responsive design rules)
  */
