@@ -35,6 +35,7 @@ public class Jobs implements Serializable{
 	private String priority;
 	private Set<Category> jobType;
 	private String remindMeOn;
+	private String link;
 	
 	/**\
 	 * Constructs the Jobs object
@@ -300,5 +301,13 @@ public class Jobs implements Serializable{
 		}
 		output += date.getDayOfMonth();
 		return output;
+	}
+
+	public void setLink(String link){
+		this.link = link;
+	}
+
+	public String getLink(){
+		return this.link;
 	}
 }

@@ -32,6 +32,7 @@ public class ApiCalls {
 		job.setJobTitle(title);
 		job.setCompany(company);
 		job.setJobDescription(url);
+		job.setLink(url);
 		return job;
 	}
 	
