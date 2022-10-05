@@ -26,6 +26,22 @@ When one user Setup their account, the system collects information about name, e
 * Filtering applications on searching page
 * Personal application page lists current applications, and has past applications/priority/date as filters
 * Personal application page enables users to create/edit/delete an application and compare salaries among applications.
+
+## Installation
+
+You will need the following programs and packages installed on your local machine.
+
+Programs:
+
+* Java Development Kit
+* Git
+
+### Setup
+   Clone the repo to a local folder:
+
+    git clone https://github.com/smarota17/JobTracker
+
+
 ### Visual Representations
 
 ## Technologies we used
