@@ -1,8 +1,9 @@
 package com.group21.jobTracker.ui;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.group21.jobTracker.ui.application.ApplicationView;
 import com.group21.jobTracker.ui.applicationSearch.ApplicationSearchView;
-import com.group21.jobTracker.ui.emailSend.EmailSendView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
 import com.group21.jobTracker.ui.profile.ProfileView;
 import com.vaadin.flow.component.Component;
@@ -36,6 +37,7 @@ public class MainLayout extends AppLayout {
     public static String email;
 
     public MainLayout() {
+    	
         // menu toggle
         final DrawerToggle drawerToggle = new DrawerToggle();
         drawerToggle.addClassName("menu-toggle");
@@ -89,9 +91,6 @@ public class MainLayout extends AppLayout {
         // profile tab
         addToDrawer(createMenuLink(ProfileView.class, ProfileView.VIEW_NAME,
                 VaadinIcon.USER.create()));
-     // Send email tab
-        addToDrawer(createMenuLink(EmailSendView.class, EmailSendView.VIEW_NAME,
-                VaadinIcon.WORKPLACE.create()));
         
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())

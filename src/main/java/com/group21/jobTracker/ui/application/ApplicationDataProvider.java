@@ -69,7 +69,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     public void delete(Jobs job) {
     	final boolean newProduct = job.isNewJob();
         User currentUser;
-        JobDataService.get().deleteJob(job.getId());
+        JobDataService.getJob().deleteJob(job.getId());
 		try {
 			currentUser = Csv.loadUser(MainLayout.userName);
 		} catch (NumberFormatException e) {

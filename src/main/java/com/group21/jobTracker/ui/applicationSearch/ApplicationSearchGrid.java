@@ -30,7 +30,7 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
                 .setFlexGrow(20).setSortable(true).setKey("jobDescription");
         addComponentColumn(job -> {
                     HorizontalLayout layout = new HorizontalLayout();
-                    Button applyButton = new Button("Got To Job");
+                    Button applyButton = new Button("Go To Job");
                     applyButton.addClickListener(e -> {
                         UI.getCurrent().getPage().open(job.getLink());
                     });

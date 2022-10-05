@@ -1,11 +1,16 @@
 package com.group21.jobTracker.ui.applicationSearch;
 
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.Objects;
 
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
+import com.group21.jobTracker.backend.data.User;
+import com.group21.jobTracker.backend.mock.JobDataService;
+import com.group21.jobTracker.csv.Csv;
+import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -32,25 +37,26 @@ public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();
-
-        DataService.get().updateJob(job);
-        if (newProduct) {
-            refreshAll();
-        } else {
-            refreshItem(job);
+        User currentUser;
+        
+		try {
+			currentUser = Csv.loadUser(MainLayout.userName);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		}
+        
+        if (!newProduct) {
+            currentUser.deleteExistingJob(job);
         }
-    }
-
-    /**
-     * Delete given product from the backing data service.
-     *
-     * @param product
-     *            the product to be deleted
-     */
-    public void delete(Jobs job) {
-        DataService.get().deleteJob(job.getId());
+        
+        currentUser.addJob(job);
+        Csv.saveUser(currentUser);
+        JobDataService.getInstance();
         refreshAll();
     }
+
 
     /**
      * Sets the filter to use for this data provider and refreshes data.

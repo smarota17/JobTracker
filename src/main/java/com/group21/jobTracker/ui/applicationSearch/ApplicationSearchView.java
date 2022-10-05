@@ -143,14 +143,6 @@ public class ApplicationSearchView extends HorizontalLayout
         dataProvider.save(job);
     }
 
-    /**
-     * Removes a product from the list of products.
-     * 
-     * @param product
-     */
-    public void removeProduct(Jobs job) {
-        dataProvider.delete(job);
-    }
 
     /**
      * Displays user a form to edit a Product.
