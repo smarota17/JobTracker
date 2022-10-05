@@ -17,12 +17,17 @@ import com.vaadin.flow.component.notification.Notification.Position;
  */
 @SuppressWarnings("serial")
 public class MockDataService extends DataService {
-
+	/** Private static MocDatService to instantiate the dataservice instance for the app */
     private static MockDataService INSTANCE;
-
+    /** Private List variable to hold jobs from api calls */
     private List<Jobs> jobs;
+    /** Private int to maintain the unique job id for each new job and save with unique job Id*/
     private int nextJobId = 0;
 
+    /**
+	 * Make API calls for Linkedin to load jobs in the application
+	 * 
+	 */
     private MockDataService() {
         try {
             jobs = ApiCalls.linkedInJobSearch(MainLayout.userName);
@@ -38,6 +43,11 @@ public class MockDataService extends DataService {
         nextJobId = jobs.size() + 1;
     }
 
+    /**
+	 * Initialize the DatService Instance 
+	 * @return MocDataService instance which contain the list of  jobs from linkedin api 
+	 * 
+	 */
     public synchronized static DataService getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new MockDataService();
@@ -45,14 +55,22 @@ public class MockDataService extends DataService {
         return INSTANCE;
     }
 
-    /* returning jobs */
+    /**
+	 * This Function is to get all jobs for the user general dashboard
+	 * @return a collection of Jobs for the User to show on Job Board View
+	 */
     @Override
     public synchronized List<Jobs> getAllJobs() {
         return Collections.unmodifiableList(jobs);
     }
 
 
-    /* updating job */
+    /**
+	 * This Function is to update any existing Job for the User
+	 * if new job then it would add to the job list otherwise it would 
+	 * update the job with necessary changes and return void
+	 * The function will throw illegalArgument Exception if the job id is invalid
+	 */
     @Override
     public synchronized void updateJob(Jobs j) {
         if (j.getId() < 0) {
@@ -72,7 +90,10 @@ public class MockDataService extends DataService {
                 + " found");
     }
 
-    /* Search jobs by Id*/
+    /**
+	 * This Function is to Search job by Id 
+	 * @return null if no job found else return the job which was looking for
+	 */
     @Override
     public synchronized Jobs getJobsbyId(int jobId) {
         for (int i = 0; i < jobs.size(); i++) {
@@ -83,7 +104,10 @@ public class MockDataService extends DataService {
         return null;
     }
 
-    /* Delete method for Jobs*/
+    /**
+	 * This Function is to delete job by Id 
+	 * 
+	 */
     @Override
     public synchronized void deleteJob(int jobId) {
         Jobs j = getJobsbyId(jobId);
