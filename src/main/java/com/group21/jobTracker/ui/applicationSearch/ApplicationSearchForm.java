@@ -50,7 +50,6 @@ public class ApplicationSearchForm extends Div {
     
     private Button save;
     private Button cancel;
-    private final Button delete;
 
     private final ApplicationSearchViewLogic viewLogic;
     private final Binder<Jobs> binder;
@@ -162,17 +161,8 @@ public class ApplicationSearchForm extends Div {
                 .addEventListener("keydown", event -> viewLogic.cancelProduct())
                 .setFilter("event.key == 'Escape'");
 
-        delete = new Button("Delete");
-        delete.setWidth("100%");
-        delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
-                ButtonVariant.LUMO_PRIMARY);
-        delete.addClickListener(event -> {
-            if (currentJob != null) {
-                viewLogic.deleteJob(currentJob);
-            }
-        });
 
-        content.add(save, delete, cancel);
+        content.add(save, cancel);
     }
 
 
@@ -180,7 +170,6 @@ public class ApplicationSearchForm extends Div {
         if (job == null) {
             job = new Jobs();
         }
-        delete.setVisible(!job.isNewJob());
         currentJob = job;
         // binder.readBean(job);
     }

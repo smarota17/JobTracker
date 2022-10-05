@@ -1,5 +1,7 @@
 package com.group21.jobTracker.mail;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -10,14 +12,18 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.backend.data.User;
+import com.group21.jobTracker.csv.Csv;
+import com.group21.jobTracker.ui.MainLayout;
+
 public class SendMail {
 
 	public static void sendEmail(String tEmail) {
 
-		final String fromEmail = "jobtracker21@outlook.com"; 
-		final String password = "Gr0up#21!"; 
+		final String fromEmail = "Enter your email address for the application here."; 
+		final String password = "Enter your password for the email you created for this application here."; 
 		final String toEmail = tEmail.trim(); 
-		System.out.println("current email" + toEmail);
 		
 		System.out.println("TLSEmail Start");
 		Properties props = new Properties();
@@ -33,14 +39,32 @@ public class SendMail {
 		});
 
         try {
-
+        	
+        	User currentUser = null;
+        	try {
+				currentUser = Csv.loadUser(MainLayout.userName);
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException("Issue loading data for current user.");
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("Issue loading data for current user.");
+			}
+        	
+        	System.out.println(currentUser.getFullName());
+        	
+        	// construct string for list of jobs
+        	String jobData = "";
+        	ArrayList<Jobs> jobList = currentUser.getJobsByDate("DueDate");
+        	for (Jobs j : jobList) {
+        		jobData += "- Position '" + j.getJobTitle() + "' at " + j.getCompany() + "' is due on " + j.getDueDate() + ".\n";
+        	}
+        	
             Message message = new MimeMessage(session);
             
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(toEmail));
-            message.setSubject("Test");
-            message.setText("Hi!");
+            message.setSubject("JobTracker Reminder: Upcoming Deadlines");
+            message.setText("Here are your upcoming application deadlines: \n\n" + jobData);
 
             Transport.send(message);
 

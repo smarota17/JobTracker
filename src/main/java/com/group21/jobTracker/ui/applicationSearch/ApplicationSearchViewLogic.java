@@ -98,13 +98,6 @@ public class ApplicationSearchViewLogic implements Serializable {
                 + (newJob ? " created" : " updated"));
     }
 
-    public void deleteJob(Jobs job) {
-        view.clearSelection();
-        view.removeProduct(job);
-        setFragmentParameter("");
-        view.showNotification(job.getJobTitle() + " removed");
-    }
-
     public void editJob(Jobs job) {
         if (job == null) {
             setFragmentParameter("");

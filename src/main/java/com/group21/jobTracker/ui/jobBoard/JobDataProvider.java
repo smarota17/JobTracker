@@ -26,34 +26,6 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
     }
 
     /**
-     * Store given product to the backing data service.
-     *
-     * @param product
-     *            the updated or new product
-     */
-    public void save(Jobs job) {
-        final boolean newProduct = job.isNewJob();
-
-        DataService.get().updateJob(job);
-        if (newProduct) {
-            refreshAll();
-        } else {
-            refreshItem(job);
-        }
-    }
-
-    /**
-     * Delete given product from the backing data service.
-     *
-     * @param product
-     *            the product to be deleted
-     */
-    public void delete(Jobs job) {
-        DataService.get().deleteJob(job.getId());
-        refreshAll();
-    }
-
-    /**
      * Sets the filter to use for this data provider and refreshes data.
      * <p>
      * Filter is compared for product name, availability and category.

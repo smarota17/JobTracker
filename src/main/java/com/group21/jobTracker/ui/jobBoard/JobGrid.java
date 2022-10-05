@@ -39,9 +39,6 @@ public class JobGrid extends Grid<Jobs> {
         addColumn(Jobs::getStatus).setHeader("Status").setResizable(true)
         .setFlexGrow(20).setSortable(true).setKey("jobStatus");
 
-        // If the browser window size changes, check if all columns fit on
-        // screen
-        // (e.g. switching from portrait to landscape mode)
         UI.getCurrent().getPage().addBrowserWindowResizeListener(
                 e -> setColumnVisibility(e.getWidth()));
     }
