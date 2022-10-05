@@ -48,6 +48,7 @@ public class Csv {
 	 * @throws NumberFormatException 
 	 */
 	public static User loadUser(String username) throws NumberFormatException, ParseException {
+		username = username.replaceAll("\\s", "");
 		File file = new File("data/" + username + ".csv");
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
