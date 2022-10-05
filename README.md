@@ -1,4 +1,5 @@
 # JobTracker
+<p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/main/resources/the_job_tracker.jpg"></p>
 
 Job Tracker is a Java Application that keeps track records of Users’ job applications.
 
