@@ -16,33 +16,62 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 /**
- * A form for editing a single product.
+ * An Application for performing create-read-update-delete operations on Jobs.
+ *
+ * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
+ * operations and controlling the view based on events from outside.
  */
 @SuppressWarnings("serial")
 public class ApplicationForm extends Div {
 
+	/* private final parameter representing the content on the form*/
     private final VerticalLayout content;
 
+    /* private final TextField parameter representing jobId*/
     public final TextField jobId;
+    /* private final TextField parameter representing jobTitle*/
     public final TextField jobTitle;
+    /* private final TextField parameter representing jobCompany*/
     public final TextField jobCompany;
+    /* private final TextField parameter representing jobDateApplied*/
     public final DatePicker jobDateApplied;
+    /* private final TextField parameter representing jobDueDate*/
     public final DatePicker jobDueDate;
+    /* private final TextField parameter representing jobSalary*/
     public final TextField jobSalary;
+    /* private final TextField parameter representing jobDescription*/
     public final TextField jobDescription;
+    /* private final TextField parameter representing jobNextAction*/
     public final TextField jobNextAction;
+    /* private final TextField parameter representing jobStatus*/
     public final TextField jobStatus;
+    /* private final TextField parameter representing jobPriority*/
     public final NumberField jobPriority;
     
+    /* private final Button parameter representing saving job button*/
     private Button save;
+    /* private final Button parameter representing cancel job button*/
     private Button cancel;
+    /* private final Button parameter representing delete job button*/
     private final Button delete;
 
+    /* private final ApplicationViewLogic instance to handle the CRUD operation for Application form*/
     private final ApplicationViewLogic viewLogic;
+    /* private final Binder instance to Bind information entered into the Application form*/
     private final Binder<Jobs> binder;
+    /* private Jobs variable represents the job object to add, delete, update*/
     private Jobs currentJob;
 
 
+    /**
+     * ApplicationForm for constructor is using to define the job form by defining  labels of each textfields and 
+     * values. Binder then binding them into the form to work with the values we are getting from the form textfields.
+     * There are action listeners for save, update, delete buttons which is using the binding information to do crud operations
+     * Evry change happening on the form is adding intot he content variable to show the changes n the form.
+     * 
+     * @param sampleCrudLogic to initialize the view instance for CRUD operations
+     *
+     */
     public ApplicationForm(ApplicationViewLogic sampleCrudLogic) {
         setClassName("job-form");
         System.out.println("inside application form: ");
@@ -134,13 +163,6 @@ public class ApplicationForm extends Div {
         binder.bindInstanceFields(this);
         binder.readBean(currentJob);
 
-        // // enable/disable save button while editing
-        // binder.addStatusChangeListener(event -> {
-        //     final boolean isValid = !event.hasValidationErrors();
-        //     final boolean hasChanges = binder.hasChanges();
-        //     save.setEnabled(hasChanges && isValid);
-        //     discard.setEnabled(hasChanges);
-        // });
         
         save = new Button("Save");
         save.setWidth("100%");
@@ -168,10 +190,10 @@ public class ApplicationForm extends Div {
 
         cancel = new Button("Cancel");
         cancel.setWidth("100%");
-        cancel.addClickListener(event -> viewLogic.cancelProduct());
+        cancel.addClickListener(event -> viewLogic.cancelJob());
         cancel.addClickShortcut(Key.ESCAPE);
         getElement()
-                .addEventListener("keydown", event -> viewLogic.cancelProduct())
+                .addEventListener("keydown", event -> viewLogic.cancelJob())
                 .setFilter("event.key == 'Escape'");
 
         delete = new Button("Delete");
@@ -188,6 +210,13 @@ public class ApplicationForm extends Div {
     }
 
 
+    /**
+     * This function use a job object as parameter and utilize the view object to call 
+     * the edit method for the job instance. After it will pop up the information from the 
+     * desired job of grids to the application form.
+     * @param job
+     * 
+     **/
     public void editJob(Jobs job) {
         if (job == null) {
             job = new Jobs();
@@ -197,13 +226,13 @@ public class ApplicationForm extends Div {
         // binder.readBean(job);
     }
     
+    /**
+     * This function use a job object as parameter to set it as current job and bind it to the application form.
+     * @param job
+     * 
+     **/
     public void setJob(Jobs job) {
         this.currentJob = job;
         binder.setBean(currentJob);
-
-//        // Show delete button for only customers already in the database
-//        delete.setVisible(customer.isPersisted());
-//        setVisible(true);
-//        firstName.selectAll();
     }
 }
