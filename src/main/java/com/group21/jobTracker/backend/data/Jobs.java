@@ -56,6 +56,8 @@ public class Jobs implements Serializable{
 		setStaus(status);
 		setPriority(priority);
 	}
+
+
 	
 	public int getId() {
 		return id;
