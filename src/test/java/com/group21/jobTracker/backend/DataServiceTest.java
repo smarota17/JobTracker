@@ -28,11 +28,6 @@ public class DataServiceTest {
     }
 
     @Test
-    public void testDataServiceCanFetchCategories() throws Exception {
-        assertFalse(service.getAllCategories().isEmpty());
-    }
-
-    @Test
     public void testUpdateProduct_updatesTheProduct() throws Exception {
         Jobs p = service.getAllJobs().iterator().next();
         p.setJobTitle("My Test Name");

@@ -1,55 +1,38 @@
 package com.group21.jobTracker.ui.application;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Locale;
 
-import com.group21.jobTracker.backend.data.Availability;
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.ui.application.ApplicationViewLogic;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.converter.StringToBigDecimalConverter;
-import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 /**
  * A form for editing a single product.
  */
+@SuppressWarnings("serial")
 public class ApplicationForm extends Div {
 
     private final VerticalLayout content;
 
-    private final TextField jobTitle;
-    private final TextField jobCompany;
-    private final DatePicker jobDateApplied;
-    private final DatePicker jobDueDate;
-    private final TextField jobSalary;
-    private final TextField jobDescription;
-    private final TextField jobNextAction;
-    private final TextField jobStatus;
-    private final TextField jobPriority;
+    public final TextField jobId;
+    public final TextField jobTitle;
+    public final TextField jobCompany;
+    public final DatePicker jobDateApplied;
+    public final DatePicker jobDueDate;
+    public final TextField jobSalary;
+    public final TextField jobDescription;
+    public final TextField jobNextAction;
+    public final TextField jobStatus;
+    public final NumberField jobPriority;
     
     private Button save;
     private Button cancel;
@@ -70,6 +53,11 @@ public class ApplicationForm extends Div {
 
         viewLogic = sampleCrudLogic;
 
+        jobId = new TextField("Job Title");
+        jobId.setWidth("100%");
+        jobId.setRequired(true);
+        jobId.setValueChangeMode(ValueChangeMode.EAGER);
+                
         jobTitle = new TextField("Job Title");
         jobTitle.setWidth("100%");
         jobTitle.setRequired(true);
@@ -125,15 +113,15 @@ public class ApplicationForm extends Div {
         
         content.add(jobStatus);
         
-        jobPriority = new TextField("Priority");
+        jobPriority = new NumberField("Priority");
         jobPriority.setWidth("100%");
-        jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
         
         content.add(jobPriority);
         
 
         binder = new BeanValidationBinder<>(Jobs.class);
+        binder.forField(jobId).bind(Jobs::getStringId,Jobs::setStringId);
         binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
         binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
         binder.forField(jobDateApplied).bind(Jobs::getDateApplied,Jobs::setDateApplied);
@@ -160,6 +148,7 @@ public class ApplicationForm extends Div {
         save.addClickListener(event -> {
         	//System.out.println("length of checkbox group: "+category.getValue());
         	currentJob = new Jobs();
+        	currentJob.setId(Integer.parseInt(jobId.getValue()));
         	currentJob.setJobTitle(jobTitle.getValue());
         	currentJob.setCompany(jobCompany.getValue());
         	currentJob.setDateApplied(jobDateApplied.getValue());

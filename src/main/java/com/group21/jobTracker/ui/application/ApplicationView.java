@@ -1,10 +1,13 @@
 package com.group21.jobTracker.ui.application;
 
-import com.group21.jobTracker.backend.DataService;
+import java.text.ParseException;
+import java.util.List;
+
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -24,6 +27,7 @@ import com.vaadin.flow.router.Route;
  * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
+@SuppressWarnings("serial")
 @Route(value = "Application", layout = MainLayout.class)
 @PageTitle("My Applications")
 public class ApplicationView extends HorizontalLayout
@@ -37,10 +41,11 @@ public class ApplicationView extends HorizontalLayout
     private final ApplicationViewLogic viewLogic = new ApplicationViewLogic(this);
     private Button newApplication;
 
-    private final ApplicationDataProvider dataProvider = new ApplicationDataProvider();
+    private final ApplicationDataProvider dataProvider;
 
     public ApplicationView() {
         // Sets the width and the height of InventoryView to "100%".
+    	 dataProvider = new ApplicationDataProvider();
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
         grid = new ApplicationGrid();
@@ -61,9 +66,8 @@ public class ApplicationView extends HorizontalLayout
         add(barAndGridLayout);
         add(form);
 
-        viewLogic.init();
     }
-
+    
     public HorizontalLayout createTopBar() {
         filter = new TextField();
         filter.setPlaceholder("Filter name, availability or category");
@@ -133,9 +137,12 @@ public class ApplicationView extends HorizontalLayout
      * Updates a product in the list of products.
      * 
      * @param product
+     * @throws ParseException 
+     * @throws NumberFormatException 
      */
     public void updateProduct(Jobs job) {
         dataProvider.save(job);
+        UI.getCurrent().getPage().reload();
     }
 
     /**
@@ -145,6 +152,7 @@ public class ApplicationView extends HorizontalLayout
      */
     public void removeProduct(Jobs job) {
         dataProvider.delete(job);
+        UI.getCurrent().getPage().reload();
     }
 
     /**
