@@ -2,6 +2,7 @@ package com.group21.jobTracker.csv;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class CsvTest {
 			user.addJob(job);
 			user.addJob(job2);
 			Csv.saveUser(user);
-			User user2 = Csv.loadUser("Test1_Parker");
+			User user2 = Csv.loadUser("TestName");
 			assertEquals(user.getFullName(), user2.getFullName());
 			assertEquals(user.getGender(), user2.getGender());
 			assertEquals(user.getAge(), user2.getAge());
@@ -34,7 +35,8 @@ class CsvTest {
 			assertEquals(user.getKeywords(), user2.getKeywords());
 			assertTrue(user.getJobs().get(0).equals(user2.getJobs().get(0)));
 			assertTrue(user.getJobs().get(1).equals(user2.getJobs().get(1)));
-			
+			File file = new File("data/TestName.csv");
+			file.delete();
 		} catch (Exception e) {
 			fail();
 		}
