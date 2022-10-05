@@ -14,17 +14,21 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
 /**
- * Mock data model. This implementation has very simplistic locking and does not
+ * A Data Service class dedicated to User Job board. The implementation has very simplistic locking and does not
  * notify users of modifications.
  */
 @SuppressWarnings("serial")
 public class JobDataService extends DataService {
-    
+	/** Private static JobDataService object to instantiate the JobDataService instance for the User */
     private static JobDataService INSTANCE;
 
+    /** Private List variable to hold jobs from the User File*/
     private List<Jobs> jobs;
-//    private int nextCategoryId = 0;
 
+    /**
+	 * Taking the user name from the main layout to load the User saved Job into the system
+	 * This method check nul pointer exception and other exception showed the exception message in the User page.
+	 */
     private JobDataService() { 
       
         try {
@@ -46,34 +50,42 @@ public class JobDataService extends DataService {
 
     }
 
+    /**
+	 * Initialize the JobDatService Instance 
+	 * @return MocDataService instance which contain the list of  jobs from User
+	 */
     public synchronized static DataService getInstance() {
         INSTANCE = new JobDataService();
         return INSTANCE;
     }
 
-    /* returning jobs */
+    /**
+	 * This Function is to get all jobs for the user. 
+	 * @return a collection of Jobs for the USer to show on Application view for User
+	 */
     public synchronized List<Jobs> getAllJobs() {
     	System.out.println("Getting jobs");
         return Collections.unmodifiableList(jobs);
     }
 
-    /* updating job */
+    /**
+	 * This Function is to update any existing Job for the User
+	 * 
+	 */
     @Override
-    public synchronized void updateJob(Jobs j) {
-        if (j.getId() < 0) {
-//            // New product
-//            j.setId(nextJobId++);
-            jobs.add(j);
-            return;
-        }
-        jobs.set(j.getId(), j);
-       return;
-//        throw new IllegalArgumentException("No Job with id " + j.getId()
-//                + " found");
-    	
-    }
+	public synchronized void updateJob(Jobs j) {
+		if (j.getId() < 0) {
+			jobs.add(j);
+			return;
+		}
+		jobs.set(j.getId(), j);
+		return;
+	}
 
-    /* Search jobs by Id*/
+    /**
+	 * This Function is to Search job by Id 
+	 * @return null if no job found else return the job which was looking for
+	 */
     @Override
     public synchronized Jobs getJobsbyId(int jobId) {
         for (int i = 0; i < jobs.size(); i++) {
@@ -84,25 +96,10 @@ public class JobDataService extends DataService {
         return null;
     }
 
-//    @Override
-//    public void updateCategory(Category category) {
-//        if (category.getId() < 0) {
-//            category.setId(nextCategoryId++);
-//            categories.add(category);
-//        }
-//    }
-
-//    /* delete  jobs based on the category*/
-//    @Override
-//    public void deleteCategory(int categoryId) {
-//        if (categories.removeIf(category -> category.getId() == categoryId)) {
-//            getAllJobs().forEach(job -> {
-//                job.getJobType().removeIf(category -> category.getId() == categoryId);
-//            });
-//        }
-//    }
-
-    /* Delete method for Jobs*/
+    /**
+	 * This Function is to delete job by Id 
+	 * 
+	 */
     @Override
     public synchronized void deleteJob(int jobId) {
         Jobs j = getJobsbyId(jobId);
