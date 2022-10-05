@@ -1,0 +1,6 @@
+#Software and Tools Required
+Eclipse 
+Java [JDK 11]
+Apache Maven
+Vaadin 23+
+Spring boot 
