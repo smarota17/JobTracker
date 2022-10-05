@@ -1,3 +1,12 @@
+[![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)
+[![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)
+[![size](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)
+[![lang](https://img.shields.io/badge/languages-4-blue?style=plastic)](https://img.shields.io/badge/languages-4-brightgreen?style=plastic)
+[![contrib](https://img.shields.io/badge/contributors-5-blue?style=plastic)](https://img.shields.io/badge/contributors-5-brightgreen?style=plastic)
+[![issue op](https://img.shields.io/badge/issues-14%20open-yellow?style=plastic)](https://img.shields.io/badge/issues-14%20open-brightgreen?style=plastic)
+[![issue cl](https://img.shields.io/badge/issues-19%20closed-yellow?style=plastic)](https://img.shields.io/badge/issues-19%20closed-brightgreen?style=plastic)
+[![pull](https://img.shields.io/badge/pull%20requests-19%20closed-yellow?style=plastic)](https://img.shields.io/badge/pull%20requests-19%20closed-brightgreen?style=plastic)
+
 # JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>
 
@@ -11,6 +20,27 @@ Job Tracker is a personal Job board to add and track job applications in all the
 When one user Setup their account, the system collects information about name, email age, etc. as personal information including the preference for job postings through the list of keywords. This web application has an email feature with which one user can get an email notification about his/her applied jobs.
 
 ## Features
+* Send reminder emails for upcoming dealines.
+* APIs from supported platforms:  Google careers, Indeed and Linkedin.
+* Dashboard for notifying upcoming deadlines
+* Filtering applications on searching page
+* Personal application page lists current applications, and has past applications/priority/date as filters
+* Personal application page enables users to create/edit/delete an application and compare salaries among applications.
+
+## Installation
+
+You will need the following programs and packages installed on your local machine.
+
+Programs:
+
+* Java Development Kit
+* Git
+
+### Setup
+   Clone the repo to a local folder:
+
+    git clone https://github.com/smarota17/JobTracker
+
 
 ### Visual Representations
 
@@ -50,3 +80,13 @@ When one user Setup their account, the system collects information about name, e
 * Sprint Boot Instructions: https://javadeveloperzone.com/spring-boot/spring-boot-gradle-example/#23_SpringBootApplication & https://spring.io/guides/gs/spring-boot/
 * Vaddin Instruction: https://vaadin.com/docs/latest/guide/start/gradle
 * Related project video: https://drive.google.com/file/d/1hxCuWlhvCY62f_RylXAK6v3H3B07ePKJ/view
+
+
+
+## Contribution
+
+Please see the CONTRIBUTING.md for instructions on how to contribute to our repository.
+
+## License
+
+This project is licensed under the Apache License 2.0.
