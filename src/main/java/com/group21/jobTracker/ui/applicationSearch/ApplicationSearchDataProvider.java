@@ -6,7 +6,6 @@ import java.util.Objects;
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -16,6 +15,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
+@SuppressWarnings("serial")
 public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */

@@ -20,6 +20,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+@SuppressWarnings("serial")
 @Route(value = "Sendemail",layout = MainLayout.class)
 @PageTitle("Send Email")
 public class EmailSendView extends HorizontalLayout{

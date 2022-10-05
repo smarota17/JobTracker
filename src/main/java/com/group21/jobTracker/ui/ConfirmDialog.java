@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+@SuppressWarnings("serial")
 public class ConfirmDialog extends Dialog {
 
     public ConfirmDialog(String caption, String text, String confirmButtonText,

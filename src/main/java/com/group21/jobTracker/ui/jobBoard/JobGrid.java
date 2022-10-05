@@ -1,28 +1,16 @@
 package com.group21.jobTracker.ui.jobBoard;
 
-import java.text.DecimalFormat;
-import java.util.Comparator;
-import java.util.stream.Collectors;
-
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.data.renderer.LitRenderer;
-import com.vaadin.flow.data.renderer.Renderer;
-import com.vaadin.flow.data.renderer.TemplateRenderer;
-import com.vaadin.flow.function.ValueProvider;
 
 /**
  * Grid of products, handling the visual presentation and filtering of a set of
  * items. This version uses an in-memory data source that is suitable for small
  * data sets.
  */
+@SuppressWarnings("serial")
 public class JobGrid extends Grid<Jobs> {
 
     public JobGrid() {

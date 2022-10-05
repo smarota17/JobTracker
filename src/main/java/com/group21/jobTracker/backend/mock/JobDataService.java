@@ -1,14 +1,10 @@
 package com.group21.jobTracker.backend.mock;
 
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import com.group21.jobTracker.Api.ApiCalls;
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
@@ -19,12 +15,12 @@ import com.vaadin.flow.component.notification.Notification.Position;
  * Mock data model. This implementation has very simplistic locking and does not
  * notify users of modifications.
  */
+@SuppressWarnings("serial")
 public class JobDataService extends DataService {
 
     private static JobDataService INSTANCE;
 
     private List<Jobs> jobs;
-    private int nextJobId = 0;
 //    private int nextCategoryId = 0;
 
     private JobDataService() { 
@@ -39,7 +35,6 @@ public class JobDataService extends DataService {
 	        Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
 		}
 
-        nextJobId = jobs.size() + 1;
     }
 
     public synchronized static DataService getInstance() {

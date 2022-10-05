@@ -15,23 +15,13 @@ import com.vaadin.flow.component.UI;
  * the system separately, and to e.g. provide alternative views for the same
  * data.
  */
+@SuppressWarnings("serial")
 public class ApplicationSearchViewLogic implements Serializable {
 
     private final ApplicationSearchView view;
 
     public ApplicationSearchViewLogic(ApplicationSearchView simpleCrudView) {
         view = simpleCrudView;
-    }
-
-    /**
-     * Does the initialization of the inventory view including disabling the
-     * buttons if the user doesn't have access.
-     */
-    public void init() {
-        //check authentication
-        if (false) {
-            view.setnewApplicationEnabled(false);
-        }
     }
 
     public void cancelProduct() {

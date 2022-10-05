@@ -1,12 +1,12 @@
 package com.group21.jobTracker.ui.application;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import com.group21.jobTracker.backend.data.Jobs;
 
-import com.group21.jobTracker.backend.data.Product;
 import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.backend.mock.JobDataService;
 import com.group21.jobTracker.csv.Csv;
@@ -20,6 +20,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
+@SuppressWarnings("serial")
 public class ApplicationDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
@@ -28,7 +29,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     public ApplicationDataProvider() {
         super(JobDataService.getJob().getAllJobs());
     }
-
+    
     /**
      * Store given product to the backing data service.
      *

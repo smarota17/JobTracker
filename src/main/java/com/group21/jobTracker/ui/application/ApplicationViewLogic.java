@@ -1,9 +1,6 @@
 package com.group21.jobTracker.ui.application;
 
 import java.io.Serializable;
-import java.text.ParseException;
-
-import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.mock.JobDataService;
 import com.vaadin.flow.component.UI;
@@ -17,23 +14,13 @@ import com.vaadin.flow.component.UI;
  * the system separately, and to e.g. provide alternative views for the same
  * data.
  */
+@SuppressWarnings("serial")
 public class ApplicationViewLogic implements Serializable {
 
     private final ApplicationView view;
 
     public ApplicationViewLogic(ApplicationView simpleCrudView) {
         view = simpleCrudView;
-    }
-
-    /**
-     * Does the initialization of the inventory view including disabling the
-     * buttons if the user doesn't have access.
-     */
-    public void init() {
-        //check authentication
-        if (false) {
-            view.setnewApplicationEnabled(false);
-        }
     }
 
     public void cancelProduct() {

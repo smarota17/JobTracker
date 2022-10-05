@@ -3,7 +3,6 @@ package com.group21.jobTracker.backend;
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.mock.JobDataService;
 import com.group21.jobTracker.backend.mock.ApplicationSearchDataService;
@@ -12,6 +11,7 @@ import com.group21.jobTracker.backend.mock.MockDataService;
 /**
  * Back-end service interface for retrieving and updating product data.
  */
+@SuppressWarnings("serial")
 public abstract class DataService implements Serializable {
 
     public abstract Collection<Jobs> getAllJobs();

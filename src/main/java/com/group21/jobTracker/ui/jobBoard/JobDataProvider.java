@@ -6,7 +6,6 @@ import java.util.Objects;
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**

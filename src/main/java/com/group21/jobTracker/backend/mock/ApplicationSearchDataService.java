@@ -7,7 +7,6 @@ import java.util.List;
 import com.group21.jobTracker.Api.ApiCalls;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
@@ -15,6 +14,7 @@ import com.vaadin.flow.component.notification.Notification.Position;
  * Mock data model. This implementation has very simplistic locking and does not
  * notify users of modifications.
  */
+@SuppressWarnings("serial")
 public class ApplicationSearchDataService extends DataService {
 
     private static ApplicationSearchDataService INSTANCE;
@@ -26,7 +26,6 @@ public class ApplicationSearchDataService extends DataService {
         try {
             jobs = ApiCalls.linkedInJobSearch(keywords);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
         }
 
@@ -72,12 +71,7 @@ public class ApplicationSearchDataService extends DataService {
     /* Search jobs by Id*/
     @Override
     public synchronized Jobs getJobsbyId(int jobId) {
-        for (int i = 0; i < jobs.size(); i++) {
-            if (jobs.get(i).getId() == jobId) {
-                return jobs.get(i);
-            }
-        }
-        return null;
+        return jobs.get(jobId);
     }
 
     /* Delete method for Jobs*/
