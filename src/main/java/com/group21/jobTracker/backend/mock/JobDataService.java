@@ -32,7 +32,7 @@ public class JobDataService extends DataService {
             jobs = Csv.loadUser(processedUserName).getJobs();
         }
         catch(NullPointerException e){
-            Notification.show("Data File Not Found",3000, Position.TOP_CENTER);
+            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
         }
         catch(Exception e){
             Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
