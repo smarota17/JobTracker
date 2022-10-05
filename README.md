@@ -82,10 +82,11 @@ Programs:
 * Related project video: https://drive.google.com/file/d/1hxCuWlhvCY62f_RylXAK6v3H3B07ePKJ/view
 
 
+
 ## Contribution
 
 Please see the CONTRIBUTING.md for instructions on how to contribute to our repository.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the Apache License 2.0.
