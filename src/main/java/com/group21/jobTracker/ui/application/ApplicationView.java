@@ -29,7 +29,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 /**
- * A view for performing create-read-update-delete operations on products.
+ * A view for performing create-read-update-delete operations on Jobs.
  *
  * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
@@ -40,16 +40,29 @@ import com.vaadin.flow.router.Route;
 public class ApplicationView extends HorizontalLayout
         implements HasUrlParameter<String>, BeforeEnterObserver  {
 
+	/* private static final parameter representing the name of the page view*/
     public static final String VIEW_NAME = "My Applications";
+    /* private final parameter representing the application grid from the page*/
     private final ApplicationGrid grid;
+    /* private final parameter representing the application form from the page*/
     private final ApplicationForm form;
+    /* private Textfield to enter the keywords to filter the job search*/
     private TextField filter;
 
+    /* private final ApplicationViewLogic instance to handle the CRUD operation for Application page*/
     private final ApplicationViewLogic viewLogic = new ApplicationViewLogic(this);
+    /* A Button variable for adding new application*/
     private Button newApplication;
 
+    /* A Data provider instance for the application page which contain the CRUG functions as well as other filtering fucntions to feed data into the page*/
     private final ApplicationDataProvider dataProvider;
 
+    /**
+     * ApplicationView constructor to initialize all the instance 
+     * like ApplicationDataProvider, initiating the APplication Grid
+     * Application form in the application page.
+     *
+     */
     public ApplicationView() {
         // Sets the width and the height of InventoryView to "100%".
     	dataProvider = new ApplicationDataProvider();
@@ -75,6 +88,11 @@ public class ApplicationView extends HorizontalLayout
 
     }
     
+    /**
+     * ApplicationView filtering and new  Application form will be assigned int he page UI.
+     * Application form in the application page.
+     * @return layout for filtering and new application
+     **/
     public HorizontalLayout createTopBar() {
         filter = new TextField();
         filter.setPlaceholder("Filter name, availability or category");
@@ -101,6 +119,11 @@ public class ApplicationView extends HorizontalLayout
         return topLayout;
     }
 
+    /**
+     * Showing error message using Notification.show from Vaadin
+     * @see Notification#show(String)
+     * @param msg
+     **/
     public void showError(String msg) {
         Notification.show(msg);
     }
@@ -116,7 +139,7 @@ public class ApplicationView extends HorizontalLayout
     }
 
     /**
-     * Enables/Disables the new product button.
+     * Enables/Disables the new Jobs button.
      * 
      * @param enabled
      */
@@ -141,9 +164,9 @@ public class ApplicationView extends HorizontalLayout
     }
 
     /**
-     * Updates a product in the list of products.
+     * Updates a Jobs in the list of jobs.
      * 
-     * @param product
+     * @param job
      * @throws ParseException 
      * @throws NumberFormatException 
      */
@@ -153,9 +176,9 @@ public class ApplicationView extends HorizontalLayout
     }
 
     /**
-     * Removes a product from the list of products.
+     * Removes a Job from the list of Jobs.
      * 
-     * @param product
+     * @param job
      */
     public void removeProduct(Jobs job) {
         dataProvider.delete(job);
@@ -163,9 +186,9 @@ public class ApplicationView extends HorizontalLayout
     }
 
     /**
-     * Displays user a form to edit a Product.
+     * Displays user a form to edit a Job.
      * 
-     * @param product
+     * @param Jobs
      */
     public void editJob(Jobs job) {
         showForm(job != null);
@@ -175,7 +198,7 @@ public class ApplicationView extends HorizontalLayout
     }
 
     /**
-     * Shows and hides the new product form
+     * Shows and hides the new job form
      * 
      * @param show
      */
@@ -190,6 +213,11 @@ public class ApplicationView extends HorizontalLayout
         viewLogic.enter(parameter);
     }
 
+    /**
+     * Before-entering to the app one can access the job-tracker site as null user.
+     * 
+     * @param event a before-enter event
+     */
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         System.out.println("beforeEnter");

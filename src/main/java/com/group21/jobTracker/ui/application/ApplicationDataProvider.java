@@ -15,7 +15,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
  * Utility class that encapsulates filtering and CRUD operations for
- * {@link Product} entities.
+ * {@link Jobs} entities.
  * <p>
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
@@ -33,7 +33,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /**
      * Store given product to the backing data service.
      *
-     * @param product
+     * @param Jobs
      *            the updated or new product
      * @throws ParseException 
      * @throws NumberFormatException 
@@ -63,8 +63,10 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /**
      * Delete given product from the backing data service.
      *
-     * @param product
-     *            the product to be deleted
+     * @param Jobs the job to be deleted
+     * @throws IllegalArgumentException
+     * @throws NumberFormatException
+     *            
      */
     public void delete(Jobs job) {
     	final boolean newProduct = job.isNewJob();
@@ -90,7 +92,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /**
      * Sets the filter to use for this data provider and refreshes data.
      * <p>
-     * Filter is compared for product name, availability and category.
+     * Filter is compared for Job Title, Company, and Keywords.
      *
      * @param filterText
      *            the text to filter by, never null
@@ -105,14 +107,27 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
         setFilter(job -> passesFilter(job.getJobTitle(), this.filterText));
     }
 
+    /**
+     * Get jobid based on job object 
+     *
+     * @param job object
+     *            
+     */
     @Override
     public Integer getId(Jobs job) {
         Objects.requireNonNull(job,
-                "Cannot provide an id for a null product.");
+                "Cannot provide an id for a null Job.");
 
         return job.getId();
     }
-
+    /**
+     * Sets the filter to use for this data provider and refreshes data.
+     * Filter is compared for Job Title, Company, and Keywords.
+     *
+     * @param job object
+     * @param filter text
+     *            
+     */
     private boolean passesFilter(Object object, String filterText) {
         return object != null && object.toString().toLowerCase(Locale.ENGLISH)
                 .contains(filterText);

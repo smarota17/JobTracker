@@ -4,11 +4,12 @@ import java.io.Serializable;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.mock.JobDataService;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.notification.Notification;
 
 /**
  * This class provides an interface for the logical operations between the CRUD
- * view, its parts like the product editor form and the data source, including
- * fetching and saving products.
+ * view, its parts like the Job editor form and the data source, including
+ * fetching and saving jobs.
  *
  * Having this separate from the view makes it easier to test various parts of
  * the system separately, and to e.g. provide alternative views for the same
@@ -17,22 +18,32 @@ import com.vaadin.flow.component.UI;
 @SuppressWarnings("serial")
 public class ApplicationViewLogic implements Serializable {
 
+	/* private final Application view instance to handle any CRUD operation from the UI*/
     private final ApplicationView view;
 
+    /**
+     * ApplicationViewLogic constructor to initialize the CRUD view object
+     *
+     */
     public ApplicationViewLogic(ApplicationView simpleCrudView) {
         view = simpleCrudView;
     }
 
-    public void cancelProduct() {
+    /**
+     * The function simply remove everything fromt he application form if someone want to cancel 
+     * any modification of any existing job or new job
+     *
+     */
+    public void cancelJob() {
         setFragmentParameter("");
         view.clearSelection();
     }
 
     /**
-     * Updates the fragment without causing InventoryViewLogic navigator to
-     * change view. It actually appends the productId as a parameter to the URL.
+     * Updates the fragment without causing ApplicationViewLogic navigator to
+     * change view. It actually appends the JobId as a parameter to the URL.
      * The parameter is set to keep the view state the same during e.g. a
-     * refresh and to enable bookmarking of individual product selections.
+     * refresh and to enable bookmarking of individual job selections.
      *
      */
     private void setFragmentParameter(String jobId) {
@@ -47,14 +58,15 @@ public class ApplicationViewLogic implements Serializable {
     }
 
     /**
-     * Opens the product form and clears its fields to make it ready for
-     * entering a new product if productId is null, otherwise loads the product
-     * with the given productId and shows its data in the form fields so the
+     * Opens the Application form and clears its fields to make it ready for
+     * entering a new Job if Id is null, otherwise loads the Jobs
+     * with the given jobId and shows its data in the form fields so the
      * user can edit them.
      *
      * 
      * @param jobId
-     */
+     * @throws NumberFormatException
+     **/
     public void enter(String jobId) {
         if (jobId != null && !jobId.isEmpty()) {
             if (jobId.equals("new")) {
@@ -74,10 +86,23 @@ public class ApplicationViewLogic implements Serializable {
         }
     }
 
+    /**
+     * This function use JobId to find a specific job from the system 
+     * by using JobDataService instance for the User
+     * @param jobId
+     **/
     private Jobs findJob(int jobId) {
         return JobDataService.getJob().getJobsbyId(jobId);
     }
 
+    /**
+     * This function use a job object as parameter and check whether the job is a new job or not by isNewJob()
+     * after that its clearing the fields on the application form. using the view instance to call 
+     * the updatejob method to save or update the job 
+     * @param job
+     * @throws IllegalArgumentException
+     * @see Notification#show(String)
+     **/
     public void saveProduct(Jobs job) {
         final boolean newJob = job.isNewJob();
         view.clearSelection();
@@ -93,6 +118,14 @@ public class ApplicationViewLogic implements Serializable {
                 + (newJob ? " created" : " updated"));
     }
 
+    /**
+     * This function use a job object as parameter and utilize the view object to call 
+     * the delete method for the job instance. After deleteting the job a popup message will show
+     * as the success of removing the job
+     *
+     * @param job
+     * @see Notification#show(String)
+     **/
     public void deleteJob(Jobs job) {
         view.clearSelection();
         view.removeProduct(job);
@@ -100,6 +133,13 @@ public class ApplicationViewLogic implements Serializable {
         view.showNotification(job.getJobTitle() + " removed");
     }
 
+    /**
+     * This function use a job object as parameter and utilize the view object to call 
+     * the edit method for the job instance. After it will pop up the information from the 
+     * desired job of grids to the application form.
+     * @param job
+     * 
+     **/
     public void editJob(Jobs job) {
         if (job == null) {
             setFragmentParameter("");
@@ -109,12 +149,23 @@ public class ApplicationViewLogic implements Serializable {
         view.editJob(job);
     }
 
+    /**
+     * This function use a job object as parameter and utilize the view to clear all previous selctions 
+     * for adding new job. then it would call the edit function to load that jobo
+     * @param job
+     * 
+     **/
     public void newJob() {
         view.clearSelection();
         setFragmentParameter("new");
         view.editJob(new Jobs());
     }
 
+    /**
+     * Row selection method pop up the job selected from the dashboard grid and show it on the application form
+     * @param job
+     * 
+     **/
     public void rowSelected(Jobs job) {
         //check authentication
         if (true) {
