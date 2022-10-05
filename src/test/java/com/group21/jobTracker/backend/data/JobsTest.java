@@ -32,7 +32,7 @@ import java.time.LocalDate;
  		assertEquals("This is my first job", jobs.getJobDescription());
  		assertEquals("SWE", jobs.getJobTitle());
  		assertEquals("Submit", jobs.getNextAction());
- 		assertEquals("1", jobs.getPriority());
+ 		assertEquals("1.0", Double.toString(jobs.getPriority()));
  		assertEquals("01/11/2022", jobs.getRemindMeOn());
  		assertEquals("10K", jobs.getSalary());
  		assertEquals("accepted", jobs.getStatus());
