@@ -20,7 +20,12 @@ Job Tracker is a personal Job board to add and track job applications in all the
 When one user Setup their account, the system collects information about name, email age, etc. as personal information including the preference for job postings through the list of keywords. This web application has an email feature with which one user can get an email notification about his/her applied jobs.
 
 ## Features
-
+* Send reminder emails for upcoming dealines.
+* APIs from supported platforms:  Google careers, Indeed and Linkedin.
+* Dashboard for notifying upcoming deadlines
+* Filtering applications on searching page
+* Personal application page lists current applications, and has past applications/priority/date as filters
+* Personal application page enables users to create/edit/delete an application and compare salaries among applications.
 ### Visual Representations
 
 ## Technologies we used
