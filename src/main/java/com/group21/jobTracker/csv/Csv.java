@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -81,14 +80,13 @@ public class Csv {
 	 * @throws ParseException if the parser encounters an error
 	 */
 	private static Jobs loadJobs(String line) throws NumberFormatException, ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		String[] list = line.split(",");
 		for(int i = 0; i < list.length; i++) {
 			if (list[i].equals("NULL")) {
 				list[i] = null;
 			}
 		}
-		Jobs job = new Jobs(list[1], list[2], null, null, list[5], list[6], list[7], list[8], list[9]);
+		Jobs job = new Jobs(list[1], list[2], null, null, list[5], list[6], list[7], list[8], Double.parseDouble(list[9]) );
 		if (list[3] != null) {
 			job.setDateApplied(LocalDate.parse(list[3]));
 		}

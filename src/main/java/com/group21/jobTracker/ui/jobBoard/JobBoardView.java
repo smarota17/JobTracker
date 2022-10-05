@@ -6,6 +6,7 @@ import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
@@ -21,22 +22,24 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
 /**
- * A view for performing create-read-update-delete operations on products.
- *
- * See also {@link JobBoardViewLogic} for fetching the data, the actual CRUD
- * operations and controlling the view based on events from outside.
+ * The JobBoardView class is used to generate the frontend page for the "Dashboard" tab on the UI. 
+ * It generates several Horizontal and Vertical layouts to format the contents of the page.
  */
 @Route(value = "Dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
+	/** Name of the page */
     public static final String VIEW_NAME = "Dashboard";
+    /** Grid object to display jobs */
     private final JobGrid grid;
-    private final JobApplicationForm form;
+    /** Form to create a Job object */
+//    private final JobApplicationForm form;
+    /** Represents the "filter" search box */
     private TextField filter;
+    /** Represents the login for the dashboard */
     private final JobBoardViewLogic viewLogic = new JobBoardViewLogic(this);
-    private Button newApplication;
 
     private final JobDataProvider dataProvider = new JobDataProvider();
 
@@ -50,15 +53,27 @@ public class JobBoardView extends HorizontalLayout
         
         grid = new JobGrid();
         grid.setItems(dataProvider.getItems());
-        // Allows user to select a single row in the grid.
-        grid.asSingleSelect().addValueChangeListener(
-                event -> viewLogic.rowSelected(event.getValue()));
+//        // Allows user to select a single row in the grid.
+//        grid.asSingleSelect().addValueChangeListener(
+//                event -> viewLogic.rowSelected(event.getValue()));
         
-        form = new JobApplicationForm(viewLogic);
+//        form = new JobApplicationForm(viewLogic);
         
-        HorizontalLayout upcomingDeadlinesLayout = new HorizontalLayout();
-        upcomingDeadlinesLayout.add( new H3("Upcoming Deadlines:") );
+        HorizontalLayout upcomingDeadlinesHeader = new HorizontalLayout();
+        upcomingDeadlinesHeader.add( new H3("Upcoming Deadlines:") );
+        upcomingDeadlinesHeader.setWidth("50%");
+        
+        VerticalLayout upcomingDeadlinesLayout = new VerticalLayout();
+        Button reminderEmail = new Button("Send reminder email");
+        // Setting theme variant of new production button to LUMO_PRIMARY that
+        // changes its background color to blue and its text color to white
+        reminderEmail.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        reminderEmail.setIcon(VaadinIcon.PLUS_CIRCLE.create());
+        reminderEmail.addClickListener(click -> viewLogic.sendEmail());
+        upcomingDeadlinesLayout.add(upcomingDeadlinesHeader);
+        upcomingDeadlinesLayout.add(reminderEmail);
         upcomingDeadlinesLayout.setWidth("50%");
+
         
         HorizontalLayout gridAndDeadlinesLayout = new HorizontalLayout();
         gridAndDeadlinesLayout.add(grid);
@@ -80,9 +95,9 @@ public class JobBoardView extends HorizontalLayout
 
        // add(helloLayout);
         add(barAndGridLayout);
-        add(form);
+//        add(form);
 
-        viewLogic.init();
+//        viewLogic.init();
     }
 
     public HorizontalLayout createTopBar() {
@@ -102,84 +117,75 @@ public class JobBoardView extends HorizontalLayout
         return topLayout;
     }
 
-    public void showError(String msg) {
-        Notification.show(msg);
-    }
+//    public void showError(String msg) {
+//        Notification.show(msg);
+//    }
+//
+//    /**
+//     * Shows a temporary popup notification to the user.
+//     * 
+//     * @see Notification#show(String)
+//     * @param msg
+//     */
+//    public void showNotification(String msg) {
+//        Notification.show(msg);
+//    }
+//
+//    /**
+//     * Deselects the selected row in the grid.
+//     */
+//    public void clearSelection() {
+//        grid.getSelectionModel().deselectAll();
+//    }
+//
+//    /**
+//     * Selects a row
+//     * 
+//     * @param row
+//     */
+//    public void selectRow(Jobs row) {
+//        grid.getSelectionModel().select(row);
+//    }
+//
+//    /**
+//     * Updates a product in the list of products.
+//     * 
+//     * @param product
+//     */
+//    public void updateProduct(Jobs job) {
+//        dataProvider.save(job);
+//    }
+//
+//    /**
+//     * Removes a product from the list of products.
+//     * 
+//     * @param product
+//     */
+//    public void removeProduct(Jobs job) {
+//        dataProvider.delete(job);
+//    }
+//
+//    /**
+//     * Displays user a form to edit a Product.
+//     * 
+//     * @param product
+//     */
+//    public void editJob(Jobs job) {
+//        showForm(job != null);
+//        //form.setCategories(job.getJobType());
+//        form.setJob(job);
+//        form.editJob(job);
+//    }
 
-    /**
-     * Shows a temporary popup notification to the user.
-     * 
-     * @see Notification#show(String)
-     * @param msg
-     */
-    public void showNotification(String msg) {
-        Notification.show(msg);
-    }
-
-    /**
-     * Enables/Disables the new product button.
-     * 
-     * @param enabled
-     */
-    public void setnewApplicationEnabled(boolean enabled) {
-        newApplication.setEnabled(enabled);
-    }
-
-    /**
-     * Deselects the selected row in the grid.
-     */
-    public void clearSelection() {
-        grid.getSelectionModel().deselectAll();
-    }
-
-    /**
-     * Selects a row
-     * 
-     * @param row
-     */
-    public void selectRow(Jobs row) {
-        grid.getSelectionModel().select(row);
-    }
-
-    /**
-     * Updates a product in the list of products.
-     * 
-     * @param product
-     */
-    public void updateProduct(Jobs job) {
-        dataProvider.save(job);
-    }
-
-    /**
-     * Removes a product from the list of products.
-     * 
-     * @param product
-     */
-    public void removeProduct(Jobs job) {
-        dataProvider.delete(job);
-    }
-
-    /**
-     * Displays user a form to edit a Product.
-     * 
-     * @param product
-     */
-    public void editJob(Jobs job) {
-        showForm(job != null);
-        //form.setCategories(job.getJobType());
-        form.setJob(job);
-        form.editJob(job);
-    }
-
-    /**
-     * Shows and hides the new product form
-     * 
-     * @param show
-     */
-    public void showForm(boolean show) {
-        form.setVisible(show);
-        form.setEnabled(show);
-    }
+//    /**
+//     * Shows and hides the new product form
+//     * 
+//     * @param show
+//     */
+//    public void showForm(boolean show) {
+//        form.setVisible(show);
+//        form.setEnabled(show);
+//    }
 
     @Override
     public void setParameter(BeforeEvent event,

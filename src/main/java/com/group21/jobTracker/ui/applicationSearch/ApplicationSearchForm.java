@@ -1,39 +1,24 @@
 package com.group21.jobTracker.ui.applicationSearch;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Collection;
-import java.util.Locale;
 
-import com.group21.jobTracker.backend.data.Availability;
-import com.group21.jobTracker.backend.data.Category;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.ui.application.ApplicationViewLogic;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.converter.StringToBigDecimalConverter;
-import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 /**
  * A form for editing a single product.
  */
+@SuppressWarnings("serial")
 public class ApplicationSearchForm extends Div {
 
     private final VerticalLayout content;
@@ -46,11 +31,10 @@ public class ApplicationSearchForm extends Div {
     private final TextField jobDescription;
     private final TextField jobNextAction;
     private final TextField jobStatus;
-    private final TextField jobPriority;
+    private final NumberField jobPriority;
     
     private Button save;
     private Button cancel;
-    private final Button delete;
 
     private final ApplicationSearchViewLogic viewLogic;
     private final Binder<Jobs> binder;
@@ -123,9 +107,8 @@ public class ApplicationSearchForm extends Div {
         
         content.add(jobStatus);
         
-        jobPriority = new TextField("Priority");
+        jobPriority = new NumberField("Priority");
         jobPriority.setWidth("100%");
-        jobPriority.setRequired(true);
         jobPriority.setValueChangeMode(ValueChangeMode.EAGER);
         
         content.add(jobPriority);
@@ -163,17 +146,8 @@ public class ApplicationSearchForm extends Div {
                 .addEventListener("keydown", event -> viewLogic.cancelProduct())
                 .setFilter("event.key == 'Escape'");
 
-        delete = new Button("Delete");
-        delete.setWidth("100%");
-        delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
-                ButtonVariant.LUMO_PRIMARY);
-        delete.addClickListener(event -> {
-            if (currentJob != null) {
-                viewLogic.deleteJob(currentJob);
-            }
-        });
 
-        content.add(save, delete, cancel);
+        content.add(save, cancel);
     }
 
 
@@ -181,7 +155,6 @@ public class ApplicationSearchForm extends Div {
         if (job == null) {
             job = new Jobs();
         }
-        delete.setVisible(!job.isNewJob());
         currentJob = job;
         // binder.readBean(job);
     }

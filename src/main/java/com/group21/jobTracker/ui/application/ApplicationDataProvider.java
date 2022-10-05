@@ -1,12 +1,15 @@
 package com.group21.jobTracker.ui.application;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import com.group21.jobTracker.backend.data.Jobs;
 
-import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
+import com.group21.jobTracker.backend.data.User;
+import com.group21.jobTracker.backend.mock.JobDataService;
+import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
@@ -17,30 +20,44 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
+@SuppressWarnings("serial")
 public class ApplicationDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
     private String filterText = "";
 
     public ApplicationDataProvider() {
-        super(DataService.get().getAllJobs());
+        super(JobDataService.getJob().getAllJobs());
     }
-
+    
     /**
      * Store given product to the backing data service.
      *
      * @param product
      *            the updated or new product
+     * @throws ParseException 
+     * @throws NumberFormatException 
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();
-
-        DataService.get().updateJob(job);
-        if (newProduct) {
-            refreshAll();
-        } else {
-            refreshItem(job);
+        User currentUser;
+        
+		try {
+			currentUser = Csv.loadUser(MainLayout.userName);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		}
+        
+        if (!newProduct) {
+            currentUser.deleteExistingJob(job);
         }
+        
+        currentUser.addJob(job);
+        Csv.saveUser(currentUser);
+        JobDataService.getInstance();
+        refreshAll();
     }
 
     /**
@@ -50,8 +67,24 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
      *            the product to be deleted
      */
     public void delete(Jobs job) {
-        DataService.get().deleteJob(job.getId());
+    	final boolean newProduct = job.isNewJob();
+        User currentUser;
+        JobDataService.getJob().deleteJob(job.getId());
+		try {
+			currentUser = Csv.loadUser(MainLayout.userName);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot read/write to file.");
+		}
+        
+        if (!newProduct) {
+            currentUser.deleteExistingJob(job);
+        }
+        Csv.saveUser(currentUser);
+        
         refreshAll();
+        
     }
 
     /**

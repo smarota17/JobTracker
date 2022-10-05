@@ -1,7 +1,6 @@
 package com.group21.jobTracker.ui.applicationSearch;
 
 
-import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.Key;
@@ -19,14 +18,13 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
-
 /**
  * A view for performing create-read-update-delete operations on products.
  *
  * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
+@SuppressWarnings("serial")
 @Route(value = "ApplicationSearch", layout = MainLayout.class)
 @PageTitle("Application Search")
 public class ApplicationSearchView extends HorizontalLayout
@@ -69,7 +67,6 @@ public class ApplicationSearchView extends HorizontalLayout
         add(barAndGridLayout);
         add(form);
 
-        viewLogic.init();
     }
 
     public HorizontalLayout createTopBar() {
@@ -146,14 +143,6 @@ public class ApplicationSearchView extends HorizontalLayout
         dataProvider.save(job);
     }
 
-    /**
-     * Removes a product from the list of products.
-     * 
-     * @param product
-     */
-    public void removeProduct(Jobs job) {
-        dataProvider.delete(job);
-    }
 
     /**
      * Displays user a form to edit a Product.

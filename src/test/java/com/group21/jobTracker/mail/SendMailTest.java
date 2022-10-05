@@ -5,19 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.group21.jobTracker.mail.SendMail;
+import com.group21.jobTracker.ui.MainLayout;
 
 public class SendMailTest {
 
 	@Test
 	public void test() {
-		SendMail.sendEmail("jobtracker21@outlook.com", "Gr0up#21!", "jobtracker21@outlook.com");
+		MainLayout.userName = "TestName";
+		SendMail.sendEmail("smarota1861@gmail.com");
 		
-		try {
-			SendMail.sendEmail("jobtracker21@outlook.com", "Gr0up#21!", "outlook.com");
-			fail();
-		} catch (RuntimeException e) {
-			System.out.println(e.getMessage());
-		}
+//		try {
+//			SendMail.sendEmail("outlook.com");
+//			fail();
+//		} catch (RuntimeException e) {
+//			System.out.println(e.getMessage());
+//		}
 	}
 
 }

@@ -15,6 +15,7 @@ import com.vaadin.flow.component.notification.Notification.Position;
  * Mock data model. This implementation has very simplistic locking and does not
  * notify users of modifications.
  */
+@SuppressWarnings("serial")
 public class MockDataService extends DataService {
 
     private static MockDataService INSTANCE;
@@ -32,7 +33,7 @@ public class MockDataService extends DataService {
 
         if(jobs == null || jobs.size() == 0){
             jobs = new ArrayList<>();
-            jobs.add(new Jobs("", "", null, null, "", "", "", "", ""));
+            jobs.add(new Jobs("", "", null, null, "", "", "", "", 0.0));
         }
         nextJobId = jobs.size() + 1;
     }

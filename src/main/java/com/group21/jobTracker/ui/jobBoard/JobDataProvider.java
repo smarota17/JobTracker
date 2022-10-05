@@ -6,7 +6,6 @@ import java.util.Objects;
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
-import com.group21.jobTracker.backend.data.Product;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -23,34 +22,6 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
 
     public JobDataProvider() {
         super(DataService.get().getAllJobs());
-    }
-
-    /**
-     * Store given product to the backing data service.
-     *
-     * @param product
-     *            the updated or new product
-     */
-    public void save(Jobs job) {
-        final boolean newProduct = job.isNewJob();
-
-        DataService.get().updateJob(job);
-        if (newProduct) {
-            refreshAll();
-        } else {
-            refreshItem(job);
-        }
-    }
-
-    /**
-     * Delete given product from the backing data service.
-     *
-     * @param product
-     *            the product to be deleted
-     */
-    public void delete(Jobs job) {
-        DataService.get().deleteJob(job.getId());
-        refreshAll();
     }
 
     /**
