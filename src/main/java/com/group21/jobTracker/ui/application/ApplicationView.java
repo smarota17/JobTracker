@@ -2,9 +2,14 @@ package com.group21.jobTracker.ui.application;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
+import com.group21.jobTracker.ui.login.LoginScreen;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.UI;
@@ -15,6 +20,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
@@ -31,7 +38,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "Application", layout = MainLayout.class)
 @PageTitle("My Applications")
 public class ApplicationView extends HorizontalLayout
-        implements HasUrlParameter<String> {
+        implements HasUrlParameter<String>, BeforeEnterObserver  {
 
     public static final String VIEW_NAME = "My Applications";
     private final ApplicationGrid grid;
@@ -45,7 +52,7 @@ public class ApplicationView extends HorizontalLayout
 
     public ApplicationView() {
         // Sets the width and the height of InventoryView to "100%".
-    	 dataProvider = new ApplicationDataProvider();
+    	dataProvider = new ApplicationDataProvider();
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
         grid = new ApplicationGrid();
@@ -182,4 +189,16 @@ public class ApplicationView extends HorizontalLayout
             @OptionalParameter String parameter) {
         viewLogic.enter(parameter);
     }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        System.out.println("beforeEnter");
+        // TODO Auto-generated method stub
+        if(MainLayout.userName == null){
+            event.rerouteTo(LoginScreen.class);
+        }
+    }
+
+
+    
 }
