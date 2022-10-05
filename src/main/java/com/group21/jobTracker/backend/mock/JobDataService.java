@@ -1,6 +1,7 @@
 package com.group21.jobTracker.backend.mock;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
@@ -17,23 +19,30 @@ import com.vaadin.flow.component.notification.Notification.Position;
  */
 @SuppressWarnings("serial")
 public class JobDataService extends DataService {
-
+    
     private static JobDataService INSTANCE;
 
     private List<Jobs> jobs;
 //    private int nextCategoryId = 0;
 
     private JobDataService() { 
-	    try {
-			jobs = Csv.loadUser(MainLayout.userName).getJobs();
-			for(Jobs j: jobs) {
-				System.out.println(j);
-			}
-		} catch (NumberFormatException e) {
-	        Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
-		} catch (ParseException e) {
-	        Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
-		}
+      
+        try {
+            String processedUserName = MainLayout.userName.replace(" ", "");
+            jobs = Csv.loadUser(processedUserName).getJobs();
+        }
+        catch(NullPointerException e){
+            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+        }
+        catch(Exception e){
+            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+        } 
+
+        if(jobs == null){
+            jobs = new ArrayList<>();
+            jobs.add(new Jobs("", "", null, null, "", "", "", "", 0.0));
+        }
+	    
 
     }
 

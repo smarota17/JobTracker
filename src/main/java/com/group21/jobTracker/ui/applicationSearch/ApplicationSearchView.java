@@ -3,15 +3,19 @@ package com.group21.jobTracker.ui.applicationSearch;
 
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
+import com.group21.jobTracker.ui.login.LoginScreen;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
@@ -28,7 +32,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "ApplicationSearch", layout = MainLayout.class)
 @PageTitle("Application Search")
 public class ApplicationSearchView extends HorizontalLayout
-        implements HasUrlParameter<String> {
+        implements HasUrlParameter<String>, BeforeEnterObserver {
 
     public static final String VIEW_NAME = "Application Search";
     private final ApplicationSearchGrid grid;
@@ -169,5 +173,15 @@ public class ApplicationSearchView extends HorizontalLayout
     public void setParameter(BeforeEvent event,
             @OptionalParameter String parameter) {
         viewLogic.enter(parameter);
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        System.out.println("beforeEnter");
+        // TODO Auto-generated method stub
+        if(MainLayout.userName == null){
+            event.rerouteTo(LoginScreen.class);
+            Notification.show("Please Login First!",3000, Position.TOP_CENTER);
+        }
     }
 }

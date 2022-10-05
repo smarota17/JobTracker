@@ -3,6 +3,7 @@ package com.group21.jobTracker.ui.jobBoard;
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
+import com.group21.jobTracker.ui.login.LoginScreen;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
@@ -12,9 +13,12 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
@@ -28,7 +32,7 @@ import com.vaadin.flow.router.RouteAlias;
 @Route(value = "Dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 public class JobBoardView extends HorizontalLayout
-        implements HasUrlParameter<String> {
+        implements HasUrlParameter<String>, BeforeEnterObserver {
 
 	/** Name of the page */
     public static final String VIEW_NAME = "Dashboard";
@@ -197,6 +201,16 @@ public class JobBoardView extends HorizontalLayout
         // Map<String, List<String>> parametersMap = queryParameters.getParameters();
         // candidateName = parametersMap.get("candidateName").get(0);
         // helloLabel.setText("Hello, " + candidateName + "!");
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        System.out.println("beforeEnter");
+        // TODO Auto-generated method stub
+        if(MainLayout.userName == null){
+            event.rerouteTo(LoginScreen.class);
+            Notification.show("Please Login First!",3000, Position.TOP_CENTER);
+        }
     }
     
 }
