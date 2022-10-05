@@ -32,7 +32,7 @@ public class ApplicationSearchDataService extends DataService {
 
         if(jobs == null || jobs.size() == 0){
             jobs = new ArrayList<>();
-            jobs.add(new Jobs("", "", null, null, "", "", "", "", ""));
+            jobs.add(new Jobs("", "", null, null, "", "", "", "", 0.0));
         }
         nextJobId = jobs.size() + 1;
     }

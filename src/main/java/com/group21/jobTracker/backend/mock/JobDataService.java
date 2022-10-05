@@ -53,12 +53,6 @@ public class JobDataService extends DataService {
         return Collections.unmodifiableList(jobs);
     }
 
-    @Override
-    public synchronized List<Category> getAllCategories() {
-//        return Collections.unmodifiableList(categories);
-    	return null;
-    }
-
     /* updating job */
     @Override
     public synchronized void updateJob(Jobs j) {
