@@ -50,7 +50,7 @@ Is the software hosted in an established, third-party repository like GitHub (ht
 |Do the author provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages?|0|https://github.com/smarota17/JobTracker|
 |If the software can be used as a library, package or service by other software, do the author provide comprehensive API documentation?|0| Not applicable.|
 |Do the author store the documentation under revision control with the source code?|3|https://zenodo.org/record/7154376#.Yz9V_nbMI2w|
-|Do the author publish the release history e.g. release data, version numbers, key features of each release etc. on the web site or in the documentation?|3|https://zenodo.org/record/7109114#.YzC4tzTMLGI|
+|Do the author publish the release history e.g. release data, version numbers, key features of each release etc. on the web site or in the documentation?|3|https://zenodo.org/record/7154376#.Yz9V_nbMI2w|
 |How the author support the software|||
 |Does the software describe how a user can get help with using the software?|||
 |Does the website and documentation describe what support, if any, the authors provide to users and developers?|3|https://github.com/sam16222/CSC510_43/commits/main|
