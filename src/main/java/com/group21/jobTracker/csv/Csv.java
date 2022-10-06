@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -24,11 +26,15 @@ public class Csv {
 	 * @param user the user being saved
 	 */
 	public static void saveUser(User user) {
-		File data = new File("data/");
+		String path = FileSystems.getDefault()
+                .getPath("data")
+                .toAbsolutePath()
+                .toString();
+		File data = new File(path+"/");
 		if (!data.exists()){
 			data.mkdirs();
 		}
-		File file = new File("data/" + user.getProcessedFullName() + ".csv");
+		File file = new File(path+"/" + user.getProcessedFullName() + ".csv");
 		file.delete();
 		try {
 		file.createNewFile();
@@ -48,8 +54,12 @@ public class Csv {
 	 * @throws NumberFormatException 
 	 */
 	public static User loadUser(String username) throws NumberFormatException, ParseException {
-		username = username.replaceAll("\\s", "");
-		File file = new File("data/" + username + ".csv");
+		String path = FileSystems.getDefault()
+                .getPath("data")
+                .toAbsolutePath()
+                .toString();
+		File file = new File(path+"/" + username + ".csv");
+		System.out.println(path);
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}
