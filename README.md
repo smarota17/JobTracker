@@ -44,6 +44,8 @@ To start using JobTracker, a user must create an account. The system collects in
 * Apache Maven 4.0.0
 
 
+We also used Vaadin's "Building Modern Web Applications with Spring Boot and Vaadin" [tutorial](https://vaadin.com/docs/latest/tutorial/overview) as a basic foundation for JobTracker. The source code can be found [here](https://github.com/vaadin/flow-crm-tutorial). The starter was modified to fit our purposes and needs. 
+
 ## Features
 * Send reminder emails for upcoming dealines.
 * APIs from supported platforms:  Google careers, Indeed and Linkedin.
