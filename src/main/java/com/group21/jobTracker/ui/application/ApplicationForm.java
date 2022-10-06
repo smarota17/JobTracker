@@ -170,7 +170,11 @@ public class ApplicationForm extends Div {
         save.addClickListener(event -> {
         	//System.out.println("length of checkbox group: "+category.getValue());
         	currentJob = new Jobs();
-        	currentJob.setId(Integer.parseInt(jobId.getValue()));
+            if(jobId.getValue().equals("")){
+                currentJob.setId(0);
+            } else {
+                currentJob.setId(Integer.parseInt(jobId.getValue()));
+            }
         	currentJob.setJobTitle(jobTitle.getValue());
         	currentJob.setCompany(jobCompany.getValue());
         	currentJob.setDateApplied(jobDateApplied.getValue());
