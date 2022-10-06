@@ -36,11 +36,26 @@ Programs:
 * Java Development Kit
 * Git
 
+Installation can be accomplished using Eclipse IDE.
+
 ### Setup
-   Clone the repo to a local folder:
+1. Open Eclipse IDE. Install here[https://www.eclipse.org/downloads/packages/release/oxygen/3a/eclipse-ide-java-developers] if not already installed.
+2. Clone the project from GitHub Repo \
+   - Cloning using EGit: 
+        Click On File > Import > Git > Projects From Git > Clone Uri > Paste The Repository Url as: https://github.com/smarota17/JobTracker.git > Select J2EE Branch > Next > Next > Finish 
+   - Cloning using Git Bash:  
+        git clone https://github.com/smarota17/JobTracker.git 
+        Click on File > Import > Existing Maven Project > Select Local Directory > Finish 
+3. Right click on the Project Directory > Maven > Update Project 
+4. Right Click on the Project Directory > Run As > Maven Clean \
+   Right Click on the Project Directory > Run As > Maven Build \
+      If the run configuration doesn't appear, use the following steps:
+      - Right Click on the Project Directory > Run As > Run Configuration > Maven Build > Main > \
+      - select Base directory as "${project_loc:jobTracker}" \
+      - select Goals "spring-boot:run" 
+5. Navigate to localhost:8080 in your browser.  
 
-    git clone https://github.com/smarota17/JobTracker
-
+Note: In order to use the "Send Mail" functionality for this project, your team must set up an _Outlook_ account, and add the username and password to the SendMail.java class. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts. 
 
 ### Visual Representations
 
@@ -58,22 +73,12 @@ Programs:
   <a href="https://maven.apache.org/" target="_blank"> 
     <img src="https://idroot.us/wp-content/uploads/2019/12/Apache-Maven-logo.png" alt="js" width="40" height="40"/>
   </a>
-  <a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS" target="_blank"> 
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="css" width="40" height="40"/>
-  </a>
-  <a href="https://html.com/" target="_blank"> 
-    <img src="https://cdn-icons-png.flaticon.com/512/888/888909.png" alt="mysql" width="40" height="40"/>
-  </a>
 </p> 
 
 * Java 11
 * Vaadin 23.2.2
 * Spring boot 2.7.3
 * Apache Maven 4.0.0
-* CSS
-* HTML
-
-
 
 ## Future Features
 

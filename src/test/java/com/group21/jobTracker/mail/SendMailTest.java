@@ -11,15 +11,13 @@ public class SendMailTest {
 
 	@Test
 	public void test() {
-		MainLayout.userName = "TestName";
-		SendMail.sendEmail("smarota1861@gmail.com");
-		
-//		try {
-//			SendMail.sendEmail("outlook.com");
-//			fail();
-//		} catch (RuntimeException e) {
-//			System.out.println(e.getMessage());
-//		}
+		// attempting to run sendEmail function on invalid address (will fail)
+		try {
+			SendMail.sendEmail("outlook.com");
+			fail();
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
