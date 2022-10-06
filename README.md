@@ -94,6 +94,7 @@ While JobTracker is ready for users, there are several enhancements that could b
 * **Chrome extension:** Create a Chrome extension for JobTracker so users can add applications to the system from their browser. 
 * **Link to other employment sites:** Consider using other employment services such as Indeed and Glassdor to generate the list of jobs on the "Application Search" page. Currently, JobTracker is only connected to LinkedIn and CareerOneStop. 
 * **Chatbot:** Implement Chatbot capability that allows users to communicate effortlessly with the bot and learn about various elements of JobTracker.
+* **SMS notifications:** Implement SMS notifications to supplement the email notification feature when reminding users of upcoming deadlines. 
 
 ## Contribution
 
