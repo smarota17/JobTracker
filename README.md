@@ -62,10 +62,14 @@ Programs:
 
 * Java Development Kit
 * Git
+* Maven or Eclipse
 
-Installation can be accomplished using Eclipse IDE.
+### Setup Option 1: Command Line (Requires Maven)
+1. Clone the repository to your local machine
+2. Navigate to /JobTracker and run "mvn" on the commandline
+3. Navigate to "localhost:8080" in your browser.
 
-### Setup
+### Setup Option 2: Eclipse (Requires Eclipse)
 1. Open Eclipse IDE. Install [here](https://www.eclipse.org/downloads/packages/release/oxygen/3a/eclipse-ide-java-developers) if not already installed.
 2. Clone the project from GitHub Repo 
    - Cloning using EGit: 
@@ -80,7 +84,7 @@ Installation can be accomplished using Eclipse IDE.
       - Right Click on the Project Directory > Run As > Run Configuration > Maven Build > Main > \
       - select Base directory as "${project_loc:jobTracker}" \
       - select Goals "spring-boot:run" 
-6. Navigate to localhost:8080 in your browser.  
+6. Navigate to "localhost:8080" in your browser.  
 
 Note: In order to use the "Send Mail" functionality for this project, your team must set up an **Outlook** email account, and add the username and password to the SendMail.java class. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts. 
 
