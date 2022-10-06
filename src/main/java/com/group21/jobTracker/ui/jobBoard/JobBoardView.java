@@ -34,9 +34,9 @@ import com.vaadin.flow.router.RouteAlias;
 public class JobBoardView extends HorizontalLayout
         implements HasUrlParameter<String>, BeforeEnterObserver {
 
-	/** Name of the page */
+	/* private static final parameter representing the name of the page view*/
     public static final String VIEW_NAME = "Dashboard";
-    /** Grid object to display jobs */
+    /* private final parameter representing the job grid from the page*/
     private final JobGrid grid;
     /** Form to create a Job object */
 //    private final JobApplicationForm form;
@@ -45,8 +45,15 @@ public class JobBoardView extends HorizontalLayout
     /** Represents the login for the dashboard */
     private final JobBoardViewLogic viewLogic = new JobBoardViewLogic(this);
 
+    /* A Data provider instance for the Job board page which contain the CRUD functions as well as other filtering functions to feed data into the page*/
     private final JobDataProvider dataProvider = new JobDataProvider();
 
+    /**
+     * JobBoardView constructor to initialize all the instance 
+     * like JobDataProvider, initiating the Job Grid
+     * Job form in the Job Board page.
+     *
+     */
     public JobBoardView() {
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
@@ -121,75 +128,6 @@ public class JobBoardView extends HorizontalLayout
         return topLayout;
     }
 
-//    public void showError(String msg) {
-//        Notification.show(msg);
-//    }
-//
-//    /**
-//     * Shows a temporary popup notification to the user.
-//     * 
-//     * @see Notification#show(String)
-//     * @param msg
-//     */
-//    public void showNotification(String msg) {
-//        Notification.show(msg);
-//    }
-//
-//    /**
-//     * Deselects the selected row in the grid.
-//     */
-//    public void clearSelection() {
-//        grid.getSelectionModel().deselectAll();
-//    }
-//
-//    /**
-//     * Selects a row
-//     * 
-//     * @param row
-//     */
-//    public void selectRow(Jobs row) {
-//        grid.getSelectionModel().select(row);
-//    }
-//
-//    /**
-//     * Updates a product in the list of products.
-//     * 
-//     * @param product
-//     */
-//    public void updateProduct(Jobs job) {
-//        dataProvider.save(job);
-//    }
-//
-//    /**
-//     * Removes a product from the list of products.
-//     * 
-//     * @param product
-//     */
-//    public void removeProduct(Jobs job) {
-//        dataProvider.delete(job);
-//    }
-//
-//    /**
-//     * Displays user a form to edit a Product.
-//     * 
-//     * @param product
-//     */
-//    public void editJob(Jobs job) {
-//        showForm(job != null);
-//        //form.setCategories(job.getJobType());
-//        form.setJob(job);
-//        form.editJob(job);
-//    }
-
-//    /**
-//     * Shows and hides the new product form
-//     * 
-//     * @param show
-//     */
-//    public void showForm(boolean show) {
-//        form.setVisible(show);
-//        form.setEnabled(show);
-//    }
 
     @Override
     public void setParameter(BeforeEvent event,
@@ -203,6 +141,11 @@ public class JobBoardView extends HorizontalLayout
         // helloLabel.setText("Hello, " + candidateName + "!");
     }
 
+    /**
+     * Before-entering to the app one can access the job-tracker site as null user.
+     * 
+     * @param event a before-enter event
+     */
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         System.out.println("beforeEnter");

@@ -10,7 +10,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
  * Utility class that encapsulates filtering and CRUD operations for
- * {@link Product} entities.
+ * {@link Jobs} entities.
  * <p>
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
@@ -27,7 +27,7 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
     /**
      * Sets the filter to use for this data provider and refreshes data.
      * <p>
-     * Filter is compared for product name, availability and category.
+     * Filter is compared for Job Title, Company and Keywords.
      *
      * @param filterText
      *            the text to filter by, never null
@@ -43,6 +43,12 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
                 || passesFilter(job.getJobTitle(), this.filterText));
     }
 
+    /**
+     * Get jobid based on job object 
+     *
+     * @param job object
+     *            
+     */
     @Override
     public Integer getId(Jobs job) {
         Objects.requireNonNull(job,
@@ -51,6 +57,14 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
         return job.getId();
     }
 
+    /**
+     * Sets the filter to use for this data provider and refreshes data.
+     * Filter is compared for Job Title, Company, and Keywords.
+     *
+     * @param job object
+     * @param filter text
+     *            
+     */
     private boolean passesFilter(Object object, String filterText) {
         return object != null && object.toString().toLowerCase(Locale.ENGLISH)
                 .contains(filterText);
