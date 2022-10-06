@@ -75,11 +75,24 @@ Programs:
 
 
 
+## Future Features
 
-* Generate gradle spring project: https://start.spring.io/
-* Sprint Boot Instructions: https://javadeveloperzone.com/spring-boot/spring-boot-gradle-example/#23_SpringBootApplication & https://spring.io/guides/gs/spring-boot/
-* Vaddin Instruction: https://vaadin.com/docs/latest/guide/start/gradle
-* Related project video: https://drive.google.com/file/d/1hxCuWlhvCY62f_RylXAK6v3H3B07ePKJ/view
+This application covers the functionalities like searching for new jobs based on the keywords provided by the User. It also maintains a User Dashboard, Application Dashboard, and a process of saving jobs for Users. This App could also be used for tracking the applied jobs in different companies with a feature of email notification. \
+
+However, there is significant scope for Job Tracker to improve in the future. Here some of the scopes are defined with a brief description. \
+* Database integration \
+Currently, the Job Tracker application is not using any Database System. Instead of a database, all the information is stored in CSV files where each user will have a separate CSV file to keep track of all the Jobs applied or saved for future consideration.
+* Deployment Server \
+In the future, Job Tracker can use Tomcat, Heroku, AWS, or any cloud server for deployment to make maintenance easier in terms of using and fixing issues.
+* Chart-based analysis \
+Another future scope is to introduce a quantitative or qualitative analysis for comparing jobs based on different charts. For example, One User can create a bar chart to compare jobs added by the user based on salary insights.
+* Chrome extension \
+Creating a Chrome extension for Job Tracker would be another scope of development for consideration.
+* Link to other Job sites \
+Currently, the application is only connected to LinkedIn, but we can also consider Indeed, CareerOneStop, Glassdoor, etc. to know a variety of Jobs within a single platform.
+* Chatbot \
+Job Tracker could have Chatbot capability allowing users to effortlessly communicate with the bot and learn about various elements of our online application like improving resumes for based on Job specifications etc. 
+
 
 
 
