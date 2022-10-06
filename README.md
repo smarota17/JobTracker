@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/535341071.svg)](https://zenodo.org/badge/latestdoi/535341071)
 [![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)
 [![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)
 [![size](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)
