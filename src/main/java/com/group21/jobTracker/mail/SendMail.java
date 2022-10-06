@@ -42,7 +42,7 @@ public class SendMail {
         	
         	User currentUser = null;
         	try {
-				currentUser = Csv.loadUser(MainLayout.userName);
+				currentUser = Csv.loadUser(MainLayout.userName.replaceAll("\\s", ""));
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException("Issue loading data for current user.");
 			} catch (ParseException e) {
@@ -59,7 +59,8 @@ public class SendMail {
         	}
         	
             Message message = new MimeMessage(session);
-            
+            System.out.println("From email: "+fromEmail);
+            System.out.println("To email: "+toEmail);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(toEmail));
