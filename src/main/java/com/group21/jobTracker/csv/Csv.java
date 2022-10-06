@@ -59,13 +59,12 @@ public class Csv {
                 .toAbsolutePath()
                 .toString();
 		File file = new File(path+"/" + username + ".csv");
-		System.out.println(path);
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}
 		try {
 			Scanner scan = new Scanner(file);
-			String[] list = scan.nextLine().split(",");
+			String[] list = scan.nextLine().split("~");
 			for(int i = 0; i < list.length; i++) {
 				if (list[i].equals("NULL")) {
 					list[i] = null;
@@ -91,8 +90,9 @@ public class Csv {
 	 * @throws ParseException if the parser encounters an error
 	 */
 	private static Jobs loadJobs(String line) throws NumberFormatException, ParseException {
-		String[] list = line.split(",");
+		String[] list = line.split("~");
 		for(int i = 0; i < list.length; i++) {
+			list[i].replace('~', '-');
 			if (list[i].equals("NULL")) {
 				list[i] = null;
 			}

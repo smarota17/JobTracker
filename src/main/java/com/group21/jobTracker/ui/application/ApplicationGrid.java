@@ -20,7 +20,6 @@ public class ApplicationGrid extends Grid<Jobs> {
 	 */
     public ApplicationGrid() {
     	
-    	System.out.println("inside the application grid: ");
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)

@@ -26,11 +26,12 @@ public class MockDataService extends DataService {
 
     /**
 	 * Make API calls for Linkedin to load jobs in the application
+	 * @throws IOException
 	 * 
-	 */
+	 **/
     private MockDataService() {
         try {
-            jobs = ApiCalls.linkedInJobSearch(MainLayout.userName);
+            jobs = ApiCalls.linkedInJobSearch(null);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
@@ -70,6 +71,7 @@ public class MockDataService extends DataService {
 	 * if new job then it would add to the job list otherwise it would 
 	 * update the job with necessary changes and return void
 	 * The function will throw illegalArgument Exception if the job id is invalid
+	 * @throws IllegalArgumentException 
 	 */
     @Override
     public synchronized void updateJob(Jobs j) {
@@ -106,8 +108,9 @@ public class MockDataService extends DataService {
 
     /**
 	 * This Function is to delete job by Id 
+	 * @throws IllegalArgumentException
 	 * 
-	 */
+	 **/
     @Override
     public synchronized void deleteJob(int jobId) {
         Jobs j = getJobsbyId(jobId);

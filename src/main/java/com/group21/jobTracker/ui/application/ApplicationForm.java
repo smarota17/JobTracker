@@ -74,7 +74,6 @@ public class ApplicationForm extends Div {
      */
     public ApplicationForm(ApplicationViewLogic sampleCrudLogic) {
         setClassName("job-form");
-        System.out.println("inside application form: ");
         content = new VerticalLayout();
         content.setSizeUndefined();
         content.addClassName("job-form-content");
@@ -168,7 +167,6 @@ public class ApplicationForm extends Div {
         save.setWidth("100%");
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         save.addClickListener(event -> {
-        	//System.out.println("length of checkbox group: "+category.getValue());
         	currentJob = new Jobs();
             if(jobId.getValue().equals("")){
                 currentJob.setId(0);

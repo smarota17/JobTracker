@@ -64,7 +64,6 @@ public class JobDataService extends DataService {
 	 * @return a collection of Jobs for the USer to show on Application view for User
 	 */
     public synchronized List<Jobs> getAllJobs() {
-    	System.out.println("Getting jobs");
         return Collections.unmodifiableList(jobs);
     }
 

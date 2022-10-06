@@ -26,6 +26,7 @@ authors:
   - given-names: ' Li-Chia'
     family-names: Chang
     affiliation: North Carolina State University
-version:
-date-released:
-license:
+version: 1.0.0
+date-released: 10-06-2022
+doi: 10.5281/zenodo.7154376
+url: https://github.com/smarota17/JobTracker
