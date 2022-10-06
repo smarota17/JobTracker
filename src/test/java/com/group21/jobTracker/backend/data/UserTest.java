@@ -120,4 +120,51 @@ class UserTest {
 		}
 	}
 
+	@Test
+	void testToString(){
+		User user = new User("A B", "TestEmail", "Male", null, null, "TestKeywords");
+		String expectedStr = "A B,TestEmail,Male,NULL,NULL,TestKeywords,";
+		assertEquals(expectedStr, user.toString());
+	}
+
+	@Test
+	void testToSaveString(){
+		User user = new User("A B", "TestEmail", "Male", null, null, "TestKeywords");
+		Jobs job1 = new Jobs("Job1", null, null, null, null, null, null, null, 0);
+		Jobs job2 = new Jobs("Job2", null, null, null, null, null, null, null, 0);
+		user.addJob(job1);
+		user.addJob(job2);
+		String expectedStr = "A B,TestEmail,Male,NULL,NULL,TestKeywords,\n0,Job1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.0,\n1,Job2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.0,";
+		assertEquals(expectedStr, user.toSaveString());
+	}
+
+	@Test
+	void testGetProcessedFullName(){
+		User user = new User("Test Full", null);
+		assertEquals("TestFull", user.getProcessedFullName());
+	}
+
+	@Test
+	void testDeleteExistingJob(){
+		User user = new User("TestDelete", null, null, null, null, null);
+		Jobs job1 = new Jobs("Job1", null, null, null, null, null, null, null, 0);
+		Jobs job2 = new Jobs("Job2", null, null, null, null, null, null, null, 0);
+		Jobs job3 = new Jobs("Job3", null, null, null, null, null, null, null, 0);
+		user.addJob(job1);
+		user.addJob(job2);
+		user.addJob(job3);
+		ArrayList<Jobs> jobs = user.getJobs();
+		for(int i=0; i<jobs.size(); i++){
+			assertEquals("Job" + (i+1), jobs.get(i).getJobTitle());
+			assertEquals(i, jobs.get(i).getId());
+		}
+		user.deleteExistingJob(job2);
+		jobs = user.getJobs();
+		assertEquals("Job1", jobs.get(0).getJobTitle());
+		assertEquals("Job3", jobs.get(1).getJobTitle());
+		for(int i=0; i<jobs.size(); i++){
+			assertEquals(i, jobs.get(i).getId());
+		}
+	}
+
 }
