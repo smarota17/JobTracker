@@ -23,7 +23,9 @@ public class LoginScreen extends FlexLayout {
     public LoginScreen() {
         buildUI();
     }
-
+    /**
+     * Method to create Login UI
+    */
     private void buildUI() {
         setSizeFull();
         setClassName("login-screen");

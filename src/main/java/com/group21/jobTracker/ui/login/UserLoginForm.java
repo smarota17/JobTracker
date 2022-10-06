@@ -32,7 +32,9 @@ public class UserLoginForm extends Div {
     private Button login;
     private Button register;
 
-
+    /**
+     * Method to create Login Form
+    */
     public UserLoginForm() {
         
 
