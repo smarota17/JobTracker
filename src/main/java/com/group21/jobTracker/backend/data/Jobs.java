@@ -237,7 +237,10 @@ public class Jobs implements Serializable{
 	 * @param status status to set
 	 */
 	public void setStatus(String status) {
-		if (status.toLowerCase().equals("in progress")) {
+		if(status == null){
+			this.status = null;
+		}
+		else if (status.toLowerCase().equals("in progress")) {
 			this.status = "in progress";
 		} else if (status.toLowerCase().equals("rejected")) {
 			this.status = "rejected";
