@@ -77,9 +77,9 @@ Programs:
 
 ## Future Features
 
-This application covers the functionalities like searching for new jobs based on the keywords provided by the User. It also maintains a User Dashboard, Application Dashboard, and a process of saving jobs for Users. This App could also be used for tracking the applied jobs in different companies with a feature of email notification. \
+This application covers the functionalities like searching for new jobs based on the keywords provided by the User. It also maintains a User Dashboard, Application Dashboard, and a process of saving jobs for Users. This App could also be used for tracking the applied jobs in different companies with a feature of email notification. 
 
-However, there is significant scope for Job Tracker to improve in the future. Here some of the scopes are defined with a brief description. \
+However, there is significant scope for Job Tracker to improve in the future. Here some of the scopes are defined with a brief description. 
 * Database integration \
 Currently, the Job Tracker application is not using any Database System. Instead of a database, all the information is stored in CSV files where each user will have a separate CSV file to keep track of all the Jobs applied or saved for future consideration.
 * Deployment Server \
