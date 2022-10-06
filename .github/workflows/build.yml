@@ -26,6 +26,9 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+          
+      - name: Build with Maven
+        run: mvn -B test
         
       - name: jacoco-badge-generator
         uses: cicirello/jacoco-badge-generator@v2.7.0
@@ -34,6 +37,7 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
+      
       - name: Upload JaCoCo coverage report as a workflow artifact
         uses: actions/upload-artifact@v3
         with:
