@@ -40,7 +40,7 @@ public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {
         User currentUser;
         
 		try {
-			currentUser = Csv.loadUser(MainLayout.userName);
+			currentUser = Csv.loadUser(MainLayout.userName.replaceAll("\\s", ""));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Cannot read/write to file.");
 		} catch (ParseException e) {
