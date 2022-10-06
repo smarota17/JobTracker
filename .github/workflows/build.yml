@@ -19,9 +19,6 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-          
-      - name: Run tests with Maven
-        run: mvn -B test --file pom.xml
         
       - name: jacoco-badge-generator
         uses: cicirello/jacoco-badge-generator@v2.7.0
@@ -33,3 +30,6 @@ jobs:
           javadoc-branch: javadoc
           java-version: 11
           target-folder: javadoc 
+          
+      - name: Run tests with Maven
+        run: mvn -B test --file pom.xml
