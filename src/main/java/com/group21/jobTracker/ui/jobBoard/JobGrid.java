@@ -20,7 +20,6 @@ public class JobGrid extends Grid<Jobs> {
 	 */
     public JobGrid() {
 
-    	System.out.println("inside the job grid:");
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)

@@ -93,8 +93,6 @@ public class ProfileView extends HorizontalLayout implements BeforeEnterObserver
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        System.out.println("beforeEnter");
-        // TODO Auto-generated method stub
         if(MainLayout.userName == null){
             event.rerouteTo(LoginScreen.class);
             Notification.show("Please Login First!",3000, Position.TOP_CENTER);

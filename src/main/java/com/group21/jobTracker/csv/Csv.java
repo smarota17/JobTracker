@@ -59,7 +59,6 @@ public class Csv {
                 .toAbsolutePath()
                 .toString();
 		File file = new File(path+"/" + username + ".csv");
-		System.out.println(path);
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}

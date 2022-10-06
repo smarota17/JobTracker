@@ -25,7 +25,6 @@ public class SendMail {
 		final String password = "Enter your password for the email you created for this application here."; 
 		final String toEmail = tEmail.trim(); 
 		
-		System.out.println("TLSEmail Start");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "outlook.office365.com"); // SMTP Host
 		props.put("mail.smtp.port", "587"); // TLS Port
@@ -49,8 +48,6 @@ public class SendMail {
 				throw new IllegalArgumentException("Issue loading data for current user.");
 			}
         	
-        	System.out.println(currentUser.getFullName());
-        	
         	// construct string for list of jobs
         	String jobData = "";
         	ArrayList<Jobs> jobList = currentUser.getJobsByDate("DueDate");
@@ -59,8 +56,6 @@ public class SendMail {
         	}
         	
             Message message = new MimeMessage(session);
-            System.out.println("From email: "+fromEmail);
-            System.out.println("To email: "+toEmail);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(toEmail));
@@ -68,8 +63,6 @@ public class SendMail {
             message.setText("Here are your upcoming application deadlines: \n\n" + jobData);
 
             Transport.send(message);
-
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

@@ -220,8 +220,6 @@ public class ApplicationView extends HorizontalLayout
      */
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        System.out.println("beforeEnter");
-        // TODO Auto-generated method stub
         if(MainLayout.userName == null){
             event.rerouteTo(LoginScreen.class);
         }

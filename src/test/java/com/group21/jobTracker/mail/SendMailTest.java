@@ -16,7 +16,7 @@ public class SendMailTest {
 			SendMail.sendEmail("outlook.com");
 			fail();
 		} catch (RuntimeException e) {
-			System.out.println(e.getMessage());
+			//Intentionally left blank
 		}
 	}
 
