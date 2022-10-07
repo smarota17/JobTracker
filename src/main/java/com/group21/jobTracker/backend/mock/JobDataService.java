@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
+import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.component.UI;
@@ -88,6 +89,26 @@ public class JobDataService extends DataService {
 	 * @return a collection of Jobs for the USer to show on Application view for User
 	 */
     public synchronized List<Jobs> getAllJobs() {
+        return Collections.unmodifiableList(jobs);
+    }
+    
+    /**
+	 * This function gets the top 5 highest priority jobs
+	 * @return a collection of the top 5 highest priority jobs
+	 */
+    public synchronized List<Jobs> getPriority() {
+    	try {
+            String processedUserName = MainLayout.userName.replace(" ", "");
+            return Collections.unmodifiableList(Csv.loadUser(processedUserName).getJobsByPriority());
+        }
+        catch(NullPointerException e){
+            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+        }
+        catch(Exception e){
+            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+        } 
+
+        jobs = new ArrayList<>();
         return Collections.unmodifiableList(jobs);
     }
 
