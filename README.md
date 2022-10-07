@@ -67,8 +67,8 @@ Programs:
 
 ### Setup Option 1: Command Line (Requires Maven)
 1. Clone the repository to your local machine
-2. Navigate to /JobTracker and run "mvn" on the commandline
-3. Navigate to "localhost:8080" in your browser.
+2. Navigate to /JobTracker and run "mvn" on the command line
+3. Navigate to "localhost:8080" in your browser
 3. Press Ctr+c in the terminal to close the project
 
 ### Setup Option 2: Eclipse (Requires Eclipse)
