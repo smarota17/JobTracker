@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.validation.constraints.NotBlank;
 
 /**
- *
+ * Class that represents the user in JobTracker.
  */
 public class User {
 
@@ -33,8 +33,9 @@ public class User {
 	/**
 	 * Constructs the user object
 	 * @param fullName fullName of the user
-	 * @param gender gender of the user
-	 * @param field job field of the user
+	 * @param email of the user
+	 * @param gender of the user 
+	 * @param age of the user
 	 * @param experience education level of the user
 	 * @param keywords job searching keywords for the user
 	 */
@@ -50,10 +51,10 @@ public class User {
 	
 	/**
 	 * Constructs the user object with just a name and email
-	 * @param fullName
-	 * @param email
+	 * @param fullName of the user
+	 * @param email of the user
 	 */
-	public User(String fullName,String email) {
+	public User(String fullName, String email) {
 		this.fullName = fullName;
 		this.emailAddress = email;
 	}
@@ -86,54 +87,68 @@ public class User {
 	 * Setter for the full name field
 	 * @param fullName the full name to set
 	*/
-	public String setFullName(String fullName) {
-		return this.fullName = fullName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	
 	/**
-	 * Getter
+	 * Getter for gender
 	 * @return the gender
 	 */
 	public String getGender() {
 		return gender;
 	}
+	
 	/**
+	 * Sets the gender of the user
 	 * @param gender the gender to set
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
 	/**
-	 * @return the major
+	 * Gets the age of the user
+	 * @return the age
 	 */
 	public String getAge() {
 		return age;
 	}
+	
 	/**
-	 * @param major the major to set
+	 * Set the age of the user
+	 * @param age to set
 	 */
 	public void setAge(String age) {
 		this.age = age;
 	}
+	
 	/**
-	 * @return the education
+	 * Get experience of the user
+	 * @return the experience of the user
 	 */
 	public String getExperience() {
 		return experience;
 	}
+	
 	/**
-	 * @param education the education to set
+	 * Set the experience of the user.
+	 * @param experience to set
 	 */
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
+	
 	/**
+	 * Get keywords from the user
 	 * @return the keywords
 	 */
 	public String getKeywords() {
 		return keywords;
 	}
+	
 	/**
+	 * Set the keywords 
 	 * @param keywords the keywords to set
 	 */
 	public void setKeywords(String keywords) {
@@ -142,6 +157,7 @@ public class User {
 	
 	/**
 	 * Adds a job to the list of user jobs
+	 * @param job add the given job object to a list of the users jobs
 	 */
 	public void addJob(Jobs job) {
 		jobs.add(job);
@@ -158,6 +174,7 @@ public class User {
 	
 	/**
 	 * Gets the 5 jobs with the closest dates
+	 * @param type either DueDate or priority 
 	 * @return a list of the 5 jobs with the closest dates
 	 */
 	public ArrayList<Jobs> getJobsByDate( String type ) {
@@ -205,7 +222,7 @@ public class User {
 	
 	/**
 	 * Gets the 5 jobs with the highest priority
-	 * @returns a list of the 5 jobs with the highest priority
+	 * @return a list of the 5 jobs with the highest priority
 	 */
 	public ArrayList<Jobs> getJobsByPriority() {
 		ArrayList<Jobs> output = new ArrayList<Jobs>();

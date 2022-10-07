@@ -2,8 +2,6 @@ package com.group21.jobTracker.login;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,20 +13,25 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
-import com.vaadin.flow.component.notification.testbench.NotificationElement;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
-class UserLoginFormTest extends Div{
-    
+/**
+ * This class test the user login functionality. 
+ */
+class UserLoginFormTest extends Div {
+    /** Layout for content */
     private VerticalLayout content;
+    /** username field */
     private TextField UserName = new TextField("User Name");
+    /** login button */
     private Button login = new Button("Login");
+    /** register button */
     private Button register;
+    /** mock user for testing */
     private User mockUser;
+    /** string message */
     private String msg;
 
     @BeforeEach

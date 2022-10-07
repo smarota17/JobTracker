@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  *
  */
 @SuppressWarnings("serial")
-public class Jobs implements Serializable{
+public class Jobs implements Serializable {
 	
 	/** Id number used for tracking the job's location in the User list **/
     private int id = -1; 
@@ -34,6 +34,7 @@ public class Jobs implements Serializable{
 	private double priority;
 	/** When the user wants to be reminded about the job **/
 	private String remindMeOn;
+	/** The URL link for a job posting (only used for application search feature) */
 	private String link;
 	
 	
@@ -123,7 +124,7 @@ public class Jobs implements Serializable{
 	}
 	/**
 	 * Setter method for the job title
-	 * @param name the name to set
+	 * @param jobTitle the name to set
 	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
@@ -277,7 +278,7 @@ public class Jobs implements Serializable{
 	
 	/**
 	 * Setter for the reminder field
-	 * @param dueDate dueDate to set
+	 * @param remindMeOn reminder day
 	 */
 	public void setRemindMeOn(String remindMeOn) {
 		this.verifyInput(remindMeOn);
@@ -298,7 +299,7 @@ public class Jobs implements Serializable{
 	 */
 	@Override
 	public String toString() {
-	      return this.jobTitle+" "+this.company+" "+Double.toString(this.priority);
+	      return this.jobTitle + " " + this.company + " " + Double.toString(this.priority);
 	}
 	
 	/**
@@ -351,11 +352,19 @@ public class Jobs implements Serializable{
 		output += date.getDayOfMonth();
 		return output;
 	}
-
+	
+	/**
+	 * Set the link for a Job posting
+	 * @param link url for job posting
+	 */
 	public void setLink(String link){
 		this.link = link;
 	}
-
+	
+	/**
+	 * Get the url for Job  
+	 * @return string url
+	 */
 	public String getLink(){
 		return this.link;
 	}

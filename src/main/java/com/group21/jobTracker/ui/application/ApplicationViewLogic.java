@@ -18,11 +18,12 @@ import com.vaadin.flow.component.notification.Notification;
 @SuppressWarnings("serial")
 public class ApplicationViewLogic implements Serializable {
 
-	/* private final Application view instance to handle any CRUD operation from the UI*/
+	/** private final Application view instance to handle any CRUD operation from the UI*/
     private final ApplicationView view;
 
     /**
      * ApplicationViewLogic constructor to initialize the CRUD view object
+     * @param simpleCrudView application view UI
      *
      */
     public ApplicationViewLogic(ApplicationView simpleCrudView) {
@@ -44,7 +45,7 @@ public class ApplicationViewLogic implements Serializable {
      * change view. It actually appends the JobId as a parameter to the URL.
      * The parameter is set to keep the view state the same during e.g. a
      * refresh and to enable bookmarking of individual job selections.
-     *
+     * @param jobId id of the job to add to URL
      */
     private void setFragmentParameter(String jobId) {
         String fragmentParameter;
@@ -64,7 +65,7 @@ public class ApplicationViewLogic implements Serializable {
      * user can edit them.
      *
      * 
-     * @param jobId
+     * @param jobId of the job object to load
      * @throws NumberFormatException
      **/
     public void enter(String jobId) {
@@ -89,7 +90,8 @@ public class ApplicationViewLogic implements Serializable {
     /**
      * This function use JobId to find a specific job from the system 
      * by using JobDataService instance for the User
-     * @param jobId
+     * @param jobId id of the job to find
+     * @return Jobs object with given id
      **/
     private Jobs findJob(int jobId) {
         return JobDataService.getJob().getJobsbyId(jobId);
@@ -99,8 +101,8 @@ public class ApplicationViewLogic implements Serializable {
      * This function use a job object as parameter and check whether the job is a new job or not by isNewJob()
      * after that its clearing the fields on the application form. using the view instance to call 
      * the updatejob method to save or update the job 
-     * @param job
-     * @throws IllegalArgumentException
+     * @param job object to save
+     * @throws IllegalArgumentException if you can't read or write to the file
      * @see Notification#show(String)
      **/
     public void saveProduct(Jobs job) {
@@ -120,10 +122,10 @@ public class ApplicationViewLogic implements Serializable {
 
     /**
      * This function use a job object as parameter and utilize the view object to call 
-     * the delete method for the job instance. After deleteting the job a popup message will show
+     * the delete method for the job instance. After deleting the job a popup message will show
      * as the success of removing the job
      *
-     * @param job
+     * @param job object to delete
      * @see Notification#show(String)
      **/
     public void deleteJob(Jobs job) {
@@ -137,7 +139,7 @@ public class ApplicationViewLogic implements Serializable {
      * This function use a job object as parameter and utilize the view object to call 
      * the edit method for the job instance. After it will pop up the information from the 
      * desired job of grids to the application form.
-     * @param job
+     * @param job to edit 
      * 
      **/
     public void editJob(Jobs job) {
@@ -152,9 +154,7 @@ public class ApplicationViewLogic implements Serializable {
     /**
      * This function use a job object as parameter and utilize the view to clear all previous selctions 
      * for adding new job. then it would call the edit function to load that jobo
-     * @param job
-     * 
-     **/
+     */
     public void newJob() {
         view.clearSelection();
         setFragmentParameter("new");
@@ -163,7 +163,7 @@ public class ApplicationViewLogic implements Serializable {
 
     /**
      * Row selection method pop up the job selected from the dashboard grid and show it on the application form
-     * @param job
+     * @param job object for the row object
      * 
      **/
     public void rowSelected(Jobs job) {

@@ -21,3 +21,4 @@ error-screenshots/
 webpack.generated.js
 data/candidate_data.csv
 /bin/
+/.checkstyle

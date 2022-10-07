@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.data.User;
@@ -14,11 +15,8 @@ import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
- * Utility class that encapsulates filtering and CRUD operations for
- * {@link Jobs} entities.
- * <p>
- * Used to simplify the code in {@link SampleCrudView} and
- * {@link SampleCrudLogic}.
+ * This class provides filtering and other "CRUD" operations for Jobs objects on the "My Application"
+ * page.
  */
 @SuppressWarnings("serial")
 public class ApplicationDataProvider extends ListDataProvider<Jobs> {
@@ -26,6 +24,9 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /** Text filter that can be changed separately. */
     private String filterText = "";
 
+    /**
+     * Constructor to pull a list of job objects to the data service.
+     */
     public ApplicationDataProvider() {
         super(JobDataService.getJob().getAllJobs());
     }
@@ -33,10 +34,9 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /**
      * Store given product to the backing data service.
      *
-     * @param Jobs
-     *            the updated or new product
-     * @throws ParseException 
-     * @throws NumberFormatException 
+     * @param job the updated or new product
+     * @throws ParseException thrown if there is an issue parsing the CSV files for the user
+     * @throws NumberFormatException  thrown if there is a format issue parsing the CSV files for the user
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();
@@ -63,9 +63,9 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     /**
      * Delete given product from the backing data service.
      *
-     * @param Jobs the job to be deleted
-     * @throws IllegalArgumentException
-     * @throws NumberFormatException
+     * @param job the job to be deleted
+     * @throws IllegalArgumentException thrown if the data cannot be stored to the CSV file
+     * @throws NumberFormatException thrown if the data cannot be stored to the CSV file
      *            
      */
     public void delete(Jobs job) {
@@ -89,21 +89,15 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
     }
 
     /**
-     * Sets the filter to use for this data provider and refreshes data.
-     * <p>
-     * Filter is compared for Job Title, Company, and Keywords.
-     *
-     * @param filterText
-     *            the text to filter by, never null
+     * Filters the data for the specific filter text
+     * @param filterText string to filter by
+     * @return list of jobs that match the filter text
      */
-    public void setFilter(String filterText) {
-        Objects.requireNonNull(filterText, "Filter text cannot be null.");
-        if (Objects.equals(this.filterText, filterText.trim())) {
-            return;
-        }
-        this.filterText = filterText.trim().toLowerCase(Locale.ENGLISH);
-        //                || passesFilter(job.getJobType(), this.filterText)
-        setFilter(job -> passesFilter(job.getJobTitle(), this.filterText));
+    public List<Jobs> updateList(String filterText) {
+    	if (filterText == null || filterText.isEmpty()) {
+    		return ((JobDataService) DataService.getJob()).getPriority();
+    	}
+    	return ((JobDataService) DataService.getJob()).getJobsByName(filterText);
     }
 
     /**
@@ -118,17 +112,5 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
                 "Cannot provide an id for a null Job.");
 
         return job.getId();
-    }
-    /**
-     * Sets the filter to use for this data provider and refreshes data.
-     * Filter is compared for Job Title, Company, and Keywords.
-     *
-     * @param job object
-     * @param filter text
-     *            
-     */
-    private boolean passesFilter(Object object, String filterText) {
-        return object != null && object.toString().toLowerCase(Locale.ENGLISH)
-                .contains(filterText);
     }
 }

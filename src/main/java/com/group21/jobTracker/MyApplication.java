@@ -5,9 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+/**
+ * This method runs the JobTracker application. 
+ */
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-@PWA(name = "JobTracker", shortName = "Tracker", offlinePath="offline.html", offlineResources = { "./images/offline.png"})
-public class MyApplication implements AppShellConfigurator{
+@PWA(name = "JobTracker", shortName = "Tracker", offlinePath = "offline.html", offlineResources = { "./images/offline.png"})
+public class MyApplication implements AppShellConfigurator {
 
     /**
      * The main method makes it possible to run the application as a plain Java

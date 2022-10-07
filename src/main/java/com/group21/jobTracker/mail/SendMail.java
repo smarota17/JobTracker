@@ -17,8 +17,19 @@ import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 
+/**
+ * This class is used to handle the "Send reminder email" functionality for JobTracker. NEVER
+ * push the username/password of the email you have set up to your repo. 
+ */
 public class SendMail {
-
+	
+	/**
+	 * This method uses the javax mail package to send an email using Outlook. In order to use
+	 * this method, make sure to set up an outlook email and supply the username and password in
+	 * the "fromEmail" and "password" fields. The email contains a list of the 5 most upcoming
+	 * deadlines for the user.
+	 * @param tEmail email to send to 
+	 */
 	public static void sendEmail(String tEmail) {
 
 		final String fromEmail = "Enter your email address for the application here."; 

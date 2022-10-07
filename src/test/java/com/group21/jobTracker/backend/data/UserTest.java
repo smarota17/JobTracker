@@ -154,15 +154,15 @@ class UserTest {
 		user.addJob(job2);
 		user.addJob(job3);
 		ArrayList<Jobs> jobs = user.getJobs();
-		for(int i=0; i<jobs.size(); i++){
-			assertEquals("Job" + (i+1), jobs.get(i).getJobTitle());
+		for(int i = 0; i < jobs.size(); i++ ){
+			assertEquals("Job" + ( i + 1 ), jobs.get(i).getJobTitle());
 			assertEquals(i, jobs.get(i).getId());
 		}
 		user.deleteExistingJob(job2);
 		jobs = user.getJobs();
 		assertEquals("Job1", jobs.get(0).getJobTitle());
 		assertEquals("Job3", jobs.get(1).getJobTitle());
-		for(int i=0; i<jobs.size(); i++){
+		for(int i = 0; i < jobs.size(); i++){
 			assertEquals(i, jobs.get(i).getId());
 		}
 	}

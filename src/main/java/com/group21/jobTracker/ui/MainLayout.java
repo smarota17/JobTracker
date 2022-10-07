@@ -1,7 +1,5 @@
 package com.group21.jobTracker.ui;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.group21.jobTracker.ui.application.ApplicationView;
 import com.group21.jobTracker.ui.applicationSearch.ApplicationSearchView;
 import com.group21.jobTracker.ui.jobBoard.JobBoardView;
@@ -31,11 +29,16 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
 //@CssImport(value = "./styles/vaadin-app-layout-styles.css", themeFor = "vaadin-app-layout")
 public class MainLayout extends AppLayout {
-
+	/** Button to log out of the system */
     private final Button logoutButton;
+    /** String representing the user name */
     public static String userName;
+    /** String representing the user email */
     public static String email;
 
+    /**
+     * Constructor
+     */
     public MainLayout() {
     	
         // menu toggle

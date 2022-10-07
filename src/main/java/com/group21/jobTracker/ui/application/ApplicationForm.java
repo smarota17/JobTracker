@@ -24,42 +24,42 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 @SuppressWarnings("serial")
 public class ApplicationForm extends Div {
 
-	/* private final parameter representing the content on the form*/
+	/** private final parameter representing the content on the form*/
     private final VerticalLayout content;
 
-    /* private final TextField parameter representing jobId*/
+    /** private final TextField parameter representing jobId*/
     public final TextField jobId;
-    /* private final TextField parameter representing jobTitle*/
+    /** private final TextField parameter representing jobTitle*/
     public final TextField jobTitle;
-    /* private final TextField parameter representing jobCompany*/
+    /** private final TextField parameter representing jobCompany*/
     public final TextField jobCompany;
-    /* private final TextField parameter representing jobDateApplied*/
+    /** private final TextField parameter representing jobDateApplied*/
     public final DatePicker jobDateApplied;
-    /* private final TextField parameter representing jobDueDate*/
+    /** private final TextField parameter representing jobDueDate*/
     public final DatePicker jobDueDate;
-    /* private final TextField parameter representing jobSalary*/
+    /** private final TextField parameter representing jobSalary*/
     public final TextField jobSalary;
-    /* private final TextField parameter representing jobDescription*/
+    /** private final TextField parameter representing jobDescription*/
     public final TextField jobDescription;
-    /* private final TextField parameter representing jobNextAction*/
+    /** private final TextField parameter representing jobNextAction*/
     public final TextField jobNextAction;
-    /* private final TextField parameter representing jobStatus*/
+    /** private final TextField parameter representing jobStatus*/
     public final TextField jobStatus;
-    /* private final TextField parameter representing jobPriority*/
+    /** private final TextField parameter representing jobPriority*/
     public final NumberField jobPriority;
     
-    /* private final Button parameter representing saving job button*/
+    /** private final Button parameter representing saving job button*/
     private Button save;
-    /* private final Button parameter representing cancel job button*/
+    /** private final Button parameter representing cancel job button*/
     private Button cancel;
-    /* private final Button parameter representing delete job button*/
+    /** private final Button parameter representing delete job button*/
     private final Button delete;
 
-    /* private final ApplicationViewLogic instance to handle the CRUD operation for Application form*/
+    /** private final ApplicationViewLogic instance to handle the CRUD operation for Application form*/
     private final ApplicationViewLogic viewLogic;
-    /* private final Binder instance to Bind information entered into the Application form*/
+    /** private final Binder instance to Bind information entered into the Application form*/
     private final Binder<Jobs> binder;
-    /* private Jobs variable represents the job object to add, delete, update*/
+    /** private Jobs variable represents the job object to add, delete, update*/
     private Jobs currentJob;
 
 
@@ -149,16 +149,16 @@ public class ApplicationForm extends Div {
         
 
         binder = new BeanValidationBinder<>(Jobs.class);
-        binder.forField(jobId).bind(Jobs::getStringId,Jobs::setStringId);
-        binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
-        binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
-        binder.forField(jobDateApplied).bind(Jobs::getDateApplied,Jobs::setDateApplied);
-        binder.forField(jobDueDate).bind(Jobs::getDueDate,Jobs::setDueDate);
-        binder.forField(jobSalary).bind(Jobs::getSalary,Jobs::setSalary);
-        binder.forField(jobDescription).bind(Jobs::getJobDescription,Jobs::setJobDescription);
-        binder.forField(jobNextAction).bind(Jobs::getNextAction,Jobs::setNextAction);
-        binder.forField(jobStatus).bind(Jobs::getStatus,Jobs::setStatus);
-        binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
+        binder.forField(jobId).bind(Jobs::getStringId, Jobs::setStringId);
+        binder.forField(jobTitle).bind(Jobs::getJobTitle, Jobs::setJobTitle);
+        binder.forField(jobCompany).bind(Jobs::getCompany, Jobs::setCompany);
+        binder.forField(jobDateApplied).bind(Jobs::getDateApplied, Jobs::setDateApplied);
+        binder.forField(jobDueDate).bind(Jobs::getDueDate, Jobs::setDueDate);
+        binder.forField(jobSalary).bind(Jobs::getSalary, Jobs::setSalary);
+        binder.forField(jobDescription).bind(Jobs::getJobDescription, Jobs::setJobDescription);
+        binder.forField(jobNextAction).bind(Jobs::getNextAction, Jobs::setNextAction);
+        binder.forField(jobStatus).bind(Jobs::getStatus, Jobs::setStatus);
+        binder.forField(jobPriority).bind(Jobs::getPriority, Jobs::setPriority);
         binder.bindInstanceFields(this);
         binder.readBean(currentJob);
 

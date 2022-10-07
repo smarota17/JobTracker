@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.group21.jobTracker.mail.SendMail;
-import com.group21.jobTracker.ui.MainLayout;
-
+/**
+ * Method that tests the send mail functionality. Can only be tested locally because you should NEVER
+ * push the username/password of the email you have set up.
+ */
 public class SendMailTest {
 
+	/**
+	 * Tests failing case for sendMail functionality (invalid address)
+	 */
 	@Test
 	public void test() {
 		// attempting to run sendEmail function on invalid address (will fail)

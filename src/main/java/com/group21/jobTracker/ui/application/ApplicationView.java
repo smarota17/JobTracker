@@ -1,12 +1,6 @@
 package com.group21.jobTracker.ui.application;
 
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.ui.MainLayout;
 import com.group21.jobTracker.ui.login.LoginScreen;
@@ -20,6 +14,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
@@ -40,21 +35,21 @@ import com.vaadin.flow.router.Route;
 public class ApplicationView extends HorizontalLayout
         implements HasUrlParameter<String>, BeforeEnterObserver  {
 
-	/* private static final parameter representing the name of the page view*/
+	/** private static final parameter representing the name of the page view*/
     public static final String VIEW_NAME = "My Applications";
-    /* private final parameter representing the application grid from the page*/
+    /** private final parameter representing the application grid from the page*/
     private final ApplicationGrid grid;
-    /* private final parameter representing the application form from the page*/
+    /** private final parameter representing the application form from the page*/
     private final ApplicationForm form;
-    /* private Textfield to enter the keywords to filter the job search*/
+    /** private Textfield to enter the keywords to filter the job search*/
     private TextField filter;
 
-    /* private final ApplicationViewLogic instance to handle the CRUD operation for Application page*/
+    /** private final ApplicationViewLogic instance to handle the CRUD operation for Application page*/
     private final ApplicationViewLogic viewLogic = new ApplicationViewLogic(this);
-    /* A Button variable for adding new application*/
+    /** A Button variable for adding new application*/
     private Button newApplication;
 
-    /* A Data provider instance for the application page which contain the CRUG functions as well as other filtering fucntions to feed data into the page*/
+    /** A Data provider instance for the application page which contain the CRUG functions as well as other filtering fucntions to feed data into the page*/
     private final ApplicationDataProvider dataProvider;
 
     /**
@@ -94,13 +89,10 @@ public class ApplicationView extends HorizontalLayout
      * @return layout for filtering and new application
      **/
     public HorizontalLayout createTopBar() {
-        filter = new TextField();
-        filter.setPlaceholder("Filter name, availability or category");
-        // Apply the filter to grid's data provider. TextField value is never
-        filter.addValueChangeListener(
-                event -> dataProvider.setFilter(event.getValue()));
-        // A shortcut to focus on the textField by pressing ctrl + F
-        filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
+		filter = new TextField();
+		filter.setPlaceholder("Filter by name");
+		filter.setValueChangeMode(ValueChangeMode.LAZY);
+		filter.addValueChangeListener(event -> grid.setItems( dataProvider.updateList(event.getValue())));
 
         newApplication = new Button("New application");
         // Setting theme variant of new production button to LUMO_PRIMARY that
@@ -132,7 +124,7 @@ public class ApplicationView extends HorizontalLayout
      * Shows a temporary popup notification to the user.
      * 
      * @see Notification#show(String)
-     * @param msg
+     * @param msg to show
      */
     public void showNotification(String msg) {
         Notification.show(msg);
@@ -141,7 +133,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Enables/Disables the new Jobs button.
      * 
-     * @param enabled
+     * @param enabled whether the new jobs button should appear or not
      */
     public void setnewApplicationEnabled(boolean enabled) {
         newApplication.setEnabled(enabled);
@@ -157,7 +149,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Selects a row
      * 
-     * @param row
+     * @param row that is selected
      */
     public void selectRow(Jobs row) {
         grid.getSelectionModel().select(row);
@@ -166,9 +158,9 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Updates a Jobs in the list of jobs.
      * 
-     * @param job
-     * @throws ParseException 
-     * @throws NumberFormatException 
+     * @param job Jobs that should be updated
+     * @throws ParseException thrown when the CSV files cannot be loaded
+     * @throws NumberFormatException thrown when the CSV files cannot be loaded
      */
     public void updateProduct(Jobs job) {
         dataProvider.save(job);
@@ -178,7 +170,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Removes a Job from the list of Jobs.
      * 
-     * @param job
+     * @param job object to be removed
      */
     public void removeProduct(Jobs job) {
         dataProvider.delete(job);
@@ -188,7 +180,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Displays user a form to edit a Job.
      * 
-     * @param Jobs
+     * @param job object to be edited
      */
     public void editJob(Jobs job) {
         showForm(job != null);
@@ -200,7 +192,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Shows and hides the new job form
      * 
-     * @param show
+     * @param show whether the form should be shown or hidden
      */
     public void showForm(boolean show) {
         form.setVisible(show);

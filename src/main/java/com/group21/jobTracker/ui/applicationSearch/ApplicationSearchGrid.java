@@ -9,13 +9,15 @@ import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 /**
- * Grid of products, handling the visual presentation and filtering of a set of
- * items. This version uses an in-memory data source that is suitable for small
- * data sets.
+ * Grid of job objects, handling the visual presentation and filtering of a set of
+ * items. Utilized Vaadin grid component.
  */
 @SuppressWarnings("serial")
 public class ApplicationSearchGrid extends Grid<Jobs> {
 
+	/**
+	 * Constructor
+	 */
     public ApplicationSearchGrid() {
 
         setSizeFull();
@@ -64,10 +66,18 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
         });
     }
 
+    /**
+     * Get the selected row.
+     * @return Jobs object in specified row
+     */
     public Jobs getSelectedRow() {
         return asSingleSelect().getValue();
     }
 
+    /**
+     * Refresh the given job
+     * @param job to refresh
+     */
     public void refresh(Jobs job) {
         getDataCommunicator().refresh(job);
     }

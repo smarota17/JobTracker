@@ -15,16 +15,27 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 
 import org.junit.jupiter.api.Test;
-
-class UserRegisterFormTest extends Div{
+/**
+ * Class to test the user register functionality. 
+ */
+class UserRegisterFormTest extends Div {
+	/** Represents layout for content */
     private VerticalLayout content;
+    /** Full name field */
     private TextField fullName;
+    /** Email field */
     private EmailField email;
+    /** Gender field */
     private TextField gender;
+    /** Age field */
     private TextField age;
+    /** Experience field */
     private NumberField experience;
+    /** Keywords field */
     private TextField keywords;
+    /** Save button */
     private Button save;
+    /** Message string */
     private String msg;
 
 
@@ -59,7 +70,7 @@ class UserRegisterFormTest extends Div{
         keywords.setLabel("Job Keywords");
 
         save = new Button("Create User");
-        save.addClickListener(event-> newUser());
+        save.addClickListener(event -> newUser());
 
         content.add(fullName, email, age, experience, keywords, save);
     }
@@ -92,7 +103,7 @@ class UserRegisterFormTest extends Div{
         experience.setValue(1.5);
         keywords.setValue("Test Key Word");
 
-        File generated = new File("data/"+fullName.getValue().replace(" ", "_")+".csv");
+        File generated = new File("data/" + fullName.getValue().replace(" ", "_") + ".csv");
         if(generated.exists()){
             generated.delete();
         }
@@ -112,7 +123,7 @@ class UserRegisterFormTest extends Div{
         experience.setValue(1.5);
         keywords.setValue("Test Key Word");
         
-        File generated = new File("data/"+fullName.getValue().replace(" ", "_")+".csv");
+        File generated = new File("data/" + fullName.getValue().replace(" ", "_") + ".csv");
         if(generated.exists()){
             generated.delete();
         }

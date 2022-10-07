@@ -1,41 +1,34 @@
 package com.group21.jobTracker.ui.profile;
 
-import java.io.*;
-
-import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
 import com.group21.jobTracker.ui.login.LoginScreen;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyModifier;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.Version;
 
+/**
+ * This class represents the "Profile" page in the UI.
+ */
 @Route(value = "Profile", layout = MainLayout.class)
 @PageTitle("My Profile")
-public class ProfileView extends HorizontalLayout implements BeforeEnterObserver{
+public class ProfileView extends HorizontalLayout implements BeforeEnterObserver {
+	/** Represents name of the view */
     public static final String VIEW_NAME = "My Profile";
-
+    
+    /**
+     * Constructor.
+     */
     public ProfileView() {
     	setClassName("profile-form");
         VerticalLayout profileLayout = new VerticalLayout();
@@ -70,17 +63,52 @@ public class ProfileView extends HorizontalLayout implements BeforeEnterObserver
             try{
                 User user = Csv.loadUser(MainLayout.userName.replace(" ", "_"));
                 try{
-                    nameField.setValue(user.getFullName());
-                    emailField.setValue(user.getEmailAddress());
-                    genderField.setValue(user.getGender());
-                    ageField.setValue(user.getAge());
-                    experienceField.setValue(Double.valueOf(user.getExperience()));
-                    keywordField.setValue(user.getKeywords());
+                    try {
+                    	nameField.setReadOnly(false);
+                        nameField.setValue(user.getFullName());
+                    }
+                    finally {
+                    	nameField.setReadOnly(true);
+                    }
+                    try {
+                    	emailField.setReadOnly(false);
+                        emailField.setValue(user.getEmailAddress());
+                    }
+                    finally {
+                    	emailField.setReadOnly(true);
+                    }
+                    try {
+                    	genderField.setReadOnly(false);
+                        genderField.setValue(user.getGender());
+                    }
+                    finally {
+                    	genderField.setReadOnly(true);
+                    }
+                    try {
+                    	ageField.setReadOnly(false);
+                        ageField.setValue(user.getAge());
+                    }
+                    finally {
+                    	ageField.setReadOnly(true);
+                    }
+                    try {
+                    	experienceField.setReadOnly(false);
+                        experienceField.setValue(Double.valueOf(user.getExperience()));
+                    }
+                    finally {
+                    	experienceField.setReadOnly(true);
+                    }
+                    try {
+                    	keywordField.setReadOnly(false);
+                        keywordField.setValue(user.getKeywords());
+                    }
+                    finally {
+                    	keywordField.setReadOnly(true);
+                    }
                 } catch (Exception e) {
                     Notification.show("There are errors with the retieved data");
                 }
             } catch (Exception e) {
-                // TODO: handle exception
                 Notification.show(e.getMessage());
             }
         }
@@ -95,7 +123,7 @@ public class ProfileView extends HorizontalLayout implements BeforeEnterObserver
     public void beforeEnter(BeforeEnterEvent event) {
         if(MainLayout.userName == null){
             event.rerouteTo(LoginScreen.class);
-            Notification.show("Please Login First!",3000, Position.TOP_CENTER);
+            Notification.show("Please Login First!", 3000, Position.TOP_CENTER);
         }
     }
 }

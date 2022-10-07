@@ -20,7 +20,7 @@ public class MockDataService extends DataService {
     private static MockDataService INSTANCE;
     /** Private List variable to hold jobs from api calls */
     private List<Jobs> jobs;
-    /** Private int to maintain the unique job id for each new job and save with unique job Id*/
+    
 
     /**
 	 * Make API calls for Linkedin to load jobs in the application
@@ -31,7 +31,7 @@ public class MockDataService extends DataService {
         try {
             jobs = ApiCalls.linkedInJobSearch(null);
         } catch (IOException e) {
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+            Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
         }
 
         if(jobs == null || jobs.size() == 0){

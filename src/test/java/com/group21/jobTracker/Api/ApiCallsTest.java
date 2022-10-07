@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import com.group21.jobTracker.backend.data.Jobs;
 
 /**
- *
+ * Test class for the ApiCalls class. Tests methods and functionality.
  */
 class ApiCallsTest {
 

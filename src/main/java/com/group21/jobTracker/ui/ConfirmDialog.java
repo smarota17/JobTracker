@@ -8,9 +8,19 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+/**
+ * Class to represent the confirm dialog for UI. 
+ */
 @SuppressWarnings("serial")
 public class ConfirmDialog extends Dialog {
 
+	/**
+	 * Constructor
+	 * @param caption for the dialog
+	 * @param text for the dialog
+	 * @param confirmButtonText confirmation text
+	 * @param confirmListener action for the dialog
+	 */
     public ConfirmDialog(String caption, String text, String confirmButtonText,
             Runnable confirmListener) {
 

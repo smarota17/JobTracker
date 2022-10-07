@@ -1,11 +1,6 @@
 package com.group21.jobTracker.ui.login;
 
 import java.io.*;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.hibernate.query.QueryParameter;
 
 import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
@@ -17,23 +12,26 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.BeforeEvent;
-import com.vaadin.flow.router.HasUrlParameter;
-import com.vaadin.flow.router.QueryParameters;
 
 /**
  * A form for editing a single product.
  */
 public class UserRegisterForm extends Div {
-
+	/** Layout for content */
     private final VerticalLayout content;
-
+    /** Full name field */
     private final TextField fullName;
+    /** Email field */
     private final EmailField email;
+    /** Gender field */
     private final TextField gender;
+    /** Age field */
     private final TextField age;
+    /** Experience field */
     private final NumberField experience;
+    /** Keywords field */
     private final TextField keywords;
+    /** Save field */
     private final Button save;
 
     /**
@@ -69,7 +67,7 @@ public class UserRegisterForm extends Div {
         keywords.setLabel("Job Keywords");
 
         save = new Button("Create User");
-        save.addClickListener(event-> newUser());
+        save.addClickListener(event -> newUser());
 
         content.add(fullName, email, age, experience, keywords, save);
     }

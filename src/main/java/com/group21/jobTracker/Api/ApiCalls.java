@@ -9,9 +9,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.group21.jobTracker.backend.data.Jobs;
-
-
-
+/**
+ * Class that represents the Api calls to LinkedIn and OneCareerStop for the "Application Search"
+ * feature of JobTracker. 
+ */
 public class ApiCalls {
 	/** Constant for the number of jobs pulled by the Search functions */
 	private static int NUM_JOBS = 5;
@@ -42,7 +43,6 @@ public class ApiCalls {
 	 * @param keywords keywords used for the search
 	 * @return a list of available jobs
 	 * @throws IOException if the linked in website cannot be reached
-	 * @throws  
 	 */
 	public static ArrayList<Jobs> linkedInJobSearch(String keywords) throws IOException {
 		try {

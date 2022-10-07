@@ -16,31 +16,50 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 /**
- * A form for editing a single product.
+ * This form is used by the ApplicationSearchView to represent the form needed to add a Jobs object
+ * to the backend.
  */
 @SuppressWarnings("serial")
 public class ApplicationSearchForm extends Div {
 
+	/** UI container for content */
     private final VerticalLayout content;
 
+    /** TextField for the job's title */
     private final TextField jobTitle;
+    /** TextField for the job's company */
     private final TextField jobCompany;
+    /** Date picker for the date applied to the job */
     private final DatePicker jobDateApplied;
+    /** TextField for the job's due date */
     private final DatePicker jobDueDate;
+    /** TextField for the job's salary */
     private final TextField jobSalary;
+    /** TextField for the job's description */
     private final TextField jobDescription;
+    /** TextField for the job's next actions */
     private final TextField jobNextAction;
+    /** TextField for the job's status */
     private final TextField jobStatus;
+    /** TextField for the job's priority */
     private final NumberField jobPriority;
     
+    /** button for saving data */
     private Button save;
+    /** button for canceling data */
     private Button cancel;
 
+    /** Object for the logic of the UI */
     private final ApplicationSearchViewLogic viewLogic;
+    /** Binder used to bind the content from UI to the form itself */
     private final Binder<Jobs> binder;
+    /** Jobs object being viewed/edited */
     private Jobs currentJob;
 
-
+    /**
+     * Constructor for the ApplicationSearchForm
+     * @param sampleCrudLogic the view logic object for the form
+     */
     public ApplicationSearchForm(ApplicationSearchViewLogic sampleCrudLogic) {
         setClassName("search-form");
 
@@ -114,15 +133,15 @@ public class ApplicationSearchForm extends Div {
         content.add(jobPriority);
 
         binder = new BeanValidationBinder<>(Jobs.class);
-        binder.forField(jobTitle).bind(Jobs::getJobTitle,Jobs::setJobTitle);
-        binder.forField(jobCompany).bind(Jobs::getCompany,Jobs::setCompany);
-        binder.forField(jobDateApplied).bind(Jobs::getDateApplied,Jobs::setDateApplied);
-        binder.forField(jobDueDate).bind(Jobs::getDueDate,Jobs::setDueDate);
-        binder.forField(jobSalary).bind(Jobs::getSalary,Jobs::setSalary);
-        binder.forField(jobDescription).bind(Jobs::getJobDescription,Jobs::setJobDescription);
-        binder.forField(jobNextAction).bind(Jobs::getNextAction,Jobs::setNextAction);
-        binder.forField(jobStatus).bind(Jobs::getStatus,Jobs::setStatus);
-        binder.forField(jobPriority).bind(Jobs::getPriority,Jobs::setPriority);
+        binder.forField(jobTitle).bind(Jobs::getJobTitle, Jobs::setJobTitle);
+        binder.forField(jobCompany).bind(Jobs::getCompany, Jobs::setCompany);
+        binder.forField(jobDateApplied).bind(Jobs::getDateApplied, Jobs::setDateApplied);
+        binder.forField(jobDueDate).bind(Jobs::getDueDate, Jobs::setDueDate);
+        binder.forField(jobSalary).bind(Jobs::getSalary, Jobs::setSalary);
+        binder.forField(jobDescription).bind(Jobs::getJobDescription, Jobs::setJobDescription);
+        binder.forField(jobNextAction).bind(Jobs::getNextAction, Jobs::setNextAction);
+        binder.forField(jobStatus).bind(Jobs::getStatus, Jobs::setStatus);
+        binder.forField(jobPriority).bind(Jobs::getPriority, Jobs::setPriority);
         binder.bindInstanceFields(this);
         binder.readBean(currentJob);
 
@@ -150,7 +169,10 @@ public class ApplicationSearchForm extends Div {
         content.add(save, cancel);
     }
 
-
+    /**
+     * Method to edit a given job.
+     * @param job that needs to be edited
+     */
     public void editJob(Jobs job) {
         if (job == null) {
             job = new Jobs();
@@ -159,6 +181,10 @@ public class ApplicationSearchForm extends Div {
         // binder.readBean(job);
     }
 
+    /**
+     * Method to set the content of a given job object in the form.
+     * @param job that needs to be set
+     */
     public void setJob(Jobs job) {
         this.currentJob = job;
         binder.setBean(currentJob);

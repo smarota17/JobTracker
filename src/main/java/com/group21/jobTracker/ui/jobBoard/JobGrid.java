@@ -52,7 +52,7 @@ public class JobGrid extends Grid<Jobs> {
 	/**
 	 * This function is to attach documents if any
 	 * 
-	 * @param AttachEvent to set for attachment to the job application.
+	 * @param attachEvent to set for attachment to the job application.
 	 */
     @Override
     protected void onAttach(AttachEvent attachEvent) {
@@ -76,8 +76,7 @@ public class JobGrid extends Grid<Jobs> {
 
     /**
 	 * This function is to refresh the selection and view of the application grid
-	 * 
-	 * 
+	 * @param job object to be refreshed
 	 */
     public void refresh(Jobs job) {
         getDataCommunicator().refresh(job);

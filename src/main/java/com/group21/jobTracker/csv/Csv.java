@@ -16,7 +16,8 @@ import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.User;
 
 /**
- *
+ * Class that represents the backend for JobTracker. All data is stored in the CSV files. Each
+ * user gets their own CSV file.
  */
 public class Csv {
 	
@@ -29,11 +30,11 @@ public class Csv {
                 .getPath("data")
                 .toAbsolutePath()
                 .toString();
-		File data = new File(path+"/");
+		File data = new File(path + "/");
 		if (!data.exists()){
 			data.mkdirs();
 		}
-		File file = new File(path+"/" + user.getProcessedFullName() + ".csv");
+		File file = new File(path + "/" + user.getProcessedFullName() + ".csv");
 		file.delete();
 		try {
 		file.createNewFile();
@@ -49,15 +50,15 @@ public class Csv {
 	 * Loads a specified user from a file
 	 * @param username the username of the specified user
 	 * @return the user as a User object
-	 * @throws ParseException 
-	 * @throws NumberFormatException 
+	 * @throws ParseException when the CSV file cannot be loaded
+	 * @throws NumberFormatException when the CSV file cannot be loaded
 	 */
 	public static User loadUser(String username) throws NumberFormatException, ParseException {
 		String path = FileSystems.getDefault()
                 .getPath("data")
                 .toAbsolutePath()
                 .toString();
-		File file = new File(path+"/" + username.replaceAll(" ", "_") + ".csv");
+		File file = new File(path + "/" + username.replaceAll(" ", "_") + ".csv");
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}

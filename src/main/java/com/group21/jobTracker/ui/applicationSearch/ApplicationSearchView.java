@@ -23,10 +23,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 /**
- * A view for performing create-read-update-delete operations on products.
- *
- * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
- * operations and controlling the view based on events from outside.
+ * Represents the UI for the "Application Search" page, incorporates functionality for "CRUD" 
+ * operations as well. 
  */
 @SuppressWarnings("serial")
 @Route(value = "ApplicationSearch", layout = MainLayout.class)
@@ -34,16 +32,24 @@ import com.vaadin.flow.router.Route;
 public class ApplicationSearchView extends HorizontalLayout
         implements HasUrlParameter<String>, BeforeEnterObserver {
 
+	/** Represents the name of the page */
     public static final String VIEW_NAME = "Application Search";
+    /** Represents the Vaadin grid (really a table) that is populated with Jobs objects from API calls */
     private final ApplicationSearchGrid grid;
+    /** Represents the form to add applications to the database */
     private final ApplicationSearchForm form;
-
+    /** Represents the logic for this page */
     private final ApplicationSearchViewLogic viewLogic = new ApplicationSearchViewLogic(this);
+    /** Field that represents the string for searches */
     private TextField searchInput;
-    private Button newApplication;
-
+    /** Button to search for more applications */
+    private Button searchApplications;
+    /** Represents the data provider for the page, with no keywords used*/
     private  ApplicationSearchDataProvider dataProvider = new ApplicationSearchDataProvider(null);
 
+    /**
+     * Constructor for the ApplicationSearchView object
+     */
     public ApplicationSearchView() {
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
@@ -73,32 +79,42 @@ public class ApplicationSearchView extends HorizontalLayout
 
     }
 
+    /**
+     * Method to create the top bar on the UI (Search bar and button to search for new apps)
+     * @return a HorizontalLayout container
+     */
     public HorizontalLayout createTopBar() {
         searchInput = new TextField();
         searchInput.setPlaceholder("Input search keywords");
-        newApplication = new Button("Search for more applications");
+        searchApplications = new Button("Search for more applications");
         // Setting theme variant of new production button to LUMO_PRIMARY that
         // changes its background color to blue and its text color to white
-        newApplication.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        newApplication.setIcon(VaadinIcon.SEARCH.create());
+        searchApplications.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        searchApplications.setIcon(VaadinIcon.SEARCH.create());
 //        newApplication.addClickListener(click -> viewLogic.newJob());
         // A shortcut to click the new product button by pressing ALT + N
-        newApplication.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
-        newApplication.addClickListener(event->startSearching());
+        searchApplications.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+        searchApplications.addClickListener(event -> startSearching());
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.setAlignItems(Alignment.CENTER);
-        topLayout.add(searchInput,newApplication);
+        topLayout.add(searchInput, searchApplications);
 
         return topLayout;
     }
 
-
+    /**
+     * Method to start searching for job applications given an input from the search field.
+     */
     private void startSearching(){
         dataProvider = new ApplicationSearchDataProvider(searchInput.getValue());
         grid.setItems(dataProvider.getItems());
     }
 
+    /**
+     * Method to show error messages.
+     * @param msg error message
+     */
     public void showError(String msg) {
         Notification.show(msg);
     }
@@ -107,20 +123,12 @@ public class ApplicationSearchView extends HorizontalLayout
      * Shows a temporary popup notification to the user.
      * 
      * @see Notification#show(String)
-     * @param msg
+     * @param msg message to display
      */
     public void showNotification(String msg) {
         Notification.show(msg);
     }
 
-    /**
-     * Enables/Disables the new product button.
-     * 
-     * @param enabled
-     */
-    public void setnewApplicationEnabled(boolean enabled) {
-        newApplication.setEnabled(enabled);
-    }
 
     /**
      * Deselects the selected row in the grid.
@@ -132,16 +140,16 @@ public class ApplicationSearchView extends HorizontalLayout
     /**
      * Selects a row
      * 
-     * @param row
+     * @param row given row to select in the grid
      */
     public void selectRow(Jobs row) {
         grid.getSelectionModel().select(row);
     }
 
     /**
-     * Updates a product in the list of products.
+     * Updates a job in the list of products.
      * 
-     * @param product
+     * @param job to be updated
      */
     public void updateProduct(Jobs job) {
         dataProvider.save(job);
@@ -149,9 +157,9 @@ public class ApplicationSearchView extends HorizontalLayout
 
 
     /**
-     * Displays user a form to edit a Product.
+     * Displays user a form to edit a job.
      * 
-     * @param product
+     * @param job to be edited
      */
     public void editJob(Jobs job) {
         showForm(job != null);
@@ -162,7 +170,7 @@ public class ApplicationSearchView extends HorizontalLayout
     /**
      * Shows and hides the new product form
      * 
-     * @param show
+     * @param show whether the form should be shown or not
      */
     public void showForm(boolean show) {
         form.setVisible(show);
@@ -179,7 +187,7 @@ public class ApplicationSearchView extends HorizontalLayout
     public void beforeEnter(BeforeEnterEvent event) {
         if(MainLayout.userName == null){
             event.rerouteTo(LoginScreen.class);
-            Notification.show("Please Login First!",3000, Position.TOP_CENTER);
+            Notification.show("Please Login First!", 3000, Position.TOP_CENTER);
         }
     }
 }

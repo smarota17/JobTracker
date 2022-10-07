@@ -11,21 +11,28 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
 /**
- * Mock data model. This implementation has very simplistic locking and does not
- * notify users of modifications.
+ * This class represents the DataService used for the "ApplicationSearch" feature of JobTracker.
+ * The data is populated by using API calls to LinkedIn and CareerOneStop. 
  */
 @SuppressWarnings("serial")
 public class ApplicationSearchDataService extends DataService {
 
+	/** Represents an instance of an ApplicationSearchDataService object */
     private static ApplicationSearchDataService INSTANCE;
 
+    /** List of jobs for the ApplicationDataService returned by the api calls */
     private List<Jobs> jobs;
 
+    /**
+     * Constructor for ApplicationSearchDataService, which uses a string of key words to 
+     * to search through LinkedIn for job postings. 
+     * @param keywords string to limit the search (eg "Software Internship")
+     */
     private ApplicationSearchDataService(String keywords) {
         try {
             jobs = ApiCalls.linkedInJobSearch(keywords);
         } catch (IOException e) {
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+            Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
         }
 
         if(jobs == null || jobs.size() == 0){
@@ -34,12 +41,16 @@ public class ApplicationSearchDataService extends DataService {
         }
     }
 
+    /**
+     * Returns an instance of ApplicationSearchDataService.
+     * @param keywords string to limit the search
+     * @return an ApplicationSearchDataService object
+     */
     public synchronized static DataService getInstance(String keywords) {
         INSTANCE = new ApplicationSearchDataService(keywords);
         return INSTANCE;
     }
 
-    /* returning jobs */
     @Override
     public synchronized List<Jobs> getAllJobs() {
         return Collections.unmodifiableList(jobs);

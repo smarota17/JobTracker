@@ -18,7 +18,7 @@ public class JobBoardViewLogic implements Serializable {
      * @param simpleCrudView the JobBoardView object that the logic will be applied to.
      */
     public JobBoardViewLogic(JobBoardView simpleCrudView) {
-        view = simpleCrudView;
+        this.view = simpleCrudView;
     }
 
     /**

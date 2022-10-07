@@ -25,15 +25,20 @@ public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
     private String filterText = "";
+    
+    /**
+     * Constructor
+     * @param keywords string that is used to limit the search for API calls (eg "Software Intern")
+     */
     public ApplicationSearchDataProvider(String keywords) {
         super(DataService.getSearchResults(keywords).getAllJobs());
     }
 
     /**
-     * Store given product to the backing data service.
+     * Store given job to the CSV backend.
      *
-     * @param product
-     *            the updated or new product
+     * @param job to be saved
+     *            
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();

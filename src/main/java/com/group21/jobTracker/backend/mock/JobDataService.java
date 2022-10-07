@@ -1,16 +1,13 @@
 package com.group21.jobTracker.backend.mock;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.group21.jobTracker.backend.DataService;
 import com.group21.jobTracker.backend.data.Jobs;
-import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 
@@ -37,10 +34,10 @@ public class JobDataService extends DataService {
             jobs = Csv.loadUser(processedUserName).getJobs();
         }
         catch(NullPointerException e){
-            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+            Notification.show("User Name Invalid", 3000, Position.TOP_CENTER);
         }
         catch(Exception e){
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+            Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
         } 
 
         if(jobs == null){
@@ -53,6 +50,7 @@ public class JobDataService extends DataService {
 
     /**
 	 * Constructor used for JUnit testing
+	 * @param name of the user
 	 */
     public JobDataService(String name) { 
       
@@ -61,10 +59,10 @@ public class JobDataService extends DataService {
             jobs = Csv.loadUser(processedUserName).getJobs();
         }
         catch(NullPointerException e){
-            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+            Notification.show("User Name Invalid", 3000, Position.TOP_CENTER);
         }
         catch(Exception e){
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+            Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
         } 
 
         if(jobs == null){
@@ -102,20 +100,15 @@ public class JobDataService extends DataService {
             return Collections.unmodifiableList(Csv.loadUser(processedUserName).getJobsByPriority());
         }
         catch(NullPointerException e){
-            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+            Notification.show("User Name Invalid", 3000, Position.TOP_CENTER);
         }
         catch(Exception e){
-            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+            Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
         } 
 
         jobs = new ArrayList<>();
         return Collections.unmodifiableList(jobs);
     }
-
-    /**
-	 * This Function is to update any existing Job for the User
-	 * 
-	 */
 
     /**
 	 * This Function is to Search job by Id 
@@ -129,5 +122,20 @@ public class JobDataService extends DataService {
             }
         }
         return null;
+    }
+    
+    /**
+	 * This function is to Search job by string text 
+	 * @param filterText the text to search for jobs by
+	 * @return an empty list if no jobs are found found else return a list of matching jobs
+	 */
+    public synchronized List<Jobs> getJobsByName(String filterText) {
+    	List<Jobs> list = new ArrayList<Jobs>();
+        for (int i = 0; i < jobs.size(); i++) {
+            if (jobs.get(i).getJobTitle().toLowerCase().contains(filterText.toLowerCase())) {
+                list.add(jobs.get(i));
+            }
+        }
+        return list;
     }
 }

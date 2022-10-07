@@ -1,9 +1,5 @@
 package com.group21.jobTracker.ui.login;
 
-
-import java.io.*;
-import java.util.*;
-
 import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.csv.Csv;
 import com.group21.jobTracker.ui.MainLayout;
@@ -12,24 +8,23 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.router.QueryParameters;
 
 /**
  * A form for editing a single product.
  */
 public class UserLoginForm extends Div {
-
+	/** Layout for content */
     private final VerticalLayout content;
-
+    /** Text field for username */
     private final TextField UserName;
+    /** Button to log in with */
     private Button login;
+    /** Button to register with */
     private Button register;
 
     /**
@@ -68,7 +63,7 @@ public class UserLoginForm extends Div {
                 MainLayout.email = user.getEmailAddress();
                 getUI().get().navigate("");
             } catch (Exception e) {
-                Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+                Notification.show(e.getMessage(), 3000, Position.TOP_CENTER);
             }
         });
 

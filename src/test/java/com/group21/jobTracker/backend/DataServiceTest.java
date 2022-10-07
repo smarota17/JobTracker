@@ -23,7 +23,7 @@ public class DataServiceTest {
     public void JobDataServiceTest()  {
     	
 		User user = new User("TestName", "TestEmail", "male", null, "1.5", "Software engineer" );
-		Jobs job1 = new Jobs("Title", "Company",null, null, "40k", "description", "action", "status", 1);
+		Jobs job1 = new Jobs("Title", "Company", null, null, "40k", "description", "action", "status", 1);
 		Jobs job2 = new Jobs("Title2", "Company2", null, null, "50k", "description2", "action2", "status2", 2);
 		user.addJob(job1);
 		user.addJob(job2);

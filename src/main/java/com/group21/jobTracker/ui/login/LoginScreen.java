@@ -1,13 +1,7 @@
 package com.group21.jobTracker.ui.login;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -19,7 +13,9 @@ import com.vaadin.flow.router.Route;
 @CssImport("./styles/shared-styles.css")
 public class LoginScreen extends FlexLayout {
 
-
+	/**
+	 * Constructor
+	 */
     public LoginScreen() {
         buildUI();
     }
