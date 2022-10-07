@@ -27,7 +27,7 @@ public class JobDataService extends DataService {
 
     /**
 	 * Taking the user name from the main layout to load the User saved Job into the system
-	 * This method check nul pointer exception and other exception showed the exception message in the User page.
+	 * This method check null pointer exception and other exception showed the exception message in the User page.
 	 */
     private JobDataService() { 
       
@@ -51,6 +51,30 @@ public class JobDataService extends DataService {
     }
 
     /**
+	 * Constructor used for JUnit testing
+	 */
+    public JobDataService(String name) { 
+      
+        try {
+            String processedUserName = name.replace(" ", "");
+            jobs = Csv.loadUser(processedUserName).getJobs();
+        }
+        catch(NullPointerException e){
+            Notification.show("User Name Invalid",3000, Position.TOP_CENTER);
+        }
+        catch(Exception e){
+            Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
+        } 
+
+        if(jobs == null){
+            jobs = new ArrayList<>();
+            jobs.add(new Jobs("", "", null, null, "", "", "", "", 0.0));
+        }
+        INSTANCE = this;
+
+    }
+    
+    /**
 	 * Initialize the JobDatService Instance 
 	 * @return MocDataService instance which contain the list of  jobs from User
 	 */
@@ -71,15 +95,6 @@ public class JobDataService extends DataService {
 	 * This Function is to update any existing Job for the User
 	 * 
 	 */
-    @Override
-	public synchronized void updateJob(Jobs j) {
-		if (j.getId() < 0) {
-			jobs.add(j);
-			return;
-		}
-		jobs.set(j.getId(), j);
-		return;
-	}
 
     /**
 	 * This Function is to Search job by Id 
@@ -93,19 +108,5 @@ public class JobDataService extends DataService {
             }
         }
         return null;
-    }
-
-    /**
-	 * This Function is to delete job by Id 
-	 * 
-	 */
-    @Override
-    public synchronized void deleteJob(int jobId) {
-        Jobs j = getJobsbyId(jobId);
-        if (j == null) {
-            throw new IllegalArgumentException("Job with id " + jobId
-                    + " not found");
-        }
-        jobs.remove(j);
     }
 }

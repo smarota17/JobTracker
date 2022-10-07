@@ -20,7 +20,6 @@ public class ApplicationSearchDataService extends DataService {
     private static ApplicationSearchDataService INSTANCE;
 
     private List<Jobs> jobs;
-    private int nextJobId = 0;
 
     private ApplicationSearchDataService(String keywords) {
         try {
@@ -33,7 +32,6 @@ public class ApplicationSearchDataService extends DataService {
             jobs = new ArrayList<>();
             jobs.add(new Jobs("", "", null, null, "", "", "", "", 0.0));
         }
-        nextJobId = jobs.size() + 1;
     }
 
     public synchronized static DataService getInstance(String keywords) {
@@ -47,41 +45,8 @@ public class ApplicationSearchDataService extends DataService {
         return Collections.unmodifiableList(jobs);
     }
 
-
-    /* updating job */
-    @Override
-    public synchronized void updateJob(Jobs j) {
-        if (j.getId() < 0) {
-            // New product
-            j.setId(nextJobId++);
-            jobs.add(j);
-            return;
-        }
-        for (int i = 0; i < jobs.size(); i++) {
-            if (jobs.get(i).getId() == j.getId()) {
-            	jobs.set(i, j);
-                return;
-            }
-        }
-
-        throw new IllegalArgumentException("No Job with id " + j.getId()
-                + " found");
-    }
-
-    /* Search jobs by Id*/
     @Override
     public synchronized Jobs getJobsbyId(int jobId) {
         return jobs.get(jobId);
-    }
-
-    /* Delete method for Jobs*/
-    @Override
-    public synchronized void deleteJob(int jobId) {
-        Jobs j = getJobsbyId(jobId);
-        if (j == null) {
-            throw new IllegalArgumentException("Job with id " + jobId
-                    + " not found");
-        }
-        jobs.remove(j);
     }
 }

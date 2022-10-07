@@ -13,8 +13,9 @@ import com.group21.jobTracker.backend.data.Jobs;
 
 
 public class ApiCalls {
+	/** Constant for the number of jobs pulled by the Search functions */
 	private static int NUM_JOBS = 5;
-	
+
 	/**
 	 * Gets a job object from a link to linkedin
 	 * @param url the link to the linkedin job posting
@@ -41,8 +42,10 @@ public class ApiCalls {
 	 * @param keywords keywords used for the search
 	 * @return a list of available jobs
 	 * @throws IOException if the linked in website cannot be reached
+	 * @throws  
 	 */
 	public static ArrayList<Jobs> linkedInJobSearch(String keywords) throws IOException {
+		try {
 		String url;
 		if(keywords == null){
 			url = "https://www.linkedin.com/jobs/search";
@@ -57,8 +60,13 @@ public class ApiCalls {
 				break;
 			}
 			results.add(linkedInSelectJob(link.attr("href")));
+			Thread.sleep( 200 ); // IMPORTANT
+			//Prevents error from Jsoup retrieving too many HTTP requests in succession
 		}
 		return results;
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Error retrieving Job Information");
+		}
 	}
 
 	/**
