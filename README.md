@@ -17,10 +17,9 @@
 # JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>
 
-JobTracker is a Java Application that helps users keep track of job applications for internship and full time positions!
+JobTracker is a Java Application that helps users keep track of job applications for internship and full time positions! This application is intended for students and professionals at any stage of their career.
 
 https://user-images.githubusercontent.com/70153150/194409299-52adb84c-05f5-48d2-a237-0f302becfe2b.mp4
-
 
 ## Description
 
@@ -52,13 +51,21 @@ To start using JobTracker, a user must create an account. The system collects in
 
 We also used Vaadin's "Building Modern Web Applications with Spring Boot and Vaadin" [tutorial](https://vaadin.com/docs/latest/tutorial/overview) as a basic foundation for JobTracker. The source code can be found [here](https://github.com/vaadin/flow-crm-tutorial). The starter was modified to fit our purposes and needs. 
 
-## Features
-* Send reminder emails for upcoming dealines.
-* APIs from supported platforms:  Google careers, Indeed and Linkedin.
-* Dashboard for notifying upcoming deadlines
-* Filtering applications on searching page
-* Personal application page lists current applications, and has past applications/priority/date as filters
-* Personal application page enables users to create/edit/delete an application and compare salaries among applications.
+## Functionality and Features
+
+This project is a refactoring of the [WolfTrack](https://github.com/Himanshuu-Gupta/WolfTrack) project from 2021, which uses Python as it's codebase. Besides changing the code structure from Python to Java, we have added several additional functionalities. 
+
+### Old Functionality
+
+### New Functionality 
+
+### Features
+* Add, edit, and delete application information to/from the system.
+* Search for applications by filtering by job application attributes or by searching by name.
+* Send reminder emails for upcoming deadlines.
+* Dashboard displaying applications by priority.
+* Search for more jobs using APIs from supported platforms: CareerOneStop and Linkedin.
+* Filter applications on the "Application Search" page by keywords. 
 
 ## Installation
 
