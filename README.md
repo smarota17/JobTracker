@@ -90,7 +90,10 @@ Programs:
 
 Note: In order to use the "Send Mail" functionality for this project, your team must set up an **Outlook** email account, and add the username and password to the SendMail.java class. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts. 
 
+## Documentation
 
+* Instructions on how to run the program can be found in this [file](https://github.com/smarota17/JobTracker/blob/main/USAGE.md).
+* The video comparing this project to a previous year's project that had a similar project idea can be found [here](https://drive.google.com/file/d/1hxCuWlhvCY62f_RylXAK6v3H3B07ePKJ/view).
 ## Future Features
 
 While JobTracker is ready for users, there are several enhancements that could be made to amplify user experience. Below, we have listed several scopes of future improvements to JobTracker with a brief description. 
