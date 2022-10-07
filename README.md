@@ -1,5 +1,5 @@
 [![DOI](https://zenodo.org/badge/535341071.svg)](https://zenodo.org/badge/latestdoi/535341071)
-[![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)
+[![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/blob/main/LICENSE.md)
 [![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)
 [![size](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)](https://img.shields.io/badge/repo%20size-2.14%20MB-brightgreen?style=plastic)
 [![lang](https://img.shields.io/badge/languages-4-blue?style=plastic)](https://img.shields.io/badge/languages-4-brightgreen?style=plastic)
