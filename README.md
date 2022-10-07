@@ -90,8 +90,6 @@ Programs:
 
 Note: In order to use the "Send Mail" functionality for this project, your team must set up an **Outlook** email account, and add the username and password to the SendMail.java class. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts. 
 
-### Visual Representations
-
 
 ## Future Features
 
