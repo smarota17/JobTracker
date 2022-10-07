@@ -14,11 +14,8 @@ import com.group21.jobTracker.ui.MainLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
- * Utility class that encapsulates filtering and CRUD operations for
- * {@link Product} entities.
- * <p>
- * Used to simplify the code in {@link SampleCrudView} and
- * {@link SampleCrudLogic}.
+ * This class is the data provider for the application search page in JobTracker. The data pulled
+ * is from API calls to LinkedIn and CareerOneStop. 
  */
 @SuppressWarnings("serial")
 public class ApplicationSearchDataProvider extends ListDataProvider<Jobs> {

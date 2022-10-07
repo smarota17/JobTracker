@@ -66,7 +66,7 @@ public class ApplicationViewLogic implements Serializable {
      *
      * 
      * @param jobId of the job object to load
-     * @throws NumberFormatException
+     * @throws NumberFormatException if there is an issue parsing the int
      **/
     public void enter(String jobId) {
         if (jobId != null && !jobId.isEmpty()) {

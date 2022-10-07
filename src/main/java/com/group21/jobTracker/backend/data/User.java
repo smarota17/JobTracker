@@ -250,7 +250,7 @@ public class User {
 	/**
 	 * Overrides the toString method to express the user as a string
 	 * 
-	 * @returns the user as a string
+	 * @return the user as a string
 	 */
 	@Override
 	public String toString() {

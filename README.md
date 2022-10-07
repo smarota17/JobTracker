@@ -8,6 +8,7 @@
 [![issue cl](https://img.shields.io/github/issues-closed/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/issues?q=is%3Aissue+is%3Aclosed)
 [![pull](https://img.shields.io/github/issues-pr/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Aopen+is%3Apr)
 [![pull_closed](https://img.shields.io/github/issues-pr-closed/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Apr+is%3Aclosed)
+[![Coverage](.github/badges/jacoco.svg)](https://github.com/smarota17/JobTracker/actions/workflows/build.yml)
 
 # JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>

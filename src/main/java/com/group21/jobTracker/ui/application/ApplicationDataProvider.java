@@ -35,8 +35,7 @@ public class ApplicationDataProvider extends ListDataProvider<Jobs> {
      * Store given product to the backing data service.
      *
      * @param job the updated or new product
-     * @throws ParseException thrown if there is an issue parsing the CSV files for the user
-     * @throws NumberFormatException  thrown if there is a format issue parsing the CSV files for the user
+     * @throws IllegalArgumentException  thrown if there is a format issue parsing the CSV files for the user
      */
     public void save(Jobs job) {
         final boolean newProduct = job.isNewJob();

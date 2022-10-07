@@ -37,8 +37,6 @@ public class JobBoardView extends HorizontalLayout
     public static final String VIEW_NAME = "Dashboard";
     /** private final parameter representing the job grid from the page*/
     private final JobGrid grid;
-    /** Represents the "filter" search box */
-    private TextField filter;
     /** Represents the login for the dashboard */
     private final JobBoardViewLogic viewLogic = new JobBoardViewLogic(this);
 
@@ -56,9 +54,7 @@ public class JobBoardView extends HorizontalLayout
         setSizeFull();
         HorizontalLayout helloLayout = new HorizontalLayout();
         helloLayout.add(new H1("Hello, " + MainLayout.userName + "!"));
-        
-        final HorizontalLayout topLayout = createTopBar();
-        
+                
         grid = new JobGrid();
         grid.setItems(dataProvider.getItems());
         
@@ -88,30 +84,10 @@ public class JobBoardView extends HorizontalLayout
 
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(helloLayout);
-        barAndGridLayout.add(topLayout);
         barAndGridLayout.add(gridAndDeadlinesLayout);
         barAndGridLayout.setFlexGrow(1, gridAndDeadlinesLayout);
-        barAndGridLayout.setFlexGrow(0, topLayout);
         barAndGridLayout.setSizeFull();
         add(barAndGridLayout);
-    }
-    
-    /**
-     * ApplicationView filtering and new  Application form will be assigned int he page UI.
-     * Application form in the application page.
-     * @return layout for filtering and new application
-     **/
-    public HorizontalLayout createTopBar() {
-        filter = new TextField();
-        filter.setPlaceholder("Filter by name");
-        filter.setValueChangeMode(ValueChangeMode.LAZY);
-        filter.addValueChangeListener(event -> grid.setItems( dataProvider.updateList(event.getValue())));
-
-        final HorizontalLayout topLayout = new HorizontalLayout();
-        topLayout.setWidth("100%");
-        topLayout.add(filter);
-        topLayout.expand(filter);
-        return topLayout;
     }
 
     @Override
