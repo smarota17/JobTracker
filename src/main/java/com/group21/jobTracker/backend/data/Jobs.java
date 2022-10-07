@@ -298,7 +298,7 @@ public class Jobs implements Serializable{
 	 */
 	@Override
 	public String toString() {
-	      return this.jobTitle+" "+this.company+" "+this.priority;
+	      return this.jobTitle+" "+this.company+" "+Double.toString(this.priority);
 	}
 	
 	/**
