@@ -41,7 +41,7 @@ public class SendMail {
         	
         	User currentUser = null;
         	try {
-				currentUser = Csv.loadUser(MainLayout.userName.replaceAll("\\s", ""));
+				currentUser = Csv.loadUser(MainLayout.userName.replaceAll("\\s", "_"));
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException("Issue loading data for current user.");
 			} catch (ParseException e) {

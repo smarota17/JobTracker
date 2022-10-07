@@ -68,7 +68,7 @@ public class ProfileView extends HorizontalLayout implements BeforeEnterObserver
 
         if(MainLayout.userName != null){
             try{
-                User user = Csv.loadUser(MainLayout.userName.replace(" ", ""));
+                User user = Csv.loadUser(MainLayout.userName.replace(" ", "_"));
                 try{
                     nameField.setValue(user.getFullName());
                     emailField.setValue(user.getEmailAddress());

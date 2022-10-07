@@ -33,7 +33,7 @@ public class JobDataService extends DataService {
     private JobDataService() { 
       
         try {
-            String processedUserName = MainLayout.userName.replace(" ", "");
+            String processedUserName = MainLayout.userName.replaceAll(" ", "_");
             jobs = Csv.loadUser(processedUserName).getJobs();
         }
         catch(NullPointerException e){
@@ -57,7 +57,7 @@ public class JobDataService extends DataService {
     public JobDataService(String name) { 
       
         try {
-            String processedUserName = name.replace(" ", "");
+            String processedUserName = name.replaceAll(" ", "_");
             jobs = Csv.loadUser(processedUserName).getJobs();
         }
         catch(NullPointerException e){
@@ -98,7 +98,7 @@ public class JobDataService extends DataService {
 	 */
     public synchronized List<Jobs> getPriority() {
     	try {
-            String processedUserName = MainLayout.userName.replace(" ", "");
+            String processedUserName = MainLayout.userName.replaceAll(" ", "_");
             return Collections.unmodifiableList(Csv.loadUser(processedUserName).getJobsByPriority());
         }
         catch(NullPointerException e){

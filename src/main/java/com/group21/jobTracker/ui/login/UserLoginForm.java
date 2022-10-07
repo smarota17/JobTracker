@@ -61,7 +61,7 @@ public class UserLoginForm extends Div {
         login.setWidth("100%");
         login.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> {
-            String processedName = UserName.getValue().replace(" ", "_");
+            String processedName = UserName.getValue().replaceAll(" ", "_");
             try {
                 User user = Csv.loadUser(processedName);
                 MainLayout.userName = user.getFullName();

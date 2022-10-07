@@ -57,7 +57,7 @@ public class Csv {
                 .getPath("data")
                 .toAbsolutePath()
                 .toString();
-		File file = new File(path+"/" + username.replace(" ", "_") + ".csv");
+		File file = new File(path+"/" + username.replaceAll(" ", "_") + ".csv");
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}
