@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/535341071.svg)](https://zenodo.org/badge/latestdoi/535341071)
 [![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/blob/main/LICENSE.md)
-[![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)]([https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic](https://www.oracle.com/java/technologies/downloads/))
+[![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)](https://www.oracle.com/java/technologies/downloads/)
 [![size](https://img.shields.io/github/languages/code-size/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker)
 [![lang](https://img.shields.io/github/languages/count/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/search?l=Java&type=code)
 [![contrib](https://img.shields.io/github/contributors/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/graphs/contributors)
