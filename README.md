@@ -1,3 +1,4 @@
+# JobTracker
 [![DOI](https://zenodo.org/badge/535341071.svg)](https://zenodo.org/badge/latestdoi/535341071)
 [![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/blob/main/LICENSE.md)
 [![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)](https://www.oracle.com/java/technologies/downloads/)
@@ -11,10 +12,6 @@
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/smarota17/JobTracker/actions/workflows/build.yml)
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://smarota17.github.io/JobTracker/javadoc/)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/smarota17/JobTracker/Build%20Workflow?style=plastic)](https://github.com/smarota17/JobTracker/actions/workflows/build.yml)
-
-
-
-# JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>
 
 JobTracker is a Java Application that helps users keep track of job applications for internship and full time positions! This application is intended for students and professionals at any stage of their career.
