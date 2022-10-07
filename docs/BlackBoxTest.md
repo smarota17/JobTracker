@@ -22,8 +22,9 @@
 </td>
 <td valign=top>
     Preconditions: LoginScreen has loaded
-
+    <br><br>
     User Name: invalid user
+    <br><br>
     Click Login
 </td>
 <td valign=top>
@@ -42,18 +43,17 @@
 </td>
 <td valign=top>
     Preconditions: LoginScreen has loaded
-
+    <br><br>
     Click "Don't have an account? Register now!"
-
+    <br><br>
     Input registration infomation, in the popped up modal.
-
-        Info: 
-            Full Name: Test Name
-            Email address: test@gmail.com
-            Age: 24
-            Year of Experience: 1
-            Job Keywords: Software Engineer
-
+    <br><br>
+    &nbsp&nbsp   Info: <br><br>
+    &nbsp&nbsp&nbsp&nbsp   Full Name: Test Name<br><br>
+    &nbsp&nbsp&nbsp&nbsp   Email address: test@gmail.com<br><br>
+    &nbsp&nbsp&nbsp&nbsp   Age: 24<br><br>
+    &nbsp&nbsp&nbsp&nbsp   Year of Experience: 1<br><br>
+    &nbsp&nbsp&nbsp&nbsp   Job Keywords: Software Engineer<br><br>
     Click "Create User"
 </td>
 <td valign=top>
@@ -74,18 +74,18 @@
 </td>
 <td valign=top>
     Preconditions: LoginScreen has loaded
-
+    <br><br>
     Click "Don't have an account? Register now!"
-
+    <br><br>
     Input registration infomation, in the popped up modal.
-
-        Info: 
-            Full Name: Test Name (A name we used before)
-            Email address: (whatever)
-            Age: (whatever)
-            Year of Experience: (whatever)
-            Job Keywords: (whatever)
-
+    <br><br>
+    &nbsp&nbsp  Info: 
+    &nbsp&nbsp&nbsp&nbsp  Full Name: Test Name (A name we used before)<br><br>
+    &nbsp&nbsp&nbsp&nbsp  Email address: (whatever)<br><br>
+    &nbsp&nbsp&nbsp&nbsp  Age: (whatever)<br><br>
+    &nbsp&nbsp&nbsp&nbsp  Year of Experience: (whatever)<br><br>
+    &nbsp&nbsp&nbsp&nbsp  Job Keywords: (whatever)<br><br>
+    <br><br>
     Click "Create User"
 </td>
 <td valign=top>
@@ -106,8 +106,9 @@
 </td>
 <td valign=top>
     Preconditions: LoginScreen has loaded
-
+    <br><br>
     User Name: Test Name
+    <br><br>
     Click Login
 </td>
 <td valign=top>
@@ -128,7 +129,7 @@
 </td>
 <td valign=top>
     Preconditions: Logged in with a valid username. (Here is "Test Name")
-
+    <br><br>
     Click "My profile" in the navigation bar.
 </td>
 <td valign=top>
@@ -156,13 +157,19 @@
 </td>
 <td valign=top>
     Preconditions: Logged in with a valid username. (Here is "Test Name")
-
+    <br><br>
     Click "Application Search" in the navigation bar.
+    <br><br>
     Input keyword:"software" in the input field and click the "Search for more applications" button.
+    <br><br>
     Click the "Go To Job" button.
+    <br><br>
     Click the "Apply here" button.
+    <br><br>
     Input the relevant infomation
+    <br><br>
     Click the "Save" button.
+    <br><br>
     Go to the "My Application" view by clicking the button in the navigation bar.
 
 </td>
@@ -197,12 +204,17 @@
 </td>
 <td valign=top>
     Preconditions: Logged in with a valid username. (Here is "Test Name")
-
+    <br><br>
     Navigate to the My application view by clicking the "My Applications" button in the navigation bar.
+    <br><br>
     Click the "+ New Application" button.
+    <br><br>
     Input the informations.
+    <br><br>
     Click the "Save" button.
+    <br><br>
     Click on one of the records in the grid.
+    <br><br>
     Click the "Delete" button.
 </td>
 <td valign=top>
@@ -232,8 +244,10 @@
 </td>
 <td valign=top>
     Preconditions: Logged in with a valid username. (Here is "Test Name")
-
-    Navigate to the Dashboard view by clicking the "Dashboard" button in the navigation bar.
+    <br><br>
+    Navigate to the Dashboard view by clicking the "Dashboard"
+    button in the navigation bar.
+    <br><br>
     Click the "+ Send reminder email" button.
 </td>
 <td valign=top>
