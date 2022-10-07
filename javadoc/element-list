@@ -1,0 +1,13 @@
+com.group21.jobTracker
+com.group21.jobTracker.Api
+com.group21.jobTracker.backend
+com.group21.jobTracker.backend.data
+com.group21.jobTracker.backend.mock
+com.group21.jobTracker.csv
+com.group21.jobTracker.mail
+com.group21.jobTracker.ui
+com.group21.jobTracker.ui.application
+com.group21.jobTracker.ui.applicationSearch
+com.group21.jobTracker.ui.jobBoard
+com.group21.jobTracker.ui.login
+com.group21.jobTracker.ui.profile
