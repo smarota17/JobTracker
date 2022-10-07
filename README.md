@@ -58,6 +58,7 @@ This project is a refactoring of the [WolfTrack](https://github.com/Himanshuu-Gu
 ### Old Functionality
 
 ### New Functionality 
+The video showing the new functionalites of the Job tracker project in comparison to the previous year project. [here](https://drive.google.com/file/d/1ftZ6-ydE9JnfYVfjSfcJ_uKiiwn-Bwj6/view).
 
 ### Features
 * Add, edit, and delete application information to/from the system.
