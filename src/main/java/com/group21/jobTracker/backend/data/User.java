@@ -237,11 +237,11 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		String[] list = {getFullName(), getEmailAddress(), getGender(), getAge(), getExperience(), getKeywords()};
+		String[] list = {getProcessedFullName(), getEmailAddress(), getGender(), getAge(), getExperience(), getKeywords()};
 		String output = "";
 		for (int i = 0; i < 6; i++) {
 			if (list[i] != null) {
-				list[i].replace('~', '-');
+				list[i] = list[i].replace('~', '-');
 				output += list[i] + "~";
 			} else {
 				output += "NULL~";
@@ -267,7 +267,7 @@ public class User {
 	 * @return the processed full name
 	 */
 	public String getProcessedFullName(){
-		return this.fullName.replace(" ", "");
+		return this.fullName.replace(" ", "_");
 	}
 
 	/**

@@ -53,12 +53,11 @@ class UserLoginFormTest extends Div{
         login.setWidth("100%");
         login.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> {
-            String processedName = UserName.getValue().replace(" ", "");
+            String processedName = UserName.getValue().replace(" ", "_");
             try {
                 User user = Csv.loadUser(processedName);
                 msg = user.getFullName();
             } catch (Exception e) {
-                // TODO: handle exception
                 msg = e.getMessage();
             }
         });

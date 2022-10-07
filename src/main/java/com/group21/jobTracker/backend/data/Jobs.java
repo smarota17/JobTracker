@@ -320,7 +320,7 @@ public class Jobs implements Serializable{
 		for (int i = 0; i < list.length; i++) {
 			
 			if (list[i] != null) {
-				list[i].replace('~', '-');
+				list[i] = list[i].replace('~', '-');
 				output += list[i] + "~";
 			} else {
 				output += "NULL~";

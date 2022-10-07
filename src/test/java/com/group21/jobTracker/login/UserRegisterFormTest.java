@@ -73,7 +73,7 @@ class UserRegisterFormTest extends Div{
             experience.getValue().toString(),
             keywords.getValue()
         );
-        String processedName = fullName.getValue().replace(" ", "");
+        String processedName = fullName.getValue().replace(" ", "_");
         File file = new File("data/" + processedName + ".csv");
         if(!file.exists()){
             Csv.saveUser(newUser);
@@ -92,7 +92,7 @@ class UserRegisterFormTest extends Div{
         experience.setValue(1.5);
         keywords.setValue("Test Key Word");
 
-        File generated = new File("data/"+fullName.getValue().replace(" ", "")+".csv");
+        File generated = new File("data/"+fullName.getValue().replace(" ", "_")+".csv");
         if(generated.exists()){
             generated.delete();
         }
@@ -100,6 +100,7 @@ class UserRegisterFormTest extends Div{
         save.click();
         assertTrue(generated.exists());
         assertEquals(null, msg);
+        generated.delete();
     }
 
     @Test
@@ -111,7 +112,7 @@ class UserRegisterFormTest extends Div{
         experience.setValue(1.5);
         keywords.setValue("Test Key Word");
         
-        File generated = new File("data/"+fullName.getValue().replace(" ", "")+".csv");
+        File generated = new File("data/"+fullName.getValue().replace(" ", "_")+".csv");
         if(generated.exists()){
             generated.delete();
         }
@@ -121,5 +122,6 @@ class UserRegisterFormTest extends Div{
        
         assertTrue(generated.exists());
         assertEquals("Registeration failed! User already exists.", msg);
+        generated.delete();
     }
 }

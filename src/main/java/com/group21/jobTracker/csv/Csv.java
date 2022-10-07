@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -58,18 +57,19 @@ public class Csv {
                 .getPath("data")
                 .toAbsolutePath()
                 .toString();
-		File file = new File(path+"/" + username + ".csv");
+		File file = new File(path+"/" + username.replace(" ", "_") + ".csv");
 		if (!file.exists()) {
 			throw new IllegalArgumentException("No saved data found");
 		}
 		try {
 			Scanner scan = new Scanner(file);
-			String[] list = scan.nextLine().split("~");
+			String[] list = scan.nextLine().split("~", -1);
 			for(int i = 0; i < list.length; i++) {
 				if (list[i].equals("NULL")) {
 					list[i] = null;
 				}
 			}
+			list[0] = list[0].replace('_', ' ');
 			User user = new User(list[0], list[1], list[2], list[3], list[4], list[5]);
 			while (scan.hasNext()) {
 				user.addJob(loadJobs(scan.nextLine()));
@@ -92,7 +92,6 @@ public class Csv {
 	private static Jobs loadJobs(String line) throws NumberFormatException, ParseException {
 		String[] list = line.split("~");
 		for(int i = 0; i < list.length; i++) {
-			list[i].replace('~', '-');
 			if (list[i].equals("NULL")) {
 				list[i] = null;
 			}

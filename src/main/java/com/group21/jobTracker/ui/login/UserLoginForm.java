@@ -61,14 +61,13 @@ public class UserLoginForm extends Div {
         login.setWidth("100%");
         login.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> {
-            String processedName = UserName.getValue().replace(" ", "");
+            String processedName = UserName.getValue().replace(" ", "_");
             try {
                 User user = Csv.loadUser(processedName);
                 MainLayout.userName = user.getFullName();
                 MainLayout.email = user.getEmailAddress();
                 getUI().get().navigate("");
             } catch (Exception e) {
-                // TODO: handle exception
                 Notification.show(e.getMessage(),3000, Position.TOP_CENTER);
             }
         });
