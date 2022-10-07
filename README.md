@@ -9,6 +9,8 @@
 [![pull](https://img.shields.io/github/issues-pr/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Aopen+is%3Apr)
 [![pull_closed](https://img.shields.io/github/issues-pr-closed/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Apr+is%3Aclosed)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/smarota17/JobTracker/actions/workflows/build.yml)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://smarota17.github.io/JobTracker/javadoc/)
+
 
 # JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>
