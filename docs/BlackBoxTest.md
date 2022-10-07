@@ -253,14 +253,14 @@
 <td valign=top>
     The app will be navigated to the "Dashboard" view.
     <br><br>
-    5 default jobs will show up in the gird.
+    At most 5 default applications of the User will show up in the gird.
     <br><br>
     After clicking the "+ Send reminder email" button, a reminder email including deadline information will be sent to the User's email(if the email address is valid).
 </td>
 <td valign=top>
     The app is navigated to the "Dashboard" view.
     <br><br>
-    5 default jobs shows up in the gird.
+    5 default applications of the User show up in the grids while there are 7 applications in total of that User.
     <br><br>
      After clicking the "+ Send reminder email" button and providing a valid email in registration, a reminder email including deadline information shows up in the mailbox of that email address.
 
