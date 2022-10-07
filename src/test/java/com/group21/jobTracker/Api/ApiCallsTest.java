@@ -20,26 +20,6 @@ import com.group21.jobTracker.backend.data.Jobs;
 class ApiCallsTest {
 
 	/**
-	 * Tests the linkedIn web crawler
-	 */
-	@Test
-	void linkedInTest(){
-		try {
-			ArrayList<Jobs> jobs = ApiCalls.linkedInJobSearch("Software Developer");
-			assertEquals(5, jobs.size());
-			for(int i = 0; i < 5; i++) {
-				assertNotNull(jobs.get(i).getJobTitle());
-				assertNotNull(jobs.get(i).getJobDescription());
-				assertNotNull(jobs.get(i).getCompany());
-			}
-		} catch (Exception e) {
-			fail();
-		}
-		
-	}
-
-	
-	/**
 	 * Tests the CareerOneStop web crawler
 	 */
 	@Test
@@ -51,6 +31,5 @@ class ApiCallsTest {
 		} catch (Exception e) {
 			fail();
 		}
-		
 	}
 }

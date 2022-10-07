@@ -6,7 +6,6 @@ import com.group21.jobTracker.backend.data.Jobs;
 import com.group21.jobTracker.backend.data.User;
 import com.group21.jobTracker.backend.mock.ApplicationSearchDataService;
 import com.group21.jobTracker.backend.mock.JobDataService;
-import com.group21.jobTracker.backend.mock.MockDataService;
 import com.group21.jobTracker.csv.Csv;
 
 import static org.junit.Assert.assertEquals;
@@ -36,21 +35,6 @@ public class DataServiceTest {
     		assertNotNull(((Jobs)jobs[i]).getJobDescription());
     		assertNotNull(((Jobs)jobs[i]).getCompany());
 		}
-    }
-    
-    /**
-     * Tests the ApplicationSearchTest class
-     */
-    @Test
-    public void ApplicationSearchTest() {
-    	service = MockDataService.getInstance();
-    	Object[] jobs = service.getAllJobs().toArray();
-    	assertEquals(5, jobs.length);
-    	for(int i = 0; i < 5; i++) {
-    		assertNotNull(((Jobs)jobs[i]).getJobTitle());
-    		assertNotNull(((Jobs)jobs[i]).getJobDescription());
-    		assertNotNull(((Jobs)jobs[i]).getCompany());
-    	}
     }
     
     /**

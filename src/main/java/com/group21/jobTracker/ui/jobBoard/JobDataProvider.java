@@ -16,6 +16,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
  * Used to simplify the code in {@link SampleCrudView} and
  * {@link SampleCrudLogic}.
  */
+@SuppressWarnings("serial")
 public class JobDataProvider extends ListDataProvider<Jobs> {
 
     /** Text filter that can be changed separately. */
