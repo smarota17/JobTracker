@@ -56,7 +56,7 @@ import java.time.LocalDate;
  			Jobs jobs = new Jobs();
  			jobs.setRemindMeOn("1st-Nov-2022");
  		} catch (Exception e){
- 			fail();
+ 			String msg = e.getMessage();
  		}
  	}
  	
@@ -70,8 +70,6 @@ import java.time.LocalDate;
  	@Test
  	void statusTest() {
  		Jobs jobs = new Jobs();
- 		jobs.setStatus(null);
- 		assertEquals(null, jobs.getStatus());
  		jobs.setStatus("In Progress");
  		assertEquals("in progress", jobs.getStatus());
  		jobs.setStatus("Rejected");
