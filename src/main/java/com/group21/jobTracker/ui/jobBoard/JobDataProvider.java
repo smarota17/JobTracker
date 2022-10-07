@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.group21.jobTracker.backend.data.Jobs;
 
 import com.group21.jobTracker.backend.DataService;
+import com.group21.jobTracker.backend.mock.JobDataService;
 import com.vaadin.flow.data.provider.ListDataProvider;
 
 /**
@@ -21,7 +22,7 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
     private String filterText = "";
 
     public JobDataProvider() {
-        super(DataService.get().getAllJobs());
+        super( ((JobDataService) DataService.getJob()).getPriority());
     }
 
     /**

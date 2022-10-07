@@ -23,13 +23,16 @@ public class JobGrid extends Grid<Jobs> {
         setSizeFull();
 
         addColumn(Jobs::getJobTitle).setHeader("Job Title").setResizable(true)
-                .setFlexGrow(20).setSortable(true).setKey("jobTitle");
+                .setFlexGrow(20).setSortable(false).setKey("jobTitle");
                 
         addColumn(Jobs::getCompany).setHeader("Company").setResizable(true)
-                .setFlexGrow(20).setSortable(true).setKey("jobCompany");
+                .setFlexGrow(20).setSortable(false).setKey("jobCompany");
         
         addColumn(Jobs::getStatus).setHeader("Status").setResizable(true)
-        .setFlexGrow(20).setSortable(true).setKey("jobStatus");
+        .setFlexGrow(20).setSortable(false).setKey("jobStatus");
+        
+        addColumn(Jobs::getPriority).setHeader("Priority").setResizable(true)
+        .setFlexGrow(20).setSortable(false).setKey("priority");
 
         UI.getCurrent().getPage().addBrowserWindowResizeListener(
                 e -> setColumnVisibility(e.getWidth()));
@@ -44,6 +47,7 @@ public class JobGrid extends Grid<Jobs> {
 		getColumnByKey("jobTitle").setVisible(true);
         getColumnByKey("jobCompany").setVisible(true);
         getColumnByKey("jobStatus").setVisible(true);
+        getColumnByKey("priority").setVisible(true);
     }
 	/**
 	 * This function is to attach documents if any

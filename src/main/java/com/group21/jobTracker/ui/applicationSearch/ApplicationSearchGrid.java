@@ -34,7 +34,7 @@ public class ApplicationSearchGrid extends Grid<Jobs> {
                     applyButton.addClickListener(e -> {
                         UI.getCurrent().getPage().open(job.getLink());
                     });
-                    H5 applyhere = new H5("Apply here");
+                    H5 applyhere = new H5("Add Application");
                     applyhere.setClassName("apply-here-button");
                     layout.add(applyButton, applyhere);
                     return layout;
