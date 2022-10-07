@@ -36,7 +36,9 @@ public class UserRegisterForm extends Div {
     private final TextField keywords;
     private final Button save;
 
-
+    /**
+     * Method to create Registration Form
+    */
     public UserRegisterForm() {
         setClassName("job-form");
         content = new VerticalLayout();
@@ -71,7 +73,9 @@ public class UserRegisterForm extends Div {
 
         content.add(fullName, email, age, experience, keywords, save);
     }
-
+    /**
+     * Method to create new User
+    */
     public void newUser() {
         User newUser = new User(
             fullName.getValue(),

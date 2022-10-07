@@ -168,7 +168,11 @@ public class ApplicationForm extends Div {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         save.addClickListener(event -> {
         	currentJob = new Jobs();
-        	currentJob.setId(Integer.parseInt(jobId.getValue()));
+            if(jobId.getValue().equals("")){
+                currentJob.setId(0);
+            } else {
+                currentJob.setId(Integer.parseInt(jobId.getValue()));
+            }
         	currentJob.setJobTitle(jobTitle.getValue());
         	currentJob.setCompany(jobCompany.getValue());
         	currentJob.setDateApplied(jobDateApplied.getValue());

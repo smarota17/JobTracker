@@ -25,16 +25,16 @@ To start using JobTracker, a user must create an account. The system collects in
 ## Technologies
 <p align="left">
   <a href="https://www.java.com/en/" target="_blank"> 
-    <img src="https://github.com/smarota17/JobTracker/blob/main/resources/java_logo.png" alt="java" width="60" height="60"/>
+    <img src="https://github.com/smarota17/JobTracker/blob/main/resources/java_logo.png" alt="java" height="60"/>
   </a>
   <a href="https://vaadin.com/" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaadin-logo.svg" alt="react" width="150" height="60"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaadin-logo.svg" alt="react" height="60"/>
   </a>
   <a href="https://spring.io/projects/spring-boot" target="_blank"> 
-    <img src="https://spring.io/images/favicon-9d25009f65637a49ac8d91eb1cf7b75e.ico" alt="spring" width="60" height="60"/>
+    <img src="https://miro.medium.com/max/640/1*AbiX4LwtSNozoyfypcKvEg.png" alt="spring" height="65"/>
   </a>
   <a href="https://maven.apache.org/" target="_blank"> 
-    <img src="https://idroot.us/wp-content/uploads/2019/12/Apache-Maven-logo.png" alt="js" width="120" height="90"/>
+    <img src="https://idroot.us/wp-content/uploads/2019/12/Apache-Maven-logo.png" alt="js" height="60"/>
   </a>
 </p> 
 
@@ -62,12 +62,13 @@ Programs:
 
 * Java Development Kit
 * Git
-* Maven or Eclipse
+* [Maven](https://maven.apache.org/install.html) or Eclipse
 
 ### Setup Option 1: Command Line (Requires Maven)
 1. Clone the repository to your local machine
 2. Navigate to /JobTracker and run "mvn" on the commandline
 3. Navigate to "localhost:8080" in your browser.
+3. Press Ctr+c in the terminal to close the project
 
 ### Setup Option 2: Eclipse (Requires Eclipse)
 1. Open Eclipse IDE. Install [here](https://www.eclipse.org/downloads/packages/release/oxygen/3a/eclipse-ide-java-developers) if not already installed.
