@@ -1,13 +1,13 @@
 [![DOI](https://zenodo.org/badge/535341071.svg)](https://zenodo.org/badge/latestdoi/535341071)
 [![License](https://img.shields.io/github/license/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/blob/main/LICENSE.md)
 [![java](https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic)]([https://img.shields.io/badge/Made%20with-Java-brightgreen?style=plastic](https://www.oracle.com/java/technologies/downloads/))
-[![size](https://img.shields.io/github/languages/code-size/smarota17/JobTracker-brightgreen?style=plastic)](https://github.com/smarota17/JobTracker)
-[![lang](https://img.shields.io/github/languages/count/smarota17/JobTracker-blue?style=plastic)](https://github.com/smarota17/JobTracker/search?l=Java&type=code)
-[![contrib](https://img.shields.io/github/contributors/smarota17/JobTracker-blue?style=plastic)](https://github.com/smarota17/JobTracker/graphs/contributors)
-[![issue op](https://img.shields.io/github/issues/smarota17/JobTracker-yellow?style=plastic)](https://github.com/smarota17/JobTracker/issues)
-[![issue cl](https://img.shields.io/github/issues-closed/smarota17/JobTracker-yellow?style=plastic)](https://github.com/smarota17/JobTracker/issues?q=is%3Aissue+is%3Aclosed)
-[![pull](https://img.shields.io/github/issues-pr/smarota17/JobTracker-yellow?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Aopen+is%3Apr)
-[![pull_closed](https://img.shields.io/github/issues-pr-closed/smarota17/JobTracker-yellow?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Apr+is%3Aclosed)
+[![size](https://img.shields.io/github/languages/code-size/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker)
+[![lang](https://img.shields.io/github/languages/count/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/search?l=Java&type=code)
+[![contrib](https://img.shields.io/github/contributors/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/graphs/contributors)
+[![issue op](https://img.shields.io/github/issues/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/issues)
+[![issue cl](https://img.shields.io/github/issues-closed/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/issues?q=is%3Aissue+is%3Aclosed)
+[![pull](https://img.shields.io/github/issues-pr/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Aopen+is%3Apr)
+[![pull_closed](https://img.shields.io/github/issues-pr-closed/smarota17/JobTracker?style=plastic)](https://github.com/smarota17/JobTracker/pulls?q=is%3Apr+is%3Aclosed)
 
 # JobTracker
 <p align="center"><img width="1000" src="https://github.com/smarota17/JobTracker/blob/job-controller/resources/the_job_tracker.jpg"></p>
