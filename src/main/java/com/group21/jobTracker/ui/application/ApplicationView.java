@@ -25,9 +25,6 @@ import com.vaadin.flow.router.Route;
 
 /**
  * A view for performing create-read-update-delete operations on Jobs.
- *
- * See also {@link ApplicationViewLogic} for fetching the data, the actual CRUD
- * operations and controlling the view based on events from outside.
  */
 @SuppressWarnings("serial")
 @Route(value = "Application", layout = MainLayout.class)
@@ -114,7 +111,7 @@ public class ApplicationView extends HorizontalLayout
     /**
      * Showing error message using Notification.show from Vaadin
      * @see Notification#show(String)
-     * @param msg
+     * @param msg message to show
      **/
     public void showError(String msg) {
         Notification.show(msg);
@@ -159,8 +156,6 @@ public class ApplicationView extends HorizontalLayout
      * Updates a Jobs in the list of jobs.
      * 
      * @param job Jobs that should be updated
-     * @throws ParseException thrown when the CSV files cannot be loaded
-     * @throws NumberFormatException thrown when the CSV files cannot be loaded
      */
     public void updateProduct(Jobs job) {
         dataProvider.save(job);

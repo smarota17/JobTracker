@@ -51,16 +51,6 @@ import java.time.LocalDate;
  	}
  	
  	@Test
- 	void verifyTest() {
- 		try {
- 			Jobs jobs = new Jobs();
- 			jobs.setRemindMeOn("1st-Nov-2022");
- 		} catch (Exception e){
- 			String msg = e.getMessage();
- 		}
- 	}
- 	
- 	@Test
  	void stringIdTest() {
  		Jobs jobs = new Jobs();
  		jobs.setStringId("5");

@@ -27,18 +27,6 @@ public class JobDataProvider extends ListDataProvider<Jobs> {
     }
 
     /**
-     * Filters the data for the specific filter text
-     * @param filterText string to filter by
-     * @return list of jobs that match the filter text
-     */
-    public List<Jobs> updateList(String filterText) {
-    	if (filterText == null || filterText.isEmpty()) {
-    		return ((JobDataService) DataService.getJob()).getPriority();
-    	}
-    	return ((JobDataService) DataService.getJob()).getJobsByName(filterText);
-    }
-
-    /**
      * Get jobid based on job object 
      *
      * @param job object

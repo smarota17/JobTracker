@@ -216,7 +216,7 @@ public class ApplicationForm extends Div {
      * This function use a job object as parameter and utilize the view object to call 
      * the edit method for the job instance. After it will pop up the information from the 
      * desired job of grids to the application form.
-     * @param job
+     * @param job that needs to be edited
      * 
      **/
     public void editJob(Jobs job) {
@@ -230,7 +230,7 @@ public class ApplicationForm extends Div {
     
     /**
      * This function use a job object as parameter to set it as current job and bind it to the application form.
-     * @param job
+     * @param job to set
      * 
      **/
     public void setJob(Jobs job) {
