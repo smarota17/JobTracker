@@ -44,7 +44,7 @@
 Is the software hosted in an established, third-party repository like GitHub (https://github.com), BitBucket (https://bitbucket.org),LaunchPad (https://launchpad.net) orSourceForge (https://sourceforge.net)?|3| The project is hosted on GitHub https://github.com/smarota17/JobTracker|
 |The software's documentation|||
 |Is the documentation clearly available on the website or within the software?|3|Documentation is availible via README.md (https://github.com/smarota17/JobTracker) and via JavaDoc.|
-|Does the documentation include a "quick start" guide, that provides a short overview of how to use the software with some basic examples of use?|3|https://github.com/sam16222/CSC510_43/blob/main/README.md|
+|Does the documentation include a "quick start" guide, that provides a short overview of how to use the software with some basic examples of use?|3|https://github.com/smarota17/JobTracker/blob/main/README.md|
 |If the author provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use the software?|3|https://github.com/smarota17/JobTracker|
 |Do the author provide a comprehensive guide to all the software’s commands, functions and options?|3|https://github.com/smarota17/JobTracker|
 |Do the author provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages?|0|https://github.com/smarota17/JobTracker|
