@@ -318,8 +318,9 @@ public class Jobs implements Serializable{
 		String output = "";
 		String[] list = {Integer.toString(id), jobTitle, company, dateToString(dateApplied), dateToString(dueDate), salary, jobDescription, nextAction, status, Double.toString(priority)};
 		for (int i = 0; i < list.length; i++) {
-			list[i].replace('~', '-');
+			
 			if (list[i] != null) {
+				list[i].replace('~', '-');
 				output += list[i] + "~";
 			} else {
 				output += "NULL~";

@@ -241,6 +241,7 @@ public class User {
 		String output = "";
 		for (int i = 0; i < 6; i++) {
 			if (list[i] != null) {
+				list[i].replace('~', '-');
 				output += list[i] + "~";
 			} else {
 				output += "NULL~";

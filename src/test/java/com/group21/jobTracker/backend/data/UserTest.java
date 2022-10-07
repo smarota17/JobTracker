@@ -123,7 +123,7 @@ class UserTest {
 	@Test
 	void testToString(){
 		User user = new User("A B", "TestEmail", "Male", null, null, "TestKeywords");
-		String expectedStr = "A B,TestEmail,Male,NULL,NULL,TestKeywords,";
+		String expectedStr = "A B~TestEmail~Male~NULL~NULL~TestKeywords~";
 		assertEquals(expectedStr, user.toString());
 	}
 
@@ -134,7 +134,7 @@ class UserTest {
 		Jobs job2 = new Jobs("Job2", null, null, null, null, null, null, null, 0);
 		user.addJob(job1);
 		user.addJob(job2);
-		String expectedStr = "A B,TestEmail,Male,NULL,NULL,TestKeywords,\n0,Job1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.0,\n1,Job2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.0,";
+		String expectedStr = "A B~TestEmail~Male~NULL~NULL~TestKeywords~\n0~Job1~NULL~NULL~NULL~NULL~NULL~NULL~NULL~0.0~\n1~Job2~NULL~NULL~NULL~NULL~NULL~NULL~NULL~0.0~";
 		assertEquals(expectedStr, user.toSaveString());
 	}
 
