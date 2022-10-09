@@ -47,7 +47,11 @@ This document covers how to use the software and different use cases
 
 **Note:** In order to use the mail functionality for this project, you must set up an Outlook email account and add the username and password to the JobTracker\src\main\java\com\group21\jobTracker\mail\SendMail.java file. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts.
 
-1. 
+1. After logging in, click on the "My Applications" button on the left.
+2. Add multiple job applications (Use Case 5).
+3. Click on the "Dashboard" tab to return to the dashboard. 
+4. Click the "Send Reminder Email" button located under the upcoming deadlines section on the right side. 
+5. A reminder email will be sent to the email you specified when creating your account with a list of 5 applications with the closest deadlines. 
 
 ## Use Case 8: Search for New Job Applications
 
