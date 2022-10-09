@@ -45,7 +45,7 @@ This document covers how to use the software and different use cases
 
 ## Use Case 7: Schedule email reminder for application
 
-\#Note: In order to use the Mail functionality for this project, you must set up an Outlook email account, and add the username and password to the JobTracker\src\main\java\com\group21\jobTracker\mail\SendMail.java file. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts.
+**Note:** In order to use the mail functionality for this project, you must set up an Outlook email account and add the username and password to the JobTracker\src\main\java\com\group21\jobTracker\mail\SendMail.java file. You cannot use Gmail for this feature because Google set up a new restriction this year that doesn't allow third-party apps to send emails from Gmail accounts.
 
 1. 
 
