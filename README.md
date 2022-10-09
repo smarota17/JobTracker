@@ -103,6 +103,7 @@ Note: In order to use the "Send Mail" functionality for this project, your team 
 ## Documentation
 
 * Instructions on how to run the program can be found in this [file](https://github.com/smarota17/JobTracker/blob/main/USAGE.md).
+* Updated Code Documentation can be found [here](https://smarota17.github.io/JobTracker/javadoc/).
 * The video comparing this project to a previous year's project that had a similar project idea can be found [here](https://drive.google.com/file/d/1hxCuWlhvCY62f_RylXAK6v3H3B07ePKJ/view).
 ## Future Features
 
